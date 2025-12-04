@@ -1,0 +1,278 @@
+@use "./mixins" as *;
+
+.input-search {
+  position: relative;
+  z-index: 3;
+
+  .svg-search,
+  .close-icon {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    z-index: 3;
+  }
+  .input-right {
+    position: absolute;
+    z-index: 3;
+    top: 7px;
+    right: 20px;
+    cursor: pointer;
+    background-color: var(--bg-color);
+    padding: 8px;
+    border-radius: 5px;
+  }
+
+  input {
+    position: relative;
+    font-size: 12px;
+    padding-left: 55px !important;
+    z-index: 3;
+    outline: none;
+  }
+
+  hr {
+    @apply pt-5 pb-20 w-[calc(100%-64px)] ml-[34px];
+  }
+
+  &__result-list {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    max-height: 400px;
+    background-color: var(--bg-color-secondary);
+    padding: 30px 20px 20px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    overflow-y: auto;
+    z-index: 2;
+    animation: scale 0.1s ease;
+    @apply no-scrollbar shadow-xl;
+  }
+}
+
+.input-dropdown {
+  position: relative;
+  z-index: 3;
+
+  .svg-down,
+  .close-icon {
+    position: absolute;
+    top: auto;
+    right: 20px;
+    z-index: 3;
+  }
+  
+  &__toggle {
+    position: relative;
+    font-size: 12px;
+    z-index: 3;
+    outline: none;
+  }
+
+  &__result-list {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    max-height: 400px;
+    background-color: var(--bg-color-secondary);
+    padding: 30px 20px 20px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    overflow-y: auto;
+    z-index: 2;
+    animation: scale 0.1s ease;
+    @apply no-scrollbar shadow-xl;
+
+    li {
+      cursor: pointer;
+      padding: 5px 0;
+      &:hover {
+        outline: 1px solid var(--primary-color);
+      }
+    }
+  }
+}
+
+.ws-form {
+  &__row {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+    margin-bottom: 30px;
+    @container (max-width: 700px) {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  &__btn {
+    width: 130px !important;
+    margin-top: 60px;
+    @apply btn-form btn-form--primary mx-auto;
+  }
+
+  input, .d-input, select {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--bg-color-secondary);
+    border-radius: 999px;
+    padding: 16px 24px;
+  }
+
+  /* Form grouping and generic form-control used by React components */
+  .form-group {
+    width: 100%;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    color: var(--text-color, #fff);
+    border: none;
+    padding: 14px 20px;
+    border-radius: 999px;
+    box-shadow: none;
+    outline: none;
+    font-size: 14px;
+    line-height: 1.2;
+    transition: box-shadow 0.12s ease, background-color 0.12s ease;
+  }
+
+  .form-control::placeholder {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .form-control:focus {
+    outline: none;
+    color: var(--text-color, #fff);
+    box-shadow: 0 6px 24px rgba(2,6,23,0.6), 0 0 0 6px rgba(59,130,246,0.06);
+  }
+
+  .form-control[disabled], .form-control[readonly] {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .input-secondary {
+    background-color: transparent;
+    border: 1px solid var(--secondary-color);
+    border-radius: 20px;
+    padding-block: 25px;
+    &:focus {
+      border: 1px solid var(--primary-color);
+      outline: none;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    background-color: var(--bg-color-secondary);
+    padding: 24px;
+    border-radius: 30px;
+  }
+
+  .ws-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    input[type="radio"] {
+      display: none;
+
+      &:checked + .ws-radio::after {
+        opacity: 1;
+      }
+    }
+
+    .ws-radio {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      border: 1px solid var(--primary-color);
+
+      &::after {
+        position: absolute;
+        content: "";
+        top: 4px;
+        left: 4px;
+        width: calc(100% - 8px);
+        height: calc(100% - 8px);
+        background-color: var(--blue-color);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      &--multi {
+        border-radius: 5px;
+        &::after {
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  .slider.round {
+    border-radius: 34px;
+  }
+  .slider.round:before {
+    border-radius: 50%;
+  }
+}

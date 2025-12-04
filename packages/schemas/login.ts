@@ -1,0 +1,10 @@
+import * as Yup from 'yup';
+
+export const login = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .min(6, 'Too short! Minimum 6 characters required')
+    .required('Required'),
+});

@@ -8,8 +8,8 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{js,ts,jsx,tsx,md}\"",
     "gen:types": "npx supabase gen types typescript --project-id twavujkympalstdxyxti --schema public > packages/types/Database.ts",
-    "supa:pull": "npx supabase db pull --schema public,profile",
-    "supa:update": "yarn supa:pull && yarn supa:gen",
+    "supa:pull": "npx supabase db pull --schema public",
+    "supa:update": "yarn supa:pull && yarn supa:types",
     "supa:deploy": "npx supabase functions deploy"
   },
   "dependencies": {

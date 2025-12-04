@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import "@styles/index.scss";
+
+import { SessionProvider } from '@pkg/providers/SessionProvider';
+import { LanguageProvider } from '@pkg/providers/LanguageProvider';
+
+import AuthGuard from './AuthGuard';
+import Layout from './Layout';
+import { Login } from '@front/pages/login';
+import { Signup } from '@front/pages/signup';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <SessionProvider>
+      <LanguageProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/fosdem-bar" element={<div>fosdem bar</div>} />
+
+            <Route path="/" element={<AuthGuard><Layout /></AuthGuard>}>
+              <Route index element={<div>Home</div>} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </LanguageProvider>
+    </SessionProvider>
+  );
 }
 
-export default App
+export default App;

@@ -6,7 +6,6 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -14,14 +13,29 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@pkg/*": ["../../packages/*"],
+      "@front/*": ["../../interfaces/web/*"],
+      "@session": ["../../packages/hooks/ctx.ts"], 
+      "@db": ["../../packages/types/Database.ts"],
+      "@client": ["../../packages/functions/Client.ts"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", 
+    "../../interfaces/web/", 
+    "../../packages/", 
+    "../../packages/hooks/ctx.ts", 
+    "../../packages/types/Database.ts",
+    "../../packages/functions/Client.ts"
+  ],
 }

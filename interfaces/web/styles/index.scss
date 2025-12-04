@@ -1,0 +1,13 @@
+@use "main" as *;
+@use "typography" as *;
+
+@use "utils/forms" as *;
+@use "utils/mixins" as *;
+@use "utils/misc.scss" as *;
+@use "utils/anims" as *;
+
+@use "pages/auth" as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
