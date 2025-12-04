@@ -1,0 +1,37 @@
+{
+  "name": "cistem",
+  "private": true,
+  "scripts": {
+    "clear": "rm -rf dist nodes_modules **/nodes_modules */nodes_modules **/*/nodes_modules && yarn install",
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,md}\"",
+    "gen:types": "npx supabase gen types typescript --project-id twavujkympalstdxyxti --schema public > packages/types/Database.ts",
+    "supa:pull": "npx supabase db pull --schema public,profile",
+    "supa:update": "yarn supa:pull && yarn supa:gen",
+    "supa:deploy": "npx supabase functions deploy"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "bootstrap": "^5.3.3",
+    "path": "^0.12.7",
+    "react-router-dom": "^7.1.3",
+    "reactstrap": "^9.2.3",
+    "sass": "^1.83.4",
+    "supabase": "^2.9.6"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "turbo": "^2.3.3",
+    "typescript": "5.5.4"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
