@@ -18,7 +18,7 @@ const AuthGuard = ({ children }: AuthGuardProps) => {
     );
   }
 
-  if (!session) return <Navigate to="/login" state={{ from: location }} replace />;
+  // if (!session) return <Navigate to="/login" state={{ from: location }} replace />;
 
   return <>{children}</>;
 };

@@ -7,8 +7,11 @@ import { LanguageProvider } from '@pkg/providers/LanguageProvider';
 
 import AuthGuard from './AuthGuard';
 import Layout from './Layout';
+
 import { Login } from '@front/pages/login';
 import { Signup } from '@front/pages/signup';
+
+import Beers from '@front/pages/beers';
 
 function App() {
   return (
@@ -22,6 +25,7 @@ function App() {
 
             <Route path="/" element={<AuthGuard><Layout /></AuthGuard>}>
               <Route index element={<div>Home</div>} />
+              <Route path="/beers" element={<Beers />} />
             </Route>
           </Routes>
         </BrowserRouter>
