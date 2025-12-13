@@ -1,16 +1,15 @@
 import { signup as schema } from '@pkg/schemas/signup';
 import { useState } from 'react';
 import { useFormik } from 'formik';
-import { handleSignup } from '@pkg/functions/session/signup';
 import { supabase } from '@pkg/functions/Client';
-import type { User } from '@pkg/types/Auth';
 import { useNavigate } from 'react-router-dom';
+import { useSession } from '../ctx';
 
 export const useSignup = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [user, setUser] = useState<User | null>(null);
+    const { signUp, session } = useSession();
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
@@ -25,13 +24,11 @@ export const useSignup = () => {
             setIsLoading(true);
             setError(null);
             try {
-                const { data: auth, error } = await handleSignup({
-                    provider: 'email',
-                    credentials: {
-                    'email': values.email,
+                const { data: auth, error } = await signUp(
+                    'email', 
+                    {'email': values.email,
                     'password': values.password}
-                })
-                const session = (await supabase.auth.getSession()).data.session;
+                )
                 if (!session) throw new Error("Not authenticated");
                 else if (auth) {
                     let user = {
@@ -49,7 +46,6 @@ export const useSignup = () => {
                     })
                     if (error) throw Error("User can't be create")
                     else {
-                        setUser(data)
                         setSuccess(true);
                         navigate("/", {replace: true})
                     }
@@ -65,7 +61,6 @@ export const useSignup = () => {
     return {
         formik,
         isLoading,
-        user,
         success,
         error,
     };

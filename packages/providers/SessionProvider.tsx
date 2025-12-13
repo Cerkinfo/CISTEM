@@ -31,7 +31,6 @@ export const SessionProviderCore = (props: React.PropsWithChildren<SessionProps>
   useEffect(() => {
     if (!session) {
       setUser(null);
-      setIsLoading(false);
       return;
     }
     const loadAccount = async () => {
