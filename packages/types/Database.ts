@@ -114,6 +114,30 @@ export type Database = {
           },
         ]
       }
+      coffee: {
+        Row: {
+          id: number
+          image: string
+          name: string
+          price: number
+          price_large: number | null
+        }
+        Insert: {
+          id?: number
+          image: string
+          name: string
+          price: number
+          price_large?: number | null
+        }
+        Update: {
+          id?: number
+          image?: string
+          name?: string
+          price?: number
+          price_large?: number | null
+        }
+        Relationships: []
+      }
       foods: {
         Row: {
           id: number
@@ -345,6 +369,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      users: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          image: string
+          last_name: string
+          pseudo: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          image: string
+          last_name: string
+          pseudo: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          image?: string
+          last_name?: string
+          pseudo?: string
+        }
+        Relationships: []
       }
     }
     Views: {
