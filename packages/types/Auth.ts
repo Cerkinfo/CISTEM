@@ -4,6 +4,7 @@ export interface User {
   last_name: string;
   pseudo: string;
   image: string;
+  role: string;
 }
 
 export interface Credentials {

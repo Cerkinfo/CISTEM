@@ -14,7 +14,8 @@ interface SessionProps {
 export const SessionProviderCore = (props: React.PropsWithChildren<SessionProps>) => {
   const [isLoading, setIsLoading] = useState(true);
   const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const [onlineUsers, setOnlineUsers] = useState<Array<{ pseudo: string; image?: string | null }>>([]);
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange((_, _session) => {
@@ -30,7 +31,7 @@ export const SessionProviderCore = (props: React.PropsWithChildren<SessionProps>
 
   useEffect(() => {
     if (!session) {
-      setUser(null);
+      setUser(undefined);
       return;
     }
     const loadAccount = async () => {
@@ -39,13 +40,71 @@ export const SessionProviderCore = (props: React.PropsWithChildren<SessionProps>
         setUser(userData);
       } catch (error) {
         console.log('🚀 ~ loadAccount ~ error:', error);
-        setUser(null);
+        setUser(undefined);
       } finally {
         setIsLoading(false);
       }
     };
     loadAccount();
   }, [session]);
+
+  useEffect(() => {
+    let channel: any = null;
+    if (session && user) {
+      (async () => {
+        try {
+          channel = supabase.channel('online-users', {
+            config: { presence: { key: user.pseudo } }
+          });
+
+          channel.on('presence', { event: 'sync' }, () => {
+            try {
+              const state = channel.presenceState();
+              const users = state
+                ? Object.entries(state).map(([pseudo, metas]: any) => ({
+                    pseudo,
+                    image: metas?.[0]?.image ?? null,
+                  }))
+                : [];
+              setOnlineUsers(users);
+            } catch (err) {
+              console.error('Error reading presence state', err);
+            }
+          });
+
+          await channel.subscribe();
+
+          try {
+            await channel.track({ pseudo: user.pseudo, image: (user as any).image ?? null });
+          } catch (err) {
+            console.error('Failed to track presence', err);
+          }
+        } catch (err) {
+          console.error('Presence channel setup failed', err);
+        }
+      })();
+    }
+
+    return () => {
+      if (!channel) return;
+      (async () => {
+        try {
+          await channel.untrack();
+        } catch (err) {}
+        try {
+          await channel.unsubscribe();
+        } catch (err) {
+          try {
+            // @ts-ignore
+            supabase.removeChannel?.(channel);
+          } catch (e) {
+            console.error('Failed to unsubscribe presence channel', e);
+          }
+        }
+        setOnlineUsers([]);
+      })();
+    };
+  }, [session, user]);
 
   return (
     <AuthContext.Provider
@@ -54,7 +113,7 @@ export const SessionProviderCore = (props: React.PropsWithChildren<SessionProps>
           return handleSignin({ provider, credentials });
         },
         signUp: async (provider, credentials) => {
-          setUser(null);
+          setUser(undefined);
           setSession(null);
           return handleSignup({ provider, credentials });
         },
@@ -64,6 +123,8 @@ export const SessionProviderCore = (props: React.PropsWithChildren<SessionProps>
         user,
         session,
         isLoading,
+        onlineUsers,
+        isUserOnline: (pseudo: string) => onlineUsers.some(u => u.pseudo === pseudo),
       }}>
       {props.children}
     </AuthContext.Provider>

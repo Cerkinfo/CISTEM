@@ -1,4 +1,4 @@
-
+@import 'variables.scss';
 
 body,
 input,
@@ -42,7 +42,6 @@ button {
 
 main {
   margin: 0 auto;
-  background-color: #e9ebee;
   box-shadow: 0px 8px 30px #1d2d4f;
   border-radius: 4px;
   overflow: hidden;
@@ -94,38 +93,6 @@ main {
   font-weight: bold;
 }
 
-#m-btns {
-  position: absolute;
-  right: 0px;
-  bottom: 20px;
-  width: auto;
-}
-
-#m-btns .td {
-  padding: 0 8px;
-}
-
-.m-btn {
-  cursor: pointer;
-  color: #0e0e0e;
-  font-size: 14px;
-  white-space: pre;
-  padding: 5px 8px 6px 8px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 2px;
-}
-
-.m-btn i {
-  font-size: 16px;
-  margin-right: 1px;
-  vertical-align: middle;
-}
-
-.m-btn span {
-  position: relative;
-  top: 1px;
-}
-
 #edit-profile {
   position: absolute;
   right: 20px;
@@ -169,34 +136,12 @@ main {
 .l-cnt {
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0px 3px 3px #ddd;
+  box-shadow: 0px 3px 3px #000;
+  border-radius: 25px;
 }
 
 .l-mrg {
   margin-top: 28px;
-}
-.l-i {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin-right: 2px;
-  background-size: auto;
-  background-repeat: no-repeat;
-  vertical-align: middle;
-}
-
-#l-i-i {
-  background-image: url("https://imagizer.imageshack.com/img922/7749/C8tmwX.png");
-  background-position: 0 -87px;
-}
-
-#l-i-p {
-  background-image: url("https://imagizer.imageshack.com/img923/7847/sRapnM.png");
-  background-position: 0 0;
-}
-
-#l-i-k {
-  background-image: url("https://imagizer.imageshack.com/img922/5617/QpPVKn.png");
 }
 
 .cnt-label {
@@ -260,57 +205,6 @@ main {
   position: relative;
   top: 1px;
   color: #2196f3;
-}
-
-#photos {
-  padding: 2px;
-  margin: 15px -20px -20px -20px;
-}
-
-#photos .td {
-  width: 33.333%;
-  height: 112px;
-  border: 2px solid #fff;
-  box-sizing: border-box;
-  background-color: #f1f1f1;
-  background-position: 50% 25%;
-  background-size: cover;
-}
-
-#photos .tb .tr:nth-child(1) .td:nth-child(1) {
-  background-image: url("https://placehold.co/112x112");
-}
-
-#photos .tb .tr:nth-child(1) .td:nth-child(2) {
-  background-image: url("https://placehold.co/112x112");
-}
-
-#photos .tb .tr:nth-child(1) .td:nth-child(3) {
-  background-image: url("https://placehold.co/112x112");
-}
-
-#photos .tb .tr:nth-child(2) .td:nth-child(1) {
-  background-image: url("https://placehold.co/112x112");
-}
-
-#photos .tb .tr:nth-child(2) .td:nth-child(2) {
-  background-image: url("https://placehold.co/112x112");
-}
-
-#photos .tb .tr:nth-child(2) .td:nth-child(3) {
-  background-image: url("https://placehold.co/112x112");
-}
-
-#photos .tb .tr:nth-child(3) .td:nth-child(1) {
-  background-image: url("https://placehold.co/112x112");
-}
-
-#photos .tb .tr:nth-child(3) .td:nth-child(2) {
-  background-image: url("https://placehold.co/112x112");
-}
-
-#photos .tb .tr:nth-child(3) .td:nth-child(3) {
-  background-image: url("https://placehold.co/112x112");
 }
 
 #k-nm {
@@ -400,7 +294,7 @@ main {
 }
 
 #m-col {
-  padding: 0px 55px;
+  padding: 0px 55px 20px;
 }
 
 .m-mrg {
@@ -415,8 +309,9 @@ main {
   padding: 13px 20px;
   margin-top: -64px;
   background-color: #fff;
-  box-shadow: 0px 3px 3px #ddd;
+  box-shadow: 0px 3px 3px #000;
   z-index: 3;
+  border-radius: 25px;
 }
 
 #p-tabs-m .td {
@@ -720,10 +615,11 @@ main {
 }
 
 #chat-lb {
-  color: #3a5795;
+  color: #ffffff;
   font-size: 16px;
   text-align: center;
-  margin: 23px 0px;
+  margin: 23px -10px;
+  white-space: nowrap;
 }
 
 #chat-lb i {
@@ -778,19 +674,3 @@ main {
   cursor: pointer;
 }
 /* Chat bar finished */
-
-/* Footer */
-#device-bar-2 {
-  padding: 9px 0px 13px 0px;
-  background-color: #000;
-}
-
-#device-bar-2 i {
-  display: block;
-  width: 40px;
-  color: #fff;
-  font-size: 40px;
-  text-align: center;
-  margin: 0 auto;
-}
-/* Footer finished */

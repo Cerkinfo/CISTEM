@@ -2,7 +2,7 @@ import { supabase } from "@pkg/functions/Client";
 import type { AuthSession } from "@supabase/supabase-js";
 
 export const fetchUser = async (_session: AuthSession | null) => {
-    const query = `id, email, first_name, last_name, pseudo, image`
+    const query = `id, email, first_name, last_name, pseudo, image, role`
     if (!_session?.user) return;
     try {
       const newQuery = supabase
