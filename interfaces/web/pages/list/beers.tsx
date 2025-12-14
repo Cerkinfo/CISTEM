@@ -1,5 +1,5 @@
 import { useInventoryList } from "@pkg/hooks/list/getInventory";
-import Separator from "../components/headers/Separator";
+import Separator from "../../components/headers/Separator";
 import { Container, Row } from "reactstrap";
 import Loading from "@front/components/utils/Loading";
 import { BeerItem } from "@front/components/block/BeerCard";

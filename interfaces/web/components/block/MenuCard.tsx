@@ -122,7 +122,7 @@ export const MenuCard = ({ img, name, description, price, price_large } : {
     img: string,
     name: string,
     description?: string,
-    price: number,
+    price?: number,
     price_large?: number
 }) => {
     return (
@@ -137,10 +137,12 @@ export const MenuCard = ({ img, name, description, price, price_large } : {
                     <h1>{name}</h1>
                     {description && <h2>{description}</h2>}
                 </div>
-                <div style={{zIndex: 4}} className="price">
-                    <h5>€ {price.toFixed(2).toString()}</h5>
-                    {price_large ? <h6>L € {price_large.toFixed(2).toString()}</h6> : null}
-                </div>
+                {price &&
+                    <div style={{zIndex: 4}} className="price">
+                        <h5>€ {price.toFixed(2).toString()}</h5>
+                        {price_large && <h6>L € {price_large.toFixed(2).toString()}</h6>}
+                    </div>
+                }
             </div>
             </div>
         </div>
