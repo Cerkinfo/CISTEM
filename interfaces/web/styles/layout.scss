@@ -1,0 +1,35 @@
+.global-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    background-color: #000;
+}
+
+.global-sidebar {
+    background-color: #363535;
+    width: 4vw;
+    height: 98vh;
+    margin-top: 1vh;
+    margin-left: 1vh;
+    border-radius: 25px;
+}
+
+.page-content {
+    background-color: #363535;
+    color: #fff;
+    width: 94.3vw;
+    height: 98vh;
+    margin-top: 1vh;
+    margin-left: 0.5vh;
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content .page-body {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}

@@ -17,6 +17,7 @@ import Foods from '@front/pages/list/foods';
 import Coffee from '@front/pages/list/coffee';
 import Locations from '@front/pages/list/locations';
 import List from '@front/pages/list';
+import Profile from '@front/pages/profile';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/list/coffee" element={<Coffee />} />
                 <Route path="/list/locations" element={<Locations />} />
               </Route>
+              <Route path="/profile/:pseudo" element={<Profile />} />
               <Route path="*" element={<div>404 Not Found</div>} />
             </Route>
           </Routes>

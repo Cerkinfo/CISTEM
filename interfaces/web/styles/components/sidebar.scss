@@ -1,0 +1,126 @@
+@import 'variables.scss';
+
+$borderRadius: 25px;
+$spacer: 1rem;
+$linkHeight: $spacer * 3.5;
+$timing: 250ms;
+$transition: $timing ease all;
+
+@mixin gooeyEffect($i) {
+  @keyframes gooeyEffect-#{$i} {
+    0% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(0.5, 1.5);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+}
+body{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 300;
+}
+.navbar{
+  $ref: &;
+  position: relative;
+  border-radius: $borderRadius;
+  height: 100%;
+  max-width: 4vw;
+  &__link {
+    position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $linkHeight;
+    width: $spacer * 5;
+    color: $lightest;
+    transition: $transition;
+    white-space: nowrap;
+    span{
+      position: absolute;
+      left: 100%;
+      transform: translateX(-#{$spacer * 3});
+      margin-left: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      color: $primary;
+      background: #fff;
+      padding: $spacer *0.75;
+      transition: $transition;
+      border-radius: $borderRadius * 1.75;
+      z-index: 10;
+    }
+    &:hover{
+      color: $light;
+    }
+    .navbar:not(:hover) &:focus,
+    &:hover{
+      span{
+        opacity: 1;
+        transform: translate(0);
+      }
+    }
+  }
+  &__menu{
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    top: 10px;
+  }
+  &__item{
+    &:last-child{
+      &:before{
+        content: '';
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+        top: 0;
+        left: $spacer;
+        width: $linkHeight;
+        height: $linkHeight;
+        background: $primary;
+        border-radius: $borderRadius * 1.75;
+        transition: $timing cubic-bezier(1, 0.2, 0.1, 1.2) all;
+        
+      }
+    }
+    
+    @for $i from 1 to 12 {
+      &:first-child:nth-last-child(#{$i}),
+      &:first-child:nth-last-child(#{$i}) ~ li {
+        &:hover {
+          ~ li:last-child:before {
+            opacity: 1;
+          }
+        }
+        &:last-child:hover:before {
+          opacity: 1;
+        }
+        @for $j from 1 to $i {
+          &:nth-child(#{$j}):hover {
+            ~ li:last-child:before {
+              @include gooeyEffect($j);
+              top: (100% / $i) * ($j - 1);
+              animation: gooeyEffect-#{$j} $timing 1;
+            }
+          }
+        }
+        &:last-child:hover:before {
+          @include gooeyEffect($i);
+          top: (100% / $i) * ($i - 1);
+          animation: gooeyEffect-#{$i} $timing 1;
+        }
+      }
+    }
+
+  }
+  
+}
