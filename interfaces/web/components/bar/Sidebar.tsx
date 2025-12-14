@@ -19,7 +19,9 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li className="navbar__item">
-                    <a href="#" className="navbar__link"><CISTEM size={'50'}/><span>How To FOSDEM</span></a>
+                    <Link to={`/`} className="navbar__link" state={{ from: location }}>
+                        <CISTEM size={'50'}/><span>How To FOSDEM</span>
+                    </Link>
                 </li>
                 <li className="navbar__item">
                     <a href="#" className="navbar__link"><Calendar size={'50'}/><span>Horaires</span></a> 

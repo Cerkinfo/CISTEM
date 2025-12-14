@@ -18,6 +18,7 @@ import Coffee from '@front/pages/list/coffee';
 import Locations from '@front/pages/list/locations';
 import List from '@front/pages/list';
 import Profile from '@front/pages/profile';
+import HowToFOSDEM from '@front/pages/howto';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
             <Route path="/fosdem-bar" element={<div>fosdem bar</div>} />
 
             <Route path="/" element={<AuthGuard><Layout /></AuthGuard>}>
-              <Route index element={<div>Home</div>} />
+              <Route index element={<HowToFOSDEM />} />
               <Route path="/list" element={<List />} >
                 <Route path="/list/beers" element={<Beers />} />
                 <Route path="/list/softs" element={<Softs />} />

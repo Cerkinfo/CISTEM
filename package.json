@@ -10,12 +10,14 @@
     "gen:types": "npx supabase gen types typescript --project-id twavujkympalstdxyxti --schema public > packages/types/Database.ts",
     "supa:pull": "npx supabase db pull --schema public",
     "supa:update": "yarn supa:pull && yarn supa:types",
-    "supa:deploy": "npx supabase functions deploy"
+    "supa:deploy": "npx supabase functions deploy",
+    "compile": "processmd packages/texts/**/*.md --outputDir packages/texts/json --preview 110"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
     "bootstrap": "^5.3.3",
     "path": "^0.12.7",
+    "processmd": "^4.7.0",
     "react-router-dom": "^7.1.3",
     "reactstrap": "^9.2.3",
     "sass": "^1.83.4",
