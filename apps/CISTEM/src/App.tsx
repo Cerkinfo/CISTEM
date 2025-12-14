@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import "@styles/index.scss";
+import "@styles/style.scss";
 
 import { SessionProvider } from '@pkg/providers/SessionProvider';
 import { LanguageProvider } from '@pkg/providers/LanguageProvider';

@@ -64,7 +64,7 @@ export default defineConfig({
     },
     hmr: {
       overlay: true,
-      // @ts-expect-error
+      // @ts-expect-error because it's better
       fullReload: [
         "../../packages/**",
         "../../interfaces/web/**/*.{js,ts,jsx,tsx}",
