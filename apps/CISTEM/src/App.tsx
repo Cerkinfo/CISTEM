@@ -12,6 +12,9 @@ import { Login } from '@front/pages/login';
 import { Signup } from '@front/pages/signup';
 
 import Beers from '@front/pages/beers';
+import Softs from '@front/pages/softs';
+import Foods from '@front/pages/foods';
+import Coffee from '@front/pages/coffee';
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
             <Route path="/" element={<AuthGuard><Layout /></AuthGuard>}>
               <Route index element={<div>Home</div>} />
               <Route path="/beers" element={<Beers />} />
+              <Route path="/softs" element={<Softs />} />
+              <Route path="/foods" element={<Foods />} />
+              <Route path="/coffee" element={<Coffee />} />
             </Route>
           </Routes>
         </BrowserRouter>
