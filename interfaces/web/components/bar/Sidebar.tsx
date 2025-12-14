@@ -14,7 +14,7 @@ export default function Sidebar() {
         <nav className="navbar">
             <ul className="navbar__menu">
                 <li className="navbar__item">
-                    <Link to={`/profile/${user?.pseudo}`} className="navbar__link" state={{ from: location }} replace>
+                    <Link to={`/profile/${user?.pseudo}`} className="navbar__link" state={{ from: location }}>
                         <Profile /><span>Mon profile</span>
                     </Link>
                 </li>
