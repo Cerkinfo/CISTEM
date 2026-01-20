@@ -13,7 +13,7 @@ import { TextInput } from "@front/components/form/inputs/TextInput";
 export const Signup:React.FC = () => {
     const { t } = useLanguage();
     const navigate = useNavigate();
-    const { formik, isLoading, success, error, user } = useSignup();
+    const { formik, isLoading, success, error } = useSignup();
 
     useEffect(() => {
         const checkSession = async () => {
@@ -23,7 +23,7 @@ export const Signup:React.FC = () => {
             }
         };
         checkSession();
-    }, [navigate, user]);
+    }, [navigate]);
 
     return (
         <div className="page-auth">

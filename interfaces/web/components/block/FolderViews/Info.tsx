@@ -1,5 +1,6 @@
 import { Center, H3 } from "@styles/components/titles";
-import { BeerColored, Handshake, Info } from "@front/components/utils/icons";
+import { Handshake, Info } from "@front/components/utils/icons";
+import { Beer } from "@front/components/utils/coloredIcons";
 
 export const InfoView = ({ title, type, alc, desc } : {
     title : string,
@@ -13,7 +14,7 @@ export const InfoView = ({ title, type, alc, desc } : {
             <br/>
             <H3>{title}</H3>
             <br/>
-            <p><BeerColored size='30'/> {type}</p>
+            <p><Beer size='30'/> {type}</p>
             <p><Handshake size='30'/> ALC. {alc} % VOL.</p>
             <p><span style={{color:'SpringGreen'}}><Info size='30'/></span> {desc}</p>
         </Center>

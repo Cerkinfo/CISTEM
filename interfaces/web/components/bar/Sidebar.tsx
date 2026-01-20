@@ -27,7 +27,7 @@ export default function Sidebar() {
                     <a href="#" className="navbar__link"><Calendar size={'50'}/><span>Horaires</span></a> 
                 </li>
                 <li className="navbar__item">
-                    <a href="#" className="navbar__link"><ProgressBar size={'50'}/><span>Listes</span></a>
+                    <a href="/list" className="navbar__link"><ProgressBar size={'50'}/><span>Listes</span></a>
                 </li>
                 <li className="navbar__item">
                     <a href="#" className="navbar__link"><Box size={'50'}/><span>Bacs de vidanges</span></a>

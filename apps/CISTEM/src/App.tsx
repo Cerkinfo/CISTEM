@@ -11,11 +11,6 @@ import Layout from './Layout';
 import { Login } from '@front/pages/login';
 import { Signup } from '@front/pages/signup';
 
-import Beers from '@front/pages/list/beers';
-import Softs from '@front/pages/list/softs';
-import Foods from '@front/pages/list/foods';
-import Coffee from '@front/pages/list/coffee';
-import Locations from '@front/pages/list/locations';
 import List from '@front/pages/list';
 import Profile from '@front/pages/profile';
 import HowToFOSDEM from '@front/pages/howto';
@@ -32,13 +27,7 @@ function App() {
 
             <Route path="/" element={<AuthGuard><Layout /></AuthGuard>}>
               <Route index element={<HowToFOSDEM />} />
-              <Route path="/list" element={<List />} >
-                <Route path="/list/beers" element={<Beers />} />
-                <Route path="/list/softs" element={<Softs />} />
-                <Route path="/list/foods" element={<Foods />} />
-                <Route path="/list/coffee" element={<Coffee />} />
-                <Route path="/list/locations" element={<Locations />} />
-              </Route>
+              <Route path="/list" element={<List />} />
               <Route path="/profile/:pseudo" element={<Profile />} />
               <Route path="*" element={<div>404 Not Found</div>} />
             </Route>

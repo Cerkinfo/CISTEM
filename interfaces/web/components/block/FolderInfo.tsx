@@ -21,6 +21,7 @@ const Style = styled.div`
             left: -345px;
             border-radius: 18px;
             overflow: hidden;
+            color: black;
         }
         .clp2 {
             top: -60px;
