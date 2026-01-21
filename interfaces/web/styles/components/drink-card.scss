@@ -46,11 +46,6 @@
 	padding: 0;
 	z-index: -1;
 }
-.container_2:after{
-	content: 'Budweiser';
-	font-size: 4rem;
-	color: #556B2F;
-}
 .content {
 	position: relative;
 	width: 100%;
@@ -64,13 +59,18 @@
 	width: 100%;
 	color: white;
 }
+.logo img {
+	margin: 20px 25px;
+	width: 150%;
+	position: relative;
+}
 
 .hamburger {
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	position: absolute;
-	top: 2%;
+	top: 1%;
 	right: 8%;
 }
 .text {

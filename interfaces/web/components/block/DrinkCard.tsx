@@ -12,12 +12,13 @@ function Modal({ isOpen, content } : { isOpen: boolean, content: ReactNode }) {
     )
 }
 
-export function DrinkCard({ name, image, price, price2, list } : { 
+export function DrinkCard({ name, image, price, price2, list, coffee } : { 
     name: string,
     image: string,
     price: string,
     price2?: string,
-    list?: any 
+    list?: any,
+    coffee?: boolean
 }) {
     const [listView, setListView] = useState('main');
 
@@ -29,7 +30,13 @@ export function DrinkCard({ name, image, price, price2, list } : {
             />}
             <div className="content">
                 <div className="logo">
-                    <div className="img"><CISTEM size={45} only={'text'} /></div>
+                    {coffee 
+                    ?   <img src='/coffee_factory.png' />
+                    : (
+                        <div className="img">
+                            <CISTEM size={45} only={'text'} />
+                        </div>
+                    )}
                 </div>
                 <div className="hamburger">
                     <img src="/cerkinfo_logo.png" />
