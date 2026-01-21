@@ -1,6 +1,6 @@
-import { Center, H3 } from "@styles/components/titles";
 import { Progress } from "reactstrap";
 import type { Database } from "@db";
+import { Center, H3 } from "@front/styles/components/titles";
 
 type TasteRow = Database["public"]["Tables"]["beers_taste"]["Row"];
 type KeyOfTasteRow = keyof TasteRow;
@@ -18,7 +18,7 @@ export const TasteView = ({ taste }: { taste: TasteRow | null }) => {
   const keys = Object.keys(taste) as KeyOfTasteRow[];
 
   return (
-    <Center style={{ fontSize: "18px" }}>
+    <>
       <H3>Taste</H3>
       <br />
       {keys.filter(k => k !== "id").map((k) => {
@@ -33,6 +33,6 @@ export const TasteView = ({ taste }: { taste: TasteRow | null }) => {
           </div>
         );
       })}
-    </Center>
+    </>
   );
 };

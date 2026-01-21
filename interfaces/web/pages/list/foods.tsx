@@ -4,7 +4,7 @@ import Loading from "@front/components/utils/Loading";
 import { MenuCard } from "@front/components/block/MenuCard";
 import { FolderInfo } from "@front/components/block/FolderInfo";
 import { Info } from "@front/components/utils/icons";
-import { FoodInfoView } from "@front/components/block/FolderViews/FoodInfo";
+import { FoodInfoView } from "@front/components/block/modals/FoodInfo";
 
 export default function Foods() {
     const { list, isLoading } = useInventoryList({tableName: 'foods'})

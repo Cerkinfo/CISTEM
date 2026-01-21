@@ -1,7 +1,7 @@
-import { Center, H3 } from "@styles/components/titles";
 import { Eye, Mouth, Nose } from "@front/components/utils/icons";
 import type { Database } from "@db";
 import type { JSX } from "react";
+import { Center, H3 } from "@front/styles/components/titles";
 
 type FlavorsRow = Database["public"]["Tables"]["beers_flavors"]["Row"];
 type KeyOfFlavorsRow = keyof FlavorsRow;
@@ -23,7 +23,7 @@ export const FlavorsView = ({ flavor }: { flavor: FlavorsRow | null }) => {
   };
 
   return (
-    <Center style={{ fontSize: "18px" }}>
+    <>
       <H3>Flavors</H3>
       <br />
       {keys.filter(k => k !== "id").map((k) => {
@@ -42,6 +42,6 @@ export const FlavorsView = ({ flavor }: { flavor: FlavorsRow | null }) => {
           </div>
         );
       })}
-    </Center>
+    </>
   );
 };

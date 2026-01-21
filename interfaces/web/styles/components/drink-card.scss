@@ -1,0 +1,167 @@
+//Code origin from https://codepen.io/rothwulf/pen/MWaOOLE
+
+@import '../colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+.container_ {
+	width: 340px;
+	height: 550px;
+	background-color: #fff;
+	border-radius: 30px;
+	position: relative;
+	overflow: hidden;
+	z-index: 0;
+	box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.4);
+	transition: .5s;
+    margin: 20px;
+}
+.container_ {
+	background-color: #fff;
+}
+.container_:hover {
+	margin-top: 10px;
+	box-shadow: 0 30px 50px black;
+}
+.container_:before {
+	content: '';
+	position: absolute;
+	top: -25%; 
+	left: 0;
+	width: 100%;
+	height: 90%;
+	background: linear-gradient(160deg, $gradient, $color-main);
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+	transform: skewY(-10deg);
+	z-index: -1;
+}
+.container_:after {
+	content: 'Cercle Informatique ULB';
+	position: absolute;
+	bottom: 33%;
+	left: 1%;
+	transform: skewY(-10deg);
+	font-size: 1rem;
+	color: #656eec;
+	margin: 0;
+	padding: 0;
+	z-index: -1;
+}
+.container_2:after{
+	content: 'Budweiser';
+	font-size: 4rem;
+	color: #556B2F;
+}
+.content {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.logo{
+	width: 20%;
+}
+.logo .img {
+	margin: 0px 15px;
+	width: 100%;
+	color: white;
+}
+
+.hamburger {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: absolute;
+	top: 2%;
+	right: 8%;
+}
+.text {
+	margin-left: 10px;
+	margin-top: 15px;
+	z-index: 10;
+}
+.text p {
+	font-size: 74px;
+	font-weight: bolder;
+	line-height: 60px;
+	text-transform: uppercase;
+	color: white;
+	margin: 0;
+}
+.beverage {
+	z-index: 1;
+	position: relative;
+	width: 100%;
+	height: 300px;
+}
+.beverage img {
+	position: absolute;
+	width: 100%;
+	transform: rotate(-30deg); 
+}
+.beverage img {
+	width: 100%;
+	height: 100%;
+	bottom: 30%;
+	left: 14%;
+}
+.price {
+	position: absolute;
+	bottom: 20%;
+	right: 3%;
+	line-height: 24px;
+	z-index: 3;
+}
+
+.price {
+	right: 70%;
+}
+
+.price h3 {
+	margin: 0;
+	font-size: 16px;
+	text-decoration: line-through;
+	color: #a3a2a2;
+	text-align: center;
+}
+.price h2 {
+	margin: 0;
+	color: #6B8E23;
+	font-size: 35px;
+	text-align: center;
+}
+.button {
+	position: relative;
+	z-index: 5;
+	transition: 1s;
+    bottom: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mens {
+	position: absolute;
+	bottom: 0.3%;
+	text-align: center;
+	left: 50%;
+	transform: translate(-50%);
+	color: #000;
+	font-size: 15px;
+	text-transform: uppercase;
+	z-index: 3;
+}
+
+.__modal {
+    z-index: 10;
+    position: absolute;
+    color: #000;
+    background-color: #fff;
+    width: 95%;
+    height: 80%;
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+    padding: 10% 5% 1% 5%;
+    border-radius: 22px;
+    border: 2px solid #999696;
+    opacity: 0.8;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
