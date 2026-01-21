@@ -1,5 +1,4 @@
 import { useInventoryList } from "@pkg/hooks/list/getInventory";
-import Separator from "../../components/headers/Separator";
 import { Col, Container, Row } from "reactstrap";
 import Loading from "@front/components/utils/Loading";
 import { MenuCard } from "@front/components/block/MenuCard";
@@ -9,7 +8,6 @@ export default function Locations() {
 
     return (
         <>
-        <Separator title="Locations"/>
         <section className="section section-lg section-shaped pg-250 m-0" id="locations">
         {isLoading ? 
             <div className="flex justify-center items-center" style={{ margin: '150px' }}>
