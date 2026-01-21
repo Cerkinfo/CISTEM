@@ -22,8 +22,8 @@ export default function Coffee() {
                                 key={index}
                                 name={coffee.name}
                                 image={coffee.image}
-                                price={coffee.price}
-                                price2={coffee.price_large ? 'L' + coffee.price_large : undefined}
+                                price={coffee.price.toFixed(1)}
+                                price2={coffee.price_large ? 'Large ' + coffee.price_large.toFixed(1) + ' €' : undefined}
                             />
                         </Col>
                     ))}
