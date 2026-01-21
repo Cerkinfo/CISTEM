@@ -23,10 +23,10 @@ export function DrinkCard({ name, image, price, price2, list } : {
 
     return (
         <div className="container_">
-            <Modal 
+            {list && <Modal 
                 isOpen={listView !== 'main'}
                 content={list.find((item: any) => (item.key) === listView).content} 
-            />
+            />}
             <div className="content">
                 <div className="logo">
                     <div className="img"><CISTEM size={45} only={'text'} /></div>
@@ -45,7 +45,7 @@ export function DrinkCard({ name, image, price, price2, list } : {
                     <h2>{price} €</h2>
                 </div>
                 <div className="button">
-                    <DrinkToolBar view={listView} onChange={setListView} list={list} />
+                    {list && <DrinkToolBar view={listView} onChange={setListView} list={list} />}
                 </div>
                 <p className="mens">{ name }</p>
             </div>
