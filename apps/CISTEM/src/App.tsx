@@ -27,8 +27,13 @@ function App() {
 
             <Route path="/" element={<AuthGuard><Layout /></AuthGuard>}>
               <Route index element={<HowToFOSDEM />} />
-              <Route path="/list" element={<List />} />
-              <Route path="/profile/:pseudo" element={<Profile />} />
+              <Route path="profile/:pseudo" element={<Profile />} />
+              <Route path="schedule" element={<></>} />
+              <Route path="list" element={<List />} />
+              <Route path="drain" element={<></>} />
+              <Route path="inventory" element={<></>} />
+              <Route path='benevoles' element={<></>} />
+              <Route path='credits' element={<></>} />
               <Route path="*" element={<div>404 Not Found</div>} />
             </Route>
           </Routes>

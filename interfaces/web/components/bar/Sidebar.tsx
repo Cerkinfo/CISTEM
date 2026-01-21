@@ -24,22 +24,34 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li className="navbar__item">
-                    <a href="#" className="navbar__link"><Calendar size={'50'}/><span>Horaires</span></a> 
+                    <Link to="/schedule" className="navbar__link">
+                        <Calendar size={'50'}/><span>Horaires</span>
+                    </Link>
                 </li>
                 <li className="navbar__item">
-                    <a href="/list" className="navbar__link"><ProgressBar size={'50'}/><span>Listes</span></a>
+                    <Link to="/list" className="navbar__link">
+                        <ProgressBar size={'50'}/><span>Listes</span>
+                    </Link>
                 </li>
                 <li className="navbar__item">
-                    <a href="#" className="navbar__link"><Box size={'50'}/><span>Bacs de vidanges</span></a>
+                    <Link to="/drain" className="navbar__link">
+                        <Box size={'50'}/><span>Bacs de vidanges</span>
+                    </Link>
                 </li>
                 <li className="navbar__item">
-                    <a href="#" className="navbar__link"><Inventory size={'50'}/><span>Inventaire</span></a>
+                    <Link to="/inventory" className="navbar__link">
+                        <Inventory size={'50'}/><span>Inventaire</span>
+                    </Link>
                 </li>
                 <li className="navbar__item">
-                    <a href="#" className="navbar__link"><Peoples size={'50'}/><span>Bénévoles</span></a>
+                    <Link to="/benevoles" className="navbar__link">
+                        <Peoples size={'50'}/><span>Bénévoles</span>
+                    </Link>
                 </li>
                 <li className="navbar__item" style={{marginTop: 'auto', marginBottom: '20px'}}>
-                    <a href="#" className="navbar__link"><CISTEM_text size={25} only={'text'} color={'white'}/><span>Crédits</span></a>
+                    <Link to="/credits" className="navbar__link">
+                        <CISTEM_text size={25} only={'text'} color={'white'}/><span>Crédits</span>
+                    </Link>
                 </li>
             </ul>
         </nav>
