@@ -1,0 +1,86 @@
+//Code origin from https://codepen.io/e_javieer/pen/bGrjvJB
+
+@import url("https://fonts.googleapis.com/css2?family=Mohave:wght@300;700&family=Open+Sans&display=swap");
+
+:root {
+	--orange: hsl(0, 100%, 65%);
+	--lighter-orange: hsl(0, 100%, 77%);
+	--grey: hsl(197, 3%, 46%);
+	--dark: hsl(0, 0%, 16%);
+	--white: hsl(0, 0%, 100%);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+::selection {
+	background-color: var(--lighter-orange);
+	color: var(--white);
+}
+
+p {
+	margin: 0;
+	&:not(:last-child) {
+		margin-bottom: 14px;
+	}
+}
+
+img {
+	width: 100%;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+	margin: 0 auto;
+	display: flex;
+}
+
+.card_title {
+	font-family: var(--title-font);
+	font-size: 28px;
+	line-height: 24px;
+	text-transform: uppercase;
+}
+
+.card_text p {
+	font-family: var(--body-font);
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.orange {
+	color: var(--orange);
+}
+
+.note-sm {
+	color: var(--grey);
+	font-family: var(--title-font);
+	font-size: 14px;
+}
+
+.card {
+	background-color: var(--white);
+	border-radius: 0.25rem;
+	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+
+	&_content {
+		padding: 26px 16px 16px;
+	}
+
+	&_title {
+		margin-bottom: 5px;
+	}
+
+	&_text {
+		margin: 16px 0;
+	}
+}
