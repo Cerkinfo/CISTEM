@@ -1,10 +1,10 @@
-import { useInventoryList } from "@pkg/hooks/list/getInventory";
+import { useInformationsList } from "@pkg/hooks/list/getInformations";
 import { Container, Row } from "reactstrap";
 import Loading from "@front/components/utils/Loading";
 import { BeerItem } from "@front/components/block/BeerItem";
 
 export default function Beers() {
-    const { list, isLoading } = useInventoryList({tableName: 'beers'})
+    const { list, isLoading } = useInformationsList({tableName: 'beers'})
 
     return (
         <>

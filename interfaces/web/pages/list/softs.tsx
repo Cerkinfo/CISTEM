@@ -1,10 +1,10 @@
-import { useInventoryList } from "@pkg/hooks/list/getInventory";
+import { useInformationsList } from "@pkg/hooks/list/getInformations";
 import { Col, Container, Row } from "reactstrap";
 import Loading from "@front/components/utils/Loading";
 import { DrinkCard } from "@front/components/block/DrinkCard";
 
 export default function Softs() {
-    const { list, isLoading } = useInventoryList({tableName: 'softs'})
+    const { list, isLoading } = useInformationsList({tableName: 'softs'})
 
     return (
         <>

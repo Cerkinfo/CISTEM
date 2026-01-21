@@ -1,9 +1,9 @@
-import { useInventoryList } from "@pkg/hooks/list/getInventory";
+import { useInformationsList } from "@pkg/hooks/list/getInformations";
 import { Card, CardBody, CardTitle, Col, Container, Row } from "reactstrap";
 import Loading from "@front/components/utils/Loading";
 
 export default function Locations() {
-    const { list, isLoading } = useInventoryList({tableName: 'locations'})
+    const { list, isLoading } = useInformationsList({tableName: 'locations'})
 
     return (
         <>

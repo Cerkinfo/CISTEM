@@ -2,7 +2,7 @@ import { supabase } from "@client";
 import type { Database } from "@db";
 import { useEffect, useState } from "react";
 
-export function useInventoryList({ tableName } : { tableName: keyof Database["public"]["Tables"] }) {
+export function useInformationsList({ tableName } : { tableName: keyof Database["public"]["Tables"] }) {
     const [list, setList] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
 
