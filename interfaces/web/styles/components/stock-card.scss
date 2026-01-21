@@ -11,11 +11,18 @@
         color: #FFF;
         background-color: #252525;
         img {
+            position: relative;
             display: block;
             max-width:500px;
             max-height:400px;
             width: auto;
             height: auto;
+        }
+        .out_of_stock {
+            position: absolute;
+            margin: 20% 5%;
+            width: 90%;
+            transform: rotate(-30deg);
         }
     }
     .card-body {

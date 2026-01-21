@@ -14,6 +14,7 @@ export function StockCard({ image, title, per_crate, quantity } : {
                 width: "100%"
             }}>
                 <img src={ image } />
+                {quantity === 0 && <img src='/out_of_stock.png' className="out_of_stock" />}
                 <CardBody>
                     <CardTitle tag="h3">
                         {title}
