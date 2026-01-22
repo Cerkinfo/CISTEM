@@ -1,0 +1,28 @@
+.action-bar {
+    background-color: #FFF;
+    color: #000;
+    display: flex;
+    bottom: 1vh;
+    position: fixed;
+    width: 94.3vw;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    ul {
+        list-style-type: none;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        transform: translateY(40%);
+        justify-content: flex-end;
+        margin-right: 20px;
+        gap: 20px;
+        .role {
+            margin-right: auto;
+        }
+    }
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
