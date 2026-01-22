@@ -2,7 +2,7 @@ import { supabase } from "@client";
 import type { Database } from "@db";
 import { useEffect, useState } from "react";
 
-export function useItem({ tableName, key } : { tableName: keyof Database["public"]["Tables"], key: any }) {
+export function useItem({ tableName, key, subscribe } : { tableName: keyof Database["public"]["Tables"], key: any, subscribe?: boolean }) {
     const [item, setItem] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -27,23 +27,25 @@ export function useItem({ tableName, key } : { tableName: keyof Database["public
           setIsLoading(false);
         }
       };
-    fetchData();
-    const subscription = supabase
-      .channel(`${tableName}-${key}-changes`)
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: tableName },
-        (payload) => {
-          console.log("Changement détecté :", payload);
-          setTimeout(() => {
-              fetchData();
-          }, 500);
-        }
-      )
-      .subscribe();
-      return () => {
-          supabase.removeChannel(subscription);
-      };
+      fetchData();
+      if(subscribe) {
+        const subscription = supabase
+          .channel(`${tableName}-${key}-changes`)
+          .on(
+            'postgres_changes',
+            { event: '*', schema: 'public', table: tableName },
+            (payload) => {
+              console.log("Changement détecté :", payload);
+              setTimeout(() => {
+                  fetchData();
+              }, 500);
+            }
+          )
+          .subscribe();
+          return () => {
+              supabase.removeChannel(subscription);
+          };
+      }
     }, [tableName]);
     
     return { item, isLoading };

@@ -2,11 +2,13 @@ import { Eye, Mouth, Nose } from "@front/components/utils/icons";
 import type { Database } from "@db";
 import type { JSX } from "react";
 import { Center, H3 } from "@front/styles/components/titles";
+import { useItem } from "@pkg/hooks/list/getItem";
 
 type FlavorsRow = Database["public"]["Tables"]["beers_flavors"]["Row"];
 type KeyOfFlavorsRow = keyof FlavorsRow;
-export const FlavorsView = ({ flavor }: { flavor: FlavorsRow | null }) => {
-  if (!flavor) {
+export const FlavorsView = ({ beerId }: { beerId: number }) => {
+  const { item: flavors, isLoading } = useItem({ tableName: "beers_flavors", key: beerId })
+  if (isLoading) {
     return (
       <Center style={{ fontSize: "18px" }}>
         <H3>Flavors</H3>
@@ -14,7 +16,7 @@ export const FlavorsView = ({ flavor }: { flavor: FlavorsRow | null }) => {
       </Center>
     );
   }
-  const keys = Object.keys(flavor) as KeyOfFlavorsRow[];
+  const keys = Object.keys(flavors) as KeyOfFlavorsRow[];
 
   const icons: Record<string, JSX.Element> = {
     visual: <Eye size="30" />,
@@ -27,7 +29,7 @@ export const FlavorsView = ({ flavor }: { flavor: FlavorsRow | null }) => {
       <H3>Flavors</H3>
       <br />
       {keys.filter(k => k !== "id").map((k) => {
-        const raw = flavor[k];
+        const raw = flavors[k];
 
         let value: string | undefined;
 

@@ -2,7 +2,7 @@ import { supabase } from "@client";
 import type { Database } from "@db";
 import { useEffect, useState } from "react";
 
-export function useInventoryList({ tableName } : { tableName: keyof Database["public"]["Tables"] }) {
+export function useInventoryList({ tableName, subscribe } : { tableName: keyof Database["public"]["Tables"], subscribe?: boolean }) {
     const [list, setList] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -24,23 +24,25 @@ export function useInventoryList({ tableName } : { tableName: keyof Database["pu
           setIsLoading(false);
         }
       };
-    fetchData();
-    const subscription = supabase
-      .channel(`${tableName}-changes`)
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: tableName },
-        (payload) => {
-          console.log("Changement détecté :", payload);
-          setTimeout(() => {
-              fetchData();
-          }, 500);
-        }
-      )
-      .subscribe();
-      return () => {
-          supabase.removeChannel(subscription);
-      };
+      fetchData();
+      if(subscribe) {
+        const subscription = supabase
+          .channel(`${tableName}-changes`)
+          .on(
+            'postgres_changes',
+            { event: '*', schema: 'public', table: tableName },
+            (payload) => {
+              console.log("Changement détecté :", payload);
+              setTimeout(() => {
+                  fetchData();
+              }, 500);
+            }
+          )
+          .subscribe();
+          return () => {
+              supabase.removeChannel(subscription);
+          };
+      }
     }, [tableName]);
     
     return { list, isLoading };

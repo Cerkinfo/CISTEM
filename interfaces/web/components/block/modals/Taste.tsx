@@ -1,11 +1,13 @@
 import { Progress } from "reactstrap";
 import type { Database } from "@db";
 import { Center, H3 } from "@front/styles/components/titles";
+import { useItem } from "@pkg/hooks/list/getItem";
 
 type TasteRow = Database["public"]["Tables"]["beers_taste"]["Row"];
 type KeyOfTasteRow = keyof TasteRow;
-export const TasteView = ({ taste }: { taste: TasteRow | null }) => {
-  if (!taste) {
+export const TasteView = ({ beerId }: { beerId: number }) => {
+  const { item: taste, isLoading } = useItem({ tableName: "beers_taste", key: beerId })
+  if (isLoading) {
     return (
       <Center style={{ fontSize: "18px" }}>
         <H3>Taste</H3>

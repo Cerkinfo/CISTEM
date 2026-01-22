@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 
 function View({ table } : { table: any }) {
-    const { list, isLoading } = useInventoryList({tableName: table})
+    const { list, isLoading } = useInventoryList({tableName: table, subscribe: true})
 
     return (
         <div className="inventory-item">

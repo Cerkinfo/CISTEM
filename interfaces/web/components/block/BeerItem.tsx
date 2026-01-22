@@ -1,24 +1,14 @@
 import { Col } from "reactstrap";
 import type { Database } from "@db"
-import { useItem } from "@pkg/hooks/list/getItem";
 import { InfoView } from "./modals/Info";
 import { TasteView } from "./modals/Taste";
 import { FlavorsView } from "./modals/Flavors";
 import { DrinkCard } from "./DrinkCard";
 import { Beer, Graph, Note, SmileyTooth } from "../utils/coloredIcons";
 
-const useTaste = (beerId: number) : {item : Database["public"]["Tables"]["beers_taste"]["Row"], isLoading : boolean} => {
-    return useItem({ tableName: "beers_taste", key: beerId });
-};
-
-const useFlavor = (beerId: number) : {item : Database["public"]["Tables"]["beers_flavors"]["Row"], isLoading : boolean}  => {
-    return useItem({ tableName: "beers_flavors", key: beerId });
-};
 type BeerRow = Database["public"]["Tables"]["beers"]["Row"];
 
 export const BeerItem = ({ beer }: { beer: BeerRow }) => {
-    const { item: taste } = useTaste(beer.id);
-    const { item: flavor } = useFlavor(beer.id);
     const list = [
         { key: 'main', icon: <Beer size={'20'} />, content: '' },
         { key: 'info', icon: <Note size={'20'} />, content: (
@@ -31,10 +21,10 @@ export const BeerItem = ({ beer }: { beer: BeerRow }) => {
             />
         ) },
         { key: 'taste', icon: <Graph size={'20'} />, content: (
-            <TasteView key="tasteView" taste={taste ?? null} />
+            <TasteView key="tasteView" beerId={beer.id} />
         ) },
         { key: 'flavors', icon: <SmileyTooth size={'20'} />, content: (
-            <FlavorsView key="flavorView" flavor={flavor ?? null} />
+            <FlavorsView key="flavorView" beerId={beer.id} />
         ) },
     ]
 
