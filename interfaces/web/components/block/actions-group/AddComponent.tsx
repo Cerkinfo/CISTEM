@@ -3,7 +3,10 @@ import { Beer, Note, Sandwich, Soft } from "@front/components/utils/coloredIcons
 import { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "@styles/components/modal.scss";
-import { BeerInsert } from "../modals/BeerInsert";
+import { BeerInsert } from "./views/BeerInsert";
+import { SoftInsert } from "./views/SoftInsert";
+import { FoodInsert } from "./views/FoodInsert";
+import { MaterialInsert } from "./views/MaterialInsert";
 
 export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     const [listView, setListView] = useState('beers');
@@ -11,11 +14,11 @@ export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: b
         { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', 
             view: <BeerInsert />},
         { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', 
-            view: /*<View table='stock_softs'/>*/null},
+            view: <SoftInsert />},
         { key: 'foods', icon: <Sandwich size={'30'} />, name: 'Nourriture', 
-            view: /*<View table='stock_foods'/>*/null},
+            view: <FoodInsert />},
         { key: 'material', icon: <Note size={'30'} />, name: 'Matériel', 
-            view: /*<View table='stock_materials' />*/null}
+            view: <MaterialInsert />}
     ];
     return(
         <Modal isOpen={isOpen} size="xl" unmountOnClose={true}>

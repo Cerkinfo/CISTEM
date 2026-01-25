@@ -1,5 +1,5 @@
 import {Col, Container, Form, Row } from "reactstrap";
-import Separator from "../../headers/Separator";
+import Separator from "../../../headers/Separator";
 import { useFormState } from "@pkg/hooks/form.ts/useFormState";
 import { capitalize } from "@pkg/utils/string";
 import { TextInput } from "@front/components/form/inputs/TextInput";
@@ -29,7 +29,7 @@ export function BeerInsert () {
     taste: ""
   })
   const formStock = useFormState({
-    bottlesPerCrate: "",
+    entityPerCrate: "",
     stockCrates: ""
   })
 
@@ -120,7 +120,7 @@ export function BeerInsert () {
           <Row>
             <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
               <TextInput name="price" label="Price (€)" placeholder="Example : 2.5" form={formInfos} onChange={ onChange } />
-              <TextInput name="bottlesPerCrate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
+              <TextInput name="entityPerCrate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
               <TextInput name="stockCrates" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
             </Col>
           </Row>
