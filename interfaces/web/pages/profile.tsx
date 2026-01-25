@@ -1,6 +1,7 @@
 // UI from : https://codepen.io/singhimalaya/pen/bxoBZZ
 
 import Connected from "@front/components/bar/Connected";
+import { PencilButton } from "@front/components/buttons/PencilButton";
 import { Talk, Time } from "@front/components/utils/icons";
 import { useSession } from "@pkg/hooks/ctx";
 import "@styles/pages/profile.scss";
@@ -19,6 +20,7 @@ export default function Profile() {
                 <div id="profile-d">
                 <div id="profile-pic">
                     <img src={user?.image}/>
+                    <PencilButton />
                 </div>
                 <div id="u-name">{user?.first_name} {user?.last_name}</div>
                 </div>

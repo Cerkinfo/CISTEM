@@ -1,18 +1,18 @@
 import "@styles/components/action-bar.scss"
 import { useSession } from "@pkg/hooks/ctx"
 import { RoleToString } from "@pkg/utils/RoleToString";
-
-function getList(role: string) {
-    switch (role) {
-        case 'ADMIN': return ([
-            {name: 'Ajouter un composent', action: ''}
-        ]);
-        default: return ([])
-    }
-}
+import { useState } from "react";
+import { Admin } from "../block/actions-group/admin";
 
 export function ActionFooterBar() {
     const { user, isLoading } = useSession();
+
+    function getModals(role: string) {
+        switch (role) {
+            case 'ADMIN': return (<Admin />);
+            default: return ([])
+        }
+    }
 
     if (isLoading || !user) return null;
     return (
@@ -21,9 +21,7 @@ export function ActionFooterBar() {
                 <li className="role">
                     {RoleToString(user?.role)}
                 </li>
-                <li>
-                    test
-                </li>
+                {getModals(user?.role)}
             </ul>
         </footer>
     )

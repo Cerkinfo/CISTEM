@@ -1,0 +1,42 @@
+.image {
+    background-color: #25252525;
+    min-height: 120px;
+    &__area {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #FFFFFF25;
+        border-radius: 25px;
+        aspect-ratio: 1/1;
+        overflow: hidden;
+        background-position: center;
+        background-size: cover;
+        cursor: pointer;
+        background-image: var(--selected-image);
+    }
+    &__text:empty {
+        display: none;
+    }
+    input {
+        display: none;
+    }
+}
+
+.input--text {
+    width: 100%;
+    display: flex;
+    position: relative;
+    gap: 5px;
+    span {
+        min-width: 60px;
+        display: flex;
+        margin: auto;
+    }
+    input {
+        height: 40px;
+        width: 85%;
+        border-radius: 10px;
+        padding: 10px;
+    }
+}

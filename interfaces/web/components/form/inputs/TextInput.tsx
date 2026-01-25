@@ -1,33 +1,40 @@
 import { useLanguage } from "@pkg/contexts/LanguageContext";
+import { capitalize } from "@pkg/utils/string";
+import "@styles/components/form/input.scss"
 
 export function TextInput({ 
-  formik, 
+  form, 
   name, 
   placeholder, 
   required,
+  type = 'text',
+  label,
+  onChange,
 }: { 
-  formik: any, 
+  form: any, 
   name: string, 
   placeholder: string, 
   required?: boolean,
+  type?: string,
+  label?: string,
+  onChange: (k: string, v: string) => void,
 }) {
   const { t } = useLanguage();
   return (
-      <div className="form-group">
+      <div className={`input--${type}`}>
+        <span>{label || capitalize(name)}</span>
         <input
           id={name}
           name={name}
-          type="text"
-          value={formik.values[name]}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          type={type}
+          value={form.values[name]}
+          onChange={ (e) => onChange(name, e.target.value) }
           placeholder={t(`${placeholder}`)}
-          className="form-control"
           required={required}
         />
-        {formik.touched[name] && formik.errors[name] && (
+        {/* {formik.touched[name] && formik.errors[name] && (
           <div className="error-message">{formik.errors[name]}</div>
-        )}
+        )} */}
       </div>
   );
 }
