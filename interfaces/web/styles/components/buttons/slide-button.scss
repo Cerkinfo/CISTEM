@@ -1,20 +1,19 @@
 // Code origin from https://codepen.io/yuhomyan/pen/OJMejWJ
 
+@import '../../colors.scss';
 .frame {
-  width: 90%;
-  margin: 40px auto;
   text-align: center;
 }
 button {
   margin: 20px;
+  white-space: nowrap;
 }
 .custom-btn {
-  width: 130px;
-  height: 40px;
+  min-width: 100px;
+  height: 30px;
   color: #fff;
   border-radius: 5px;
-  padding: 10px 25px;
-  font-family: 'Lato', sans-serif;
+  padding: 5px 20px;
   font-weight: 500;
   background: transparent;
   cursor: pointer;
@@ -29,7 +28,7 @@ button {
 
 /* 15 */
 .btn-15 {
-  background: #b621fe;
+  background: $light;
   border: none;
   z-index: 1;
 }
@@ -41,7 +40,7 @@ button {
   top: 0;
   right: 0;
   z-index: -1;
-  background-color: #663dff;
+  background-color: $color-secondary;
   border-radius: 5px;
    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
    7px 7px 20px 0px rgba(0,0,0,.1),
