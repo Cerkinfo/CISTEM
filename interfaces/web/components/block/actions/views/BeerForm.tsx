@@ -58,17 +58,17 @@ export function BeerForm ({ data } : { data?: any }) {
   useEffect(() => {
   if (stateFlavors) {
     Object.entries(stateFlavors).forEach(([key, value]) => {
-      if(key !== "id") formFlavors.set(key, value ?? "");
+      if(key !== "id") formFlavors.set(key as any, value ?? "");
     });
   }
   if (stateTaste) {
     Object.entries(stateTaste).forEach(([key, value]) => {
-      if(key !== "id") formTaste.set(key, value ?? "");
+      if(key !== "id") formTaste.set(key as any, value ?? "");
     });
   }
   if (stateStock) {
     Object.entries(stateStock).forEach(([key, value]) => {
-      if(key !== "id") formStock.set(key, value ?? "");
+      if(key !== "id") formStock.set(key as any, value ?? "");
     });
   }
   }, [stateFlavors, stateTaste, stateStock]);

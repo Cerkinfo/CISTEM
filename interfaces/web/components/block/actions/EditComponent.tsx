@@ -13,7 +13,7 @@ import { useInformationsList } from "@pkg/hooks/list/getInformations";
 export function EditComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     const [listView, setListView] = useState('beers');
     const [current, setCurrent] = useState('');
-    const {list: data} = useInformationsList({tableName: listView})
+    const {list: data} = useInformationsList({tableName: listView as any})
     const list = [
         { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', 
             view: <BeerForm data={current} />},

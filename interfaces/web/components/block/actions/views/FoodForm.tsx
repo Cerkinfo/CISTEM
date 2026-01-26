@@ -32,7 +32,7 @@ export function FoodForm({ data } : { data?: any }) {
   useEffect(() => {
     if (stateStock) {
       Object.entries(stateStock).forEach(([key, value]) => {
-        if(key !== "id") formStock.set(key, value ?? "");
+        if(key !== "id") formStock.set(key as any, value ?? "");
       });
     }
   }, [stateStock]);
