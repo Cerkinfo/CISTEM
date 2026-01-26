@@ -3,22 +3,22 @@ import { Beer, Note, Sandwich, Soft } from "@front/components/utils/coloredIcons
 import { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "@styles/components/modal.scss";
-import { BeerInsert } from "./views/BeerInsert";
-import { SoftInsert } from "./views/SoftInsert";
-import { FoodInsert } from "./views/FoodInsert";
-import { MaterialInsert } from "./views/MaterialInsert";
+import { BeerForm } from "./views/BeerForm";
+import { SoftForm } from "./views/SoftForm";
+import { FoodForm } from "./views/FoodForm";
+import { MaterialForm } from "./views/MaterialForm";
 
 export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     const [listView, setListView] = useState('beers');
     const list = [
         { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', 
-            view: <BeerInsert />},
+            view: <BeerForm />},
         { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', 
-            view: <SoftInsert />},
+            view: <SoftForm />},
         { key: 'foods', icon: <Sandwich size={'30'} />, name: 'Nourriture', 
-            view: <FoodInsert />},
+            view: <FoodForm />},
         { key: 'material', icon: <Note size={'30'} />, name: 'Matériel', 
-            view: <MaterialInsert />}
+            view: <MaterialForm />}
     ];
     return(
         <Modal isOpen={isOpen} size="xl" unmountOnClose={true}>
@@ -26,7 +26,14 @@ export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: b
                 <ListHeaderBar list={list} view={listView} onChange={setListView} size={'1vw'}/>
             </ModalHeader>
             <ModalBody>
-                {list?.find((l: any) => l.key === listView)?.view || listView}
+                {listView === "beers" && <>
+                    <p>
+                        Rends-toi sur <a href="https://www.vandb.fr/biere/">vandb.fr</a>, trouve la bière à ajouter et renseigne
+                        toutes les informations dans le formulaire ci-dessous.
+                    </p>
+                    <p>! Attention n'oublie pas de traduire les textes en anglais !</p>
+                </>}
+                {list?.find((l: any) => l.key === listView)?.view}
             </ModalBody>
             <ModalFooter>
                 <p>ATTENTION ! Vérifie bien toutes les réponses car si il n'y a pas de vérification ici mais l'erreur sera provoquée au niveau du serveur et tu devras tout recommencer !</p>

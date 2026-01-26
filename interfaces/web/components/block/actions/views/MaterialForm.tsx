@@ -1,13 +1,13 @@
 import {Col, Container, Form, Row } from "reactstrap";
 import Separator from "../../../headers/Separator";
-import { useFormState } from "@pkg/hooks/form.ts/useFormState";
+import { useFormState } from "@pkg/hooks/form/useFormState";
 import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
 
-export function FoodInsert () {
+export function MaterialForm () {
   const formInfos = useFormState({
     name: "",
-    ingredients: "",
+    description: "",
     image: null as File | null,
     price: ""
   })
@@ -40,8 +40,8 @@ export function FoodInsert () {
                 setImage={ function (img: File) {formInfos.set("image", img)} }
               />
             </Col><Col md="9" style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
-              <TextInput name="name"  placeholder="Example : Sandwich Club" form={formInfos} onChange={ onChange }  />
-              <TextInput name="ingredients" placeholder="Example : Bread, Ham, Cheese" form={formInfos} onChange={ onChange } />
+              <TextInput name="name"  placeholder="Example : Eco-cup" form={formInfos} onChange={ onChange }  />
+              <TextInput name="description" placeholder="Example : None is the best dev & president ever" form={formInfos} onChange={ onChange } />
             </Col>
           </Row>
         </Container>

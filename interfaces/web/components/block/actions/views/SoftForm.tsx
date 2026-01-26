@@ -1,10 +1,10 @@
 import {Col, Container, Form, Row } from "reactstrap";
 import Separator from "../../../headers/Separator";
-import { useFormState } from "@pkg/hooks/form.ts/useFormState";
+import { useFormState } from "@pkg/hooks/form/useFormState";
 import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
 
-export function SoftInsert () {
+export function SoftForm () {
   const formInfos = useFormState({
     name: "",
     volume: "",

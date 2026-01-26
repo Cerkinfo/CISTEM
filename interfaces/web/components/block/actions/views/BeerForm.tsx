@@ -1,19 +1,34 @@
 import {Col, Container, Form, Row } from "reactstrap";
 import Separator from "../../../headers/Separator";
-import { useFormState } from "@pkg/hooks/form.ts/useFormState";
+import { useFormState } from "@pkg/hooks/form/useFormState";
 import { capitalize } from "@pkg/utils/string";
 import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
+import { useEffect, useState } from "react";
+import { useItem } from "@pkg/hooks/list/getItem";
 
-export function BeerInsert () {
+export function BeerForm ({ data } : { data?: any }) {
+  const [beerId, _] = useState(data?.id);
+  const { item: flavors, isLoading: ilf } = useItem({tableName: "beers_flavors", key: beerId});
+  const { item: taste, isLoading: ilt } = useItem({tableName: "beers_taste", key: beerId});
+  const { item: stock, isLoading: ils } = useItem({tableName: "stock_beers", key: beerId});
+
+  const [stateFlavors, setFlavors] = useState(null);
+  const [stateTaste, setTaste] = useState(null);
+  const [stateStock, setStock] = useState(null);
+
+  useEffect(() => {if (!ilf) setFlavors(flavors)}, [ilf, flavors]);
+  useEffect(() => {if (!ilt) setTaste(taste)}, [ilt, taste]);
+  useEffect(() => {if (!ils) setStock(stock)}, [ils, stock]);
+  
   const formInfos = useFormState({
-    name: "",
-    type: "",
-    volume: "",
-    alcohol: "",
-    description: "",
-    image: null as File | null,
-    price: ""
+    name: data?.name || "",
+    type: data?.type || "",
+    volume: data?.volume || "",
+    alcohol: data?.alcohol || "",
+    description: data?.description || "",
+    image: data?.image || null as File | string | null,
+    price: data?.price || ""
   })
   const formTaste = useFormState({
     bitterness: "",
@@ -29,8 +44,8 @@ export function BeerInsert () {
     taste: ""
   })
   const formStock = useFormState({
-    entityPerCrate: "",
-    stockCrates: ""
+    entity_per_crate: "",
+    stock: ""
   })
 
   function onChange(key: any, value: any) {
@@ -40,6 +55,25 @@ export function BeerInsert () {
     else if (key === typeof formStock) formStock.set(key, value);
   }
 
+  useEffect(() => {
+  if (stateFlavors) {
+    Object.entries(stateFlavors).forEach(([key, value]) => {
+      if(key !== "id") formFlavors.set(key, value ?? "");
+    });
+  }
+  if (stateTaste) {
+    Object.entries(stateTaste).forEach(([key, value]) => {
+      if(key !== "id") formTaste.set(key, value ?? "");
+    });
+  }
+  if (stateStock) {
+    Object.entries(stateStock).forEach(([key, value]) => {
+      if(key !== "id") formStock.set(key, value ?? "");
+    });
+  }
+  }, [stateFlavors]);
+
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(formInfos, formTaste, formFlavors, formStock);
@@ -47,11 +81,6 @@ export function BeerInsert () {
 
   return (
     <>
-      <p>
-        Rends-toi sur <a href="https://www.vandb.fr/biere/">vandb.fr</a>, trouve la bière à ajouter et renseigne
-        toutes les informations dans le formulaire ci-dessous.
-      </p>
-      <p>! Attention n'oublie pas de traduire les textes en anglais !</p>
       <Form onSubmit={ handleSubmit }>
 
         <Separator title="General" />
@@ -120,8 +149,8 @@ export function BeerInsert () {
           <Row>
             <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
               <TextInput name="price" label="Price (€)" placeholder="Example : 2.5" form={formInfos} onChange={ onChange } />
-              <TextInput name="entityPerCrate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
-              <TextInput name="stockCrates" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
+              <TextInput name="entity_per_crate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
+              <TextInput name="stock" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
             </Col>
           </Row>
         </Container>

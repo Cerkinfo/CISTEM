@@ -1,0 +1,15 @@
+.component-dropdown {
+    display: flex;
+    width: 100%;
+    .dropdown {
+        width: 100%;
+        display: flex;
+        button {
+            width: 100%;
+        }
+        .dropdown-menu {
+            z-index: 10;
+            margin-top: 37px;
+        }
+    }
+}

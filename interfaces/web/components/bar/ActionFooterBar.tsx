@@ -1,8 +1,7 @@
 import "@styles/components/action-bar.scss"
 import { useSession } from "@pkg/hooks/ctx"
 import { RoleToString } from "@pkg/utils/RoleToString";
-import { useState } from "react";
-import { Admin } from "../block/actions-group/admin";
+import { Admin } from "../block/actions/admin";
 
 export function ActionFooterBar() {
     const { user, isLoading } = useSession();
