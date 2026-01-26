@@ -18,11 +18,11 @@ export function EditComponent({ isOpen, close } : { isOpen: boolean, close: (b: 
         { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', 
             view: <BeerForm data={current} />},
         { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', 
-            view: <SoftForm />},
+            view: <SoftForm data={current}/>},
         { key: 'foods', icon: <Sandwich size={'30'} />, name: 'Nourriture', 
-            view: <FoodForm />},
+            view: <FoodForm data={current}/>},
         { key: 'materials', icon: <Note size={'30'} />, name: 'Matériel', 
-            view: <MaterialForm />}
+            view: <MaterialForm data={current} />}
     ];
 
     function handleChangeView(view: string) {

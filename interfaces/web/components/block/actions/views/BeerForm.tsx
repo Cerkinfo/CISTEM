@@ -71,7 +71,7 @@ export function BeerForm ({ data } : { data?: any }) {
       if(key !== "id") formStock.set(key, value ?? "");
     });
   }
-  }, [stateFlavors]);
+  }, [stateFlavors, stateTaste, stateStock]);
 
 
   const handleSubmit = async (e: any) => {

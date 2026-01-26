@@ -3,23 +3,39 @@ import Separator from "../../../headers/Separator";
 import { useFormState } from "@pkg/hooks/form/useFormState";
 import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
+import { useItem } from "@pkg/hooks/list/getItem";
+import { useEffect, useState } from "react";
 
-export function SoftForm () {
+export function SoftForm ({ data } : { data?: any }) {
+  const [softId, _] = useState(data?.id);
+  const { item: stock, isLoading: ils } = useItem({tableName: "stock_softs", key: softId});
+  const [stateStock, setStock] = useState(null);
+  
+  useEffect(() => {if (!ils) setStock(stock)}, [ils, stock]);
+
   const formInfos = useFormState({
-    name: "",
-    volume: "",
-    image: null as File | null,
-    price: ""
+    name: data?.name || "",
+    volume: data?.volume || "",
+    image: data?.image || null as File | string | null,
+    price: data?.price || ""
   })
   const formStock = useFormState({
-    entityPerCrate: "",
-    stockCrates: ""
+    entity_per_crate: "",
+    stock: ""
   })
 
   function onChange(key: any, value: any) {
     if (key === typeof formInfos) formInfos.set(key, value);
     else if (key === typeof formStock) formStock.set(key, value);
   }
+
+  useEffect(() => {
+    if (stateStock) {
+      Object.entries(stateStock).forEach(([key, value]) => {
+        if(key !== "id") formStock.set(key, value ?? "");
+      });
+    }
+  }, [stateStock]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -51,8 +67,8 @@ export function SoftForm () {
           <Row>
             <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
               <TextInput name="price" label="Price (€)" placeholder="Example : 2.5" form={formInfos} onChange={ onChange } />
-              <TextInput name="entityPerCrate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
-              <TextInput name="stockCrates" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
+              <TextInput name="entity_per_crate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
+              <TextInput name="stock" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
             </Col>
           </Row>
         </Container>
