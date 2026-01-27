@@ -7,12 +7,14 @@ import { BeerForm } from "./views/BeerForm";
 import { SoftForm } from "./views/SoftForm";
 import { FoodForm } from "./views/FoodForm";
 import { MaterialForm } from "./views/MaterialForm";
+import { BeerInsert } from "@pkg/hooks/insert/beer";
 
 export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     const [listView, setListView] = useState('beers');
+    const [data, setData] = useState([])
     const list = [
         { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', 
-            view: <BeerForm />},
+            view: <BeerForm data={data} setData={setData} />},
         { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', 
             view: <SoftForm />},
         { key: 'foods', icon: <Sandwich size={'30'} />, name: 'Nourriture', 
@@ -40,7 +42,7 @@ export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: b
                 <Button outline color="danger" onClick={() => close(false)}>
                     Cancel
                 </Button>
-                <Button outline color="success" onClick={() => {}}>
+                <Button outline color="success" onClick={() => {BeerInsert({form: data})}}>
                     Add
                 </Button>
             </ModalFooter>

@@ -13,7 +13,7 @@ import { InfoView } from "../../modals/Info";
 import { TasteView } from "../../modals/Taste";
 import { FlavorsView } from "../../modals/Flavors";
 
-export function BeerForm ({ data } : { data?: any }) {
+export function BeerForm ({ data, setData } : { data: any, setData: (...args: any[]) => any }) {
   const [beerId, _] = useState(data?.id);
   const { item: flavors, isLoading: ilf } = useItem({tableName: "beers_flavors", key: beerId});
   const { item: taste, isLoading: ilt } = useItem({tableName: "beers_taste", key: beerId});
@@ -55,10 +55,22 @@ export function BeerForm ({ data } : { data?: any }) {
   })
 
   function onChange(key: any, value: any) {
-    if (Object.keys(formInfos.values).includes(key)) formInfos.set(key, value);
-    else if (Object.keys(formTaste.values).includes(key)) formTaste.set(key, value);
-    else if (Object.keys(formFlavors.values).includes(key)) formFlavors.set(key, value);
-    else if (Object.keys(formStock.values).includes(key)) formStock.set(key, value);
+    if (Object.keys(formInfos.values).includes(key)) {
+      formInfos.set(key, value);
+      setData((prev: any) => [...prev, {key:  value}]);
+    }
+    else if (Object.keys(formTaste.values).includes(key)) {
+      formTaste.set(key, value)
+      setData((prev: any) => [...prev, {taste: [key, value]}])
+    }
+    else if (Object.keys(formFlavors.values).includes(key)) {
+      formFlavors.set(key, value)
+      setData((prev: any) => [...prev, {flavors: [key, value]}])
+    }
+    else if (Object.keys(formStock.values).includes(key)) {
+      formStock.set(key, value)
+      setData((prev: any) => [...prev, {stock: [key, value]}])
+    }
   }
 
   useEffect(() => {
