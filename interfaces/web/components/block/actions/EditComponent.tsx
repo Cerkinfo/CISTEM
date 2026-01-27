@@ -1,5 +1,5 @@
 import { ListHeaderBar } from "@front/components/bar/ListHeaderBar";
-import { Beer, Note, Sandwich, Soft } from "@front/components/utils/coloredIcons";
+import { Beer, Coffee, Note, People, PubSign, Sandwich, Soft } from "@front/components/utils/coloredIcons";
 import { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "@styles/components/modal.scss";
@@ -9,20 +9,23 @@ import { FoodForm } from "./views/FoodForm";
 import { MaterialForm } from "./views/MaterialForm";
 import { ComponentDropdown } from "@front/components/form/dropdown/ComponentDropdown";
 import { useInformationsList } from "@pkg/hooks/list/getInformations";
+import { CoffeeForm } from "./views/CoffeeForm";
+import { UserForm } from "./views/UserForm";
+import { LocationForm } from "./views/LocationForm";
 
 export function EditComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     const [listView, setListView] = useState('beers');
-    const [current, setCurrent] = useState('');
+    const [current, setCurrent] = useState<any>('');
     const {list: data} = useInformationsList({tableName: listView as any})
+    const [data_, setData] = useState([])
     const list = [
-        { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', 
-            view: <BeerForm data={current} />},
-        { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', 
-            view: <SoftForm data={current}/>},
-        { key: 'foods', icon: <Sandwich size={'30'} />, name: 'Nourriture', 
-            view: <FoodForm data={current}/>},
-        { key: 'materials', icon: <Note size={'30'} />, name: 'Matériel', 
-            view: <MaterialForm data={current} />}
+        { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', view: <BeerForm data={data} setData={setData} />},
+        { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', view: <SoftForm data={current} />},
+        { key: 'foods', icon: <Sandwich size={'30'} />, name: 'Nourriture', view: <FoodForm data={current} />},
+        { key: 'materials', icon: <Note size={'30'} />, name: 'Matériel', view: <MaterialForm data={current} />},
+        { key: 'coffee', icon: <Coffee size={'30'} />, name: 'Café', view: <CoffeeForm data={current} />},
+        { key: 'users', icon: <People size={'30'} />, name: 'Bénévole', view: <UserForm data={current} />},
+        { key: 'locations', icon: <PubSign size={'30'} />, name: 'Bar', view: <LocationForm data={current} />}
     ];
 
     function handleChangeView(view: string) {
@@ -35,7 +38,7 @@ export function EditComponent({ isOpen, close } : { isOpen: boolean, close: (b: 
                 <ListHeaderBar list={list} view={listView} onChange={handleChangeView} size={'1vw'}/>
             </ModalHeader>
                 <ModalBody>
-                    <ComponentDropdown list={data} current={current} onChange={setCurrent}/>
+                    <ComponentDropdown list={data} current={current.name} onChange={setCurrent}/>
                     {current && list?.find((l: any) => l.key === listView)?.view}
                 </ModalBody>
             <ModalFooter>

@@ -183,6 +183,46 @@ export type Database = {
         }
         Relationships: []
       }
+      managers: {
+        Row: {
+          id: number
+          manager: string
+          suppleant: string | null
+        }
+        Insert: {
+          id?: number
+          manager: string
+          suppleant?: string | null
+        }
+        Update: {
+          id?: number
+          manager?: string
+          suppleant?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "managers_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "managers_manager_fkey"
+            columns: ["manager"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "managers_suppleant_fkey"
+            columns: ["suppleant"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       materials: {
         Row: {
           description: string | null
@@ -268,19 +308,19 @@ export type Database = {
       }
       stock_beers: {
         Row: {
-          bottles_per_crate: number
+          entity_per_crate: number
           id: number
-          stock_crates: number
+          stock: number
         }
         Insert: {
-          bottles_per_crate?: number
+          entity_per_crate?: number
           id?: number
-          stock_crates?: number
+          stock?: number
         }
         Update: {
-          bottles_per_crate?: number
+          entity_per_crate?: number
           id?: number
-          stock_crates?: number
+          stock?: number
         }
         Relationships: [
           {
@@ -294,19 +334,19 @@ export type Database = {
       }
       stock_foods: {
         Row: {
-          entity_per_box: number
+          entity_per_crate: number
           id: number
-          stock_box: number
+          stock: number
         }
         Insert: {
-          entity_per_box: number
+          entity_per_crate: number
           id?: number
-          stock_box?: number
+          stock?: number
         }
         Update: {
-          entity_per_box?: number
+          entity_per_crate?: number
           id?: number
-          stock_box?: number
+          stock?: number
         }
         Relationships: [
           {
@@ -320,19 +360,19 @@ export type Database = {
       }
       stock_materials: {
         Row: {
-          entity_per_box: number
+          entity_per_crate: number
           id: number
-          stock_box: number
+          stock: number
         }
         Insert: {
-          entity_per_box: number
+          entity_per_crate: number
           id?: number
-          stock_box?: number
+          stock?: number
         }
         Update: {
-          entity_per_box?: number
+          entity_per_crate?: number
           id?: number
-          stock_box?: number
+          stock?: number
         }
         Relationships: [
           {
@@ -346,19 +386,19 @@ export type Database = {
       }
       stock_softs: {
         Row: {
-          bottles_per_crate: number
+          entity_per_crate: number
           id: number
-          stock_crates: number
+          stock: number
         }
         Insert: {
-          bottles_per_crate: number
+          entity_per_crate: number
           id?: number
-          stock_crates: number
+          stock: number
         }
         Update: {
-          bottles_per_crate?: number
+          entity_per_crate?: number
           id?: number
-          stock_crates?: number
+          stock?: number
         }
         Relationships: [
           {
@@ -379,6 +419,7 @@ export type Database = {
           image: string
           last_name: string
           pseudo: string
+          role: Database["public"]["Enums"]["ROLE"]
         }
         Insert: {
           created_at?: string
@@ -388,6 +429,7 @@ export type Database = {
           image: string
           last_name: string
           pseudo: string
+          role?: Database["public"]["Enums"]["ROLE"]
         }
         Update: {
           created_at?: string
@@ -397,6 +439,7 @@ export type Database = {
           image?: string
           last_name?: string
           pseudo?: string
+          role?: Database["public"]["Enums"]["ROLE"]
         }
         Relationships: []
       }
@@ -414,7 +457,15 @@ export type Database = {
       pg_execute: { Args: { sql: string }; Returns: Record<string, unknown>[] }
     }
     Enums: {
-      [_ in never]: never
+      ROLE:
+        | "ADMIN"
+        | "TREZ"
+        | "MANAGER_BAR"
+        | "MANAGER_STOCK"
+        | "MANAGER_DRAIN"
+        | "WATER_SELLER"
+        | "BENEVOLE"
+      USER_ROLE: "ADMIN" | "MANAGER" | "SUPPLEANT" | "BENEVOLE" | "TEST"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -541,6 +592,17 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      ROLE: [
+        "ADMIN",
+        "TREZ",
+        "MANAGER_BAR",
+        "MANAGER_STOCK",
+        "MANAGER_DRAIN",
+        "WATER_SELLER",
+        "BENEVOLE",
+      ],
+      USER_ROLE: ["ADMIN", "MANAGER", "SUPPLEANT", "BENEVOLE", "TEST"],
+    },
   },
 } as const

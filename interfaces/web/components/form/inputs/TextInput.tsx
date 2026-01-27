@@ -13,7 +13,7 @@ export function TextInput({
 }: { 
   form: any, 
   name: string, 
-  placeholder: string, 
+  placeholder?: string, 
   required?: boolean,
   type?: string,
   label?: string,
@@ -29,7 +29,7 @@ export function TextInput({
           type={type}
           value={form.values[name]}
           onChange={ (e) => onChange(name, e.target.value) }
-          placeholder={t(`${placeholder}`)}
+          placeholder={placeholder && t(`${placeholder}`)}
           required={required}
         />
         {/* {formik.touched[name] && formik.errors[name] && (

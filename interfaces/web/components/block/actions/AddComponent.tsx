@@ -1,5 +1,5 @@
 import { ListHeaderBar } from "@front/components/bar/ListHeaderBar";
-import { Beer, Note, Sandwich, Soft } from "@front/components/utils/coloredIcons";
+import { Beer, Coffee, Note, People, PubSign, Sandwich, Soft } from "@front/components/utils/coloredIcons";
 import { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "@styles/components/modal.scss";
@@ -8,19 +8,21 @@ import { SoftForm } from "./views/SoftForm";
 import { FoodForm } from "./views/FoodForm";
 import { MaterialForm } from "./views/MaterialForm";
 import { BeerInsert } from "@pkg/hooks/insert/beer";
+import { CoffeeForm } from "./views/CoffeeForm";
+import { UserForm } from "./views/UserForm";
+import { LocationForm } from "./views/LocationForm";
 
 export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     const [listView, setListView] = useState('beers');
     const [data, setData] = useState([])
     const list = [
-        { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', 
-            view: <BeerForm data={data} setData={setData} />},
-        { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', 
-            view: <SoftForm />},
-        { key: 'foods', icon: <Sandwich size={'30'} />, name: 'Nourriture', 
-            view: <FoodForm />},
-        { key: 'material', icon: <Note size={'30'} />, name: 'Matériel', 
-            view: <MaterialForm />}
+        { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', view: <BeerForm data={data} setData={setData} />},
+        { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', view: <SoftForm />},
+        { key: 'foods', icon: <Sandwich size={'30'} />, name: 'Nourriture', view: <FoodForm />},
+        { key: 'materials', icon: <Note size={'30'} />, name: 'Matériel', view: <MaterialForm />},
+        { key: 'coffee', icon: <Coffee size={'30'} />, name: 'Café', view: <CoffeeForm />},
+        { key: 'users', icon: <People size={'30'} />, name: 'Bénévole', view: <UserForm />},
+        { key: 'locations', icon: <PubSign size={'30'} />, name: 'Bar', view: <LocationForm />}
     ];
     return(
         <Modal isOpen={isOpen} size="xl" unmountOnClose={true}>

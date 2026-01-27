@@ -56,7 +56,7 @@ export function RemoveComponent({ isOpen, close } : { isOpen: boolean, close: (b
                 <ListHeaderBar list={list} view={listView} onChange={handleChangeView} size={'1vw'}/>
             </ModalHeader>
                 <ModalBody>
-                    <ComponentDropdown list={data} current={current} onChange={setCurrent}/>
+                    <ComponentDropdown list={data} current={current.name} onChange={setCurrent}/>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         {current && list?.find((l: any) => l.key === listView)?.view}
                     </div>
