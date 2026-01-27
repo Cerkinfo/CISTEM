@@ -6,6 +6,12 @@ import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
 import { useEffect, useState } from "react";
 import { useItem } from "@pkg/hooks/list/getItem";
+import { SwitcherButton } from "@front/components/form/buttons/SwitchButton";
+import { DrinkCard } from "../../DrinkCard";
+import { Beer, Graph, Note, SmileyTooth } from "@front/components/utils/coloredIcons";
+import { InfoView } from "../../modals/Info";
+import { TasteView } from "../../modals/Taste";
+import { FlavorsView } from "../../modals/Flavors";
 
 export function BeerForm ({ data } : { data?: any }) {
   const [beerId, _] = useState(data?.id);
@@ -49,10 +55,10 @@ export function BeerForm ({ data } : { data?: any }) {
   })
 
   function onChange(key: any, value: any) {
-    if (key === typeof formInfos) formInfos.set(key, value);
-    else if (key === typeof formTaste) formTaste.set(key, value);
-    else if (key === typeof formFlavors) formFlavors.set(key, value);
-    else if (key === typeof formStock) formStock.set(key, value);
+    if (Object.keys(formInfos.values).includes(key)) formInfos.set(key, value);
+    else if (Object.keys(formTaste.values).includes(key)) formTaste.set(key, value);
+    else if (Object.keys(formFlavors.values).includes(key)) formFlavors.set(key, value);
+    else if (Object.keys(formStock.values).includes(key)) formStock.set(key, value);
   }
 
   useEffect(() => {
@@ -79,83 +85,115 @@ export function BeerForm ({ data } : { data?: any }) {
     console.log(formInfos, formTaste, formFlavors, formStock);
   };
 
+  const [view, setView] = useState<string>('Form')
+
   return (
     <>
-      <Form onSubmit={ handleSubmit }>
+      <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+      <SwitcherButton current={view} choices={['Form', 'Preview']} onSelect={setView} />
+      </div>
 
-        <Separator title="General" />
-        <Container fluid>
-          <Row style={{display:'flex', alignItems: 'center'}}>
-            <Col md="3">
-              <ImageInput 
-                name="image"
-                image={formInfos.values["image"]}
-                setImage={ function (img: File) {formInfos.set("image", img)} }
-              />
-            </Col><Col md="9" style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
-              <TextInput name="name"  placeholder="Example : Jupiler" form={formInfos} onChange={ onChange }  />
-              <TextInput name="type" placeholder="Example : Blonde Lager" form={formInfos} onChange={ onChange } />
-              <TextInput name="volume" label="Volume (cl)" placeholder="Example : 25" form={formInfos} onChange={ onChange } />
-              <TextInput name="alcohol" label="Alcohol (%)" placeholder="Example : 5.2" form={formInfos} onChange={ onChange } />
-              <TextInput name="description" placeholder="Example : Jupiler is a very good beer" form={formInfos} onChange={ onChange } />
-            </Col>
-          </Row>
-        </Container>
-
-        <Separator title="Taste" />
-        <p style={{ fontSize: "13px" }}>
-          Sorry la manip est un peu relou mais sans scraping pas d'autre solution pour l'instant...
-        </p>
-        <p style={{ fontSize: "13px", marginTop:"-12px" }}>
-          Ctrl + U (Code Source) & Ctrl + F (Recherche) & "Description" -&gt; Prendre la valeur "aria-valuenow"
-        </p>
-        <Container fluid>
-          <Row>
-            <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
-              {Object.keys(formTaste.values).map((field) => (
-                <TextInput
-                    key={field}
-                    name={field}
-                    label={`${capitalize(field)} (%)`}
-                    placeholder={`Example : 30`}
-                    form={formTaste}
-                    onChange={ onChange }
+      {view === 'Preview' ? (
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <DrinkCard 
+            name={`${formInfos.values["name"]} ${formInfos.values["volume"]}cl`}
+            image={formInfos.values["image"]}
+            price={formInfos.values["price"]}
+            list={[
+              { key: 'main', icon: <Beer size={'20'} />, content: '' },
+              { key: 'info', icon: <Note size={'20'} />, content: (
+                  <InfoView
+                      key="infoView"
+                      title={`${formInfos.values["name"]} ${formInfos.values["volume"]}cl`}
+                      type={formInfos.values["type"]}
+                      alc={formInfos.values["alcohol"]}
+                      desc={formInfos.values["description"]}
                   />
-                )
-              )}
-            </Col>
-          </Row>
-        </Container>
+              ) },
+              { key: 'taste', icon: <Graph size={'20'} />, content: (
+                  <TasteView key="tasteView" beerId={0} taste_={formTaste.values} />
+              ) },
+              { key: 'flavors', icon: <SmileyTooth size={'20'} />, content: (
+                  <FlavorsView key="flavorView" beerId={0} flavors_={formFlavors.values} />
+              ) },
+            ]}
+          />
+        </div>
+      ) : (
+        <Form onSubmit={ handleSubmit }>
+          <Separator title="General" />
+          <Container fluid>
+            <Row style={{display:'flex', alignItems: 'center'}}>
+              <Col md="3">
+                <ImageInput 
+                  name="image"
+                  image={formInfos.values["image"]}
+                  setImage={ function (img: File) {formInfos.set("image", img); console.log('insert', formInfos.values["image"])} }
+                />
+              </Col><Col md="9" style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
+                <TextInput name="name"  placeholder="Example : Jupiler" form={formInfos} onChange={ onChange }  />
+                <TextInput name="type" placeholder="Example : Blonde Lager" form={formInfos} onChange={ onChange } />
+                <TextInput name="volume" label="Volume (cl)" placeholder="Example : 25" form={formInfos} onChange={ onChange } />
+                <TextInput name="alcohol" label="Alcohol (%)" placeholder="Example : 5.2" form={formInfos} onChange={ onChange } />
+                <TextInput name="description" placeholder="Example : Jupiler is a very good beer" form={formInfos} onChange={ onChange } />
+              </Col>
+            </Row>
+          </Container>
 
-        <Separator title="Flavors" />
-        <Container fluid>
-          <Row>
-            <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
-            {Object.keys(formFlavors.values).map((field) => (
-              <TextInput
-                key={field}
-                name={field}
-                placeholder={`Example : Malte, houblon, levure`}
-                form={formFlavors}
-                onChange={ onChange }
-              />
-            ))}
-            </Col>
-          </Row>
-        </Container>
+          <Separator title="Taste" />
+          <p style={{ fontSize: "13px" }}>
+            Sorry la manip est un peu relou mais sans scraping pas d'autre solution pour l'instant...
+          </p>
+          <p style={{ fontSize: "13px", marginTop:"-12px" }}>
+            Ctrl + U (Code Source) & Ctrl + F (Recherche) & "Description" -&gt; Prendre la valeur "aria-valuenow"
+          </p>
+          <Container fluid>
+            <Row>
+              <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
+                {Object.keys(formTaste.values).map((field) => (
+                  <TextInput
+                      key={field}
+                      name={field}
+                      label={`${capitalize(field)} (%)`}
+                      placeholder={`Example : 30`}
+                      form={formTaste}
+                      onChange={ onChange }
+                    />
+                  )
+                )}
+              </Col>
+            </Row>
+          </Container>
 
-        <Separator title="Sale" />
-        <Container fluid>
-          <Row>
-            <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
-              <TextInput name="price" label="Price (€)" placeholder="Example : 2.5" form={formInfos} onChange={ onChange } />
-              <TextInput name="entity_per_crate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
-              <TextInput name="stock" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
-            </Col>
-          </Row>
-        </Container>
+          <Separator title="Flavors" />
+          <Container fluid>
+            <Row>
+              <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
+              {Object.keys(formFlavors.values).map((field) => (
+                <TextInput
+                  key={field}
+                  name={field}
+                  placeholder={`Example : Malte, houblon, levure`}
+                  form={formFlavors}
+                  onChange={ onChange }
+                />
+              ))}
+              </Col>
+            </Row>
+          </Container>
 
-      </Form>
+          <Separator title="Sale" />
+          <Container fluid>
+            <Row>
+              <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
+                <TextInput name="price" label="Price (€)" placeholder="Example : 2.5" form={formInfos} onChange={ onChange } />
+                <TextInput name="entity_per_crate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
+                <TextInput name="stock" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
+              </Col>
+            </Row>
+          </Container>
+        </Form>
+      )}
     </>
   );
 }

@@ -5,7 +5,7 @@ import { useItem } from "@pkg/hooks/list/getItem";
 
 type TasteRow = Database["public"]["Tables"]["beers_taste"]["Row"];
 type KeyOfTasteRow = keyof TasteRow;
-export const TasteView = ({ beerId }: { beerId: number }) => {
+export const TasteView = ({ beerId, taste_ }: { beerId: number, taste_?: any }) => {
   const { item: taste, isLoading } = useItem({ tableName: "beers_taste", key: beerId })
   if (isLoading) {
     return (
@@ -17,14 +17,15 @@ export const TasteView = ({ beerId }: { beerId: number }) => {
   }
 
   const capitalizeFirstLetter = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
-  const keys = Object.keys(taste) as KeyOfTasteRow[];
+  const keys = Object.keys(taste || taste_) as KeyOfTasteRow[];
 
+  if(!keys) return null;
   return (
     <>
       <H3>Taste</H3>
       <br />
       {keys.filter(k => k !== "id").map((k) => {
-        const raw = taste[k];
+        const raw = taste ? taste[k] : taste_[k];
         let value: string | number | undefined =
           raw == null ? undefined : typeof raw === "number" ? raw : Number(raw) || undefined;
 

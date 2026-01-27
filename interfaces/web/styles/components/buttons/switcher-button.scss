@@ -1,0 +1,16 @@
+.switcher {
+  background-color: #000;
+  position: absolute;
+  padding: 5px;
+  border-radius: 25px;
+  button {
+    color: #fff;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 12px;
+  }
+  .--active {
+    background-color: #fff;
+    color: #000
+  }
+}

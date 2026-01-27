@@ -6,7 +6,7 @@ import { useItem } from "@pkg/hooks/list/getItem";
 
 type FlavorsRow = Database["public"]["Tables"]["beers_flavors"]["Row"];
 type KeyOfFlavorsRow = keyof FlavorsRow;
-export const FlavorsView = ({ beerId }: { beerId: number }) => {
+export const FlavorsView = ({ beerId, flavors_ }: { beerId: number, flavors_?: any }) => {
   const { item: flavors, isLoading } = useItem({ tableName: "beers_flavors", key: beerId })
   if (isLoading) {
     return (
@@ -16,7 +16,7 @@ export const FlavorsView = ({ beerId }: { beerId: number }) => {
       </Center>
     );
   }
-  const keys = Object.keys(flavors) as KeyOfFlavorsRow[];
+  const keys = Object.keys(flavors || flavors_) as KeyOfFlavorsRow[];
 
   const icons: Record<string, JSX.Element> = {
     visual: <Eye size="30" />,
@@ -24,12 +24,13 @@ export const FlavorsView = ({ beerId }: { beerId: number }) => {
     taste: <Mouth size="30" />,
   };
 
+  if(!keys) return null;
   return (
     <>
       <H3>Flavors</H3>
       <br />
       {keys.filter(k => k !== "id").map((k) => {
-        const raw = flavors[k];
+        const raw = flavors ? flavors[k] : flavors_[k];
 
         let value: string | undefined;
 

@@ -17,7 +17,7 @@ export function TextInput({
   required?: boolean,
   type?: string,
   label?: string,
-  onChange: (k: string, v: string) => void,
+  onChange: (...args: any[]) => any;
 }) {
   const { t } = useLanguage();
   return (

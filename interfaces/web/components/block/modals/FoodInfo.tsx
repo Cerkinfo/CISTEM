@@ -1,5 +1,5 @@
-import { Center, H3 } from "@styles/components/titles";
 import { Info } from "@front/components/utils/icons";
+import { Center, H3 } from "@front/styles/components/titles";
 
 export const FoodInfoView = ({ title, ingredients } : { title : string, ingredients: string }) => {
     return (

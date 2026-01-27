@@ -5,6 +5,8 @@ import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
 import { useItem } from "@pkg/hooks/list/getItem";
 import { useEffect, useState } from "react";
+import { DrinkCard } from "../../DrinkCard";
+import { SwitcherButton } from "@front/components/form/buttons/SwitchButton";
 
 export function SoftForm ({ data } : { data?: any }) {
   const [softId, _] = useState(data?.id);
@@ -25,8 +27,8 @@ export function SoftForm ({ data } : { data?: any }) {
   })
 
   function onChange(key: any, value: any) {
-    if (key === typeof formInfos) formInfos.set(key, value);
-    else if (key === typeof formStock) formStock.set(key, value);
+    if (Object.keys(formInfos.values).includes(key)) formInfos.set(key, value);
+    else if (Object.keys(formStock.values).includes(key)) formStock.set(key, value);
   }
 
   useEffect(() => {
@@ -42,38 +44,54 @@ export function SoftForm ({ data } : { data?: any }) {
     console.log(formInfos, formStock);
   };
 
+  const [view, setView] = useState<string>('Form')
+  
   return (
     <>
-      <Form onSubmit={ handleSubmit }>
+      <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+      <SwitcherButton current={view} choices={['Form', 'Preview']} onSelect={setView} />
+      </div>
 
-        <Separator title="General" />
-        <Container fluid>
-          <Row style={{display:'flex', alignItems: 'center'}}>
-            <Col md="3">
-              <ImageInput 
-                name="image"
-                image={formInfos.values["image"]}
-                setImage={ function (img: File) {formInfos.set("image", img)} }
-              />
-            </Col><Col md="9" style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
-              <TextInput name="name"  placeholder="Example : Club-Mate" form={formInfos} onChange={ onChange }  />
-              <TextInput name="volume" label="Volume (cl)" placeholder="Example : 25" form={formInfos} onChange={ onChange } />
-            </Col>
-          </Row>
-        </Container>
+      {view === 'Preview' ? (
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <DrinkCard
+            name={`${formInfos.values["name"]} ${formInfos.values["volume"]}cl`}
+            image={formInfos.values["image"]}
+            price={formInfos.values["price"]}
+          />
+        </div>
+      ) : (
+        <Form onSubmit={ handleSubmit }>
 
-        <Separator title="Sale" />
-        <Container fluid>
-          <Row>
-            <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
-              <TextInput name="price" label="Price (€)" placeholder="Example : 2.5" form={formInfos} onChange={ onChange } />
-              <TextInput name="entity_per_crate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
-              <TextInput name="stock" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
-            </Col>
-          </Row>
-        </Container>
+          <Separator title="General" />
+          <Container fluid>
+            <Row style={{display:'flex', alignItems: 'center'}}>
+              <Col md="3">
+                <ImageInput 
+                  name="image"
+                  image={formInfos.values["image"]}
+                  setImage={ function (img: File) {formInfos.set("image", img)} }
+                />
+              </Col><Col md="9" style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
+                <TextInput name="name"  placeholder="Example : Club-Mate" form={formInfos} onChange={ onChange }  />
+                <TextInput name="volume" label="Volume (cl)" placeholder="Example : 25" form={formInfos} onChange={ onChange } />
+              </Col>
+            </Row>
+          </Container>
 
-      </Form>
+          <Separator title="Sale" />
+          <Container fluid>
+            <Row>
+              <Col style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
+                <TextInput name="price" label="Price (€)" placeholder="Example : 2.5" form={formInfos} onChange={ onChange } />
+                <TextInput name="entity_per_crate" label="Bottles per crate" placeholder="Example : 24" form={formStock} onChange={ onChange } />
+                <TextInput name="stock" label="Stock crates" placeholder="Example : 10" form={formStock} onChange={ onChange } />
+              </Col>
+            </Row>
+          </Container>
+
+        </Form>
+      )}
     </>
   );
 }
