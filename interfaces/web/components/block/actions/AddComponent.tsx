@@ -44,7 +44,7 @@ export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: b
                 <Button outline color="danger" onClick={() => close(false)}>
                     Cancel
                 </Button>
-                <Button outline color="success" onClick={() => {BeerInsert({form: data})}}>
+                <Button outline color="success" type='submit'>
                     Add
                 </Button>
             </ModalFooter>

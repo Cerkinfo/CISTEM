@@ -22,26 +22,27 @@ Deno.serve(async (req) => {
         headers: corsHeaders,
     });
 
-    let body;
+    let formData;
     try {
-        body = await req.json();
+        formData = await req.formData();
     } catch (_) {
-        return new Response("Invalid JSON", {
+        return new Response("Invalid FormData", {
         status: 401,
         headers: corsHeaders,
         });
     }
-    const payload = body.user;
+    const userRaw = formData.get('user');
+    const payload = JSON.parse(userRaw as string)
+    const pseudo = payload.pseudo ? payload.pseudo : `${payload.first_name}_${payload.last_name}`
 
     const { data, error } = await supabaseAdminClient
     .from('users')
     .insert({
-        id: payload.id,
         email: payload.email,
         first_name: payload.first_name,
         last_name: payload.last_name,
-        pseudo: payload.pseudo,
-        image: `https://api.dicebear.com/9.x/lorelei/svg?seed=${encodeURIComponent(payload.pseudo)}`,
+        pseudo: pseudo,
+        image: `https://api.dicebear.com/9.x/lorelei/svg?seed=${encodeURIComponent(pseudo)}`,
     })
     .select()
     .single();
@@ -50,6 +51,46 @@ Deno.serve(async (req) => {
             status: 400,
             headers: corsHeaders
         });
+    }
+
+    const file = formData.get('image')
+
+    if (file instanceof File) {
+    const extension = file.name.split('.').pop()
+    const filePath = `${crypto.randomUUID()}.${extension}`
+
+    const { data: ImgData, error: ImgError } =
+        await supabaseAdminClient
+        .storage
+        .from('users-images')
+        .upload(filePath, file, { upsert: true })
+        if (ImgError) {
+            console.error("Image upload error:", ImgError);
+            return new Response(ImgError.message, { 
+                status: 500,
+                headers: corsHeaders
+            });
+        } else {
+            const imageUrl = supabaseAdminClient
+            .storage
+            .from('users-images')
+            .getPublicUrl(ImgData.path).data.publicUrl;
+
+            const { data: UpdateData, error: UpdateError } = await supabaseAdminClient
+            .from('users')
+            .update({ image: imageUrl })
+            .eq('id', data.id)
+            .select()
+            .single();
+            if (UpdateError) {
+                console.error("User update error:", UpdateError);
+                return new Response(UpdateError.message, { 
+                    status: 500,
+                    headers: corsHeaders
+                });
+            }
+            data.image = UpdateData.image;
+        }
     }
 
     return new Response(JSON.stringify({ user: data }), {

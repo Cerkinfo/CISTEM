@@ -1,10 +1,11 @@
-import {Col, Container, Form, Row } from "reactstrap";
+import {Button, Col, Container, Form, Row } from "reactstrap";
 import Separator from "../../../headers/Separator";
 import { useFormState } from "@pkg/hooks/form/useFormState";
 import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
 import { ComponentDropdown } from "@front/components/form/dropdown/ComponentDropdown";
 import { ROLE, type Role } from "@pkg/types/Auth";
+import { useUserInsert } from "@pkg/hooks/insert/user";
 
 export function UserForm ({ data } : { data?: any }) {
   const formInfos = useFormState({
@@ -20,14 +21,16 @@ export function UserForm ({ data } : { data?: any }) {
     if (Object.keys(formInfos.values).includes(key)) formInfos.set(key, value);
   }
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    console.log(formInfos);
-  };
+  const { insertUser, data: user, error, isLoading } = useUserInsert()
+  async function handleSubmit() {
+    console.log('log')
+    await insertUser(formInfos.values)
+  }
+
   
   return (
     <>
-        <Form onSubmit={ handleSubmit }>
+        <Form>
 
             <Separator title="General" />
             <Container fluid>
@@ -50,6 +53,12 @@ export function UserForm ({ data } : { data?: any }) {
             </Container>
 
         </Form>
+        <Button outline color="danger" onClick={() => {}}>
+            Cancel
+        </Button>
+        <Button outline color="success" type='submit' onClick={() => handleSubmit()} disabled={isLoading}>
+            {isLoading ? 'Loading...' : 'Add'}
+        </Button>
     </>
   );
 }
