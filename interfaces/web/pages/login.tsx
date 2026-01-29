@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useLanguage } from "@pkg/contexts/LanguageContext";
 import { EmailInput } from '@front/components/form/inputs/EmailInput';
 import { PasswordInput } from '@front/components/form/inputs/PasswordInput';
@@ -12,8 +12,7 @@ import "@styles/pages/auth.scss";
 export const Login:React.FC = () => {
     const { t } = useLanguage();
     const { session, user } = useSession();
-    const navigate = useNavigate();
-    const { formik, isLoading, success, error } = useLogin();
+    const { formik, isLoading } = useLogin();
 
     if (session && user) return <Navigate to={'/'} />
 

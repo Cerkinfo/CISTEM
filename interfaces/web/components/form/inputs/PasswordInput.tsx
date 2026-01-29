@@ -13,7 +13,7 @@ export function PasswordInput({ formik }: { formik: any } ) {
             required
           />
           {formik.touched.password && formik.errors.password && (
-            <div className="error-message">{formik.errors.password}</div>
+            <div className="error-message" style={{color: 'red'}}>{formik.errors.password}</div>
           )}
         </div>
     );

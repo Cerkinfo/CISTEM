@@ -1,29 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useLanguage } from "@pkg/contexts/LanguageContext";
 import { EmailInput } from '@front/components/form/inputs/EmailInput';
 import { PasswordInput } from '@front/components/form/inputs/PasswordInput';
 import { SubmitButton } from '@front/components/form/buttons/SubmitButton';
-import { useEffect } from "react";
-import { supabase } from "@client";
 import { useSignup } from "@pkg/hooks/auth/signup";
 import CISTEM from "@front/components/utils/CISTEM";
 import Loading from "@front/components/utils/Loading";
-import { TextInput } from "@front/components/form/inputs/TextInput";
+import { useSession } from "@pkg/hooks/ctx";
 
 export const Signup:React.FC = () => {
+    const { session, user } = useSession();
     const { t } = useLanguage();
-    const navigate = useNavigate();
     const { formik, isLoading, success, error } = useSignup();
 
-    useEffect(() => {
-        const checkSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                navigate('/');
-            }
-        };
-        checkSession();
-    }, [navigate]);
+    if (session && user) return <Navigate to={'/'} />
 
     return (
         <div className="page-auth">

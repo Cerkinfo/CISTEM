@@ -13,7 +13,7 @@ export function EmailInput({ formik }: { formik: any } ) {
             required
           />
           {formik.touched.email && formik.errors.email && (
-            <div className="error-message">{formik.errors.email}</div>
+            <div className="error-message" style={{color: 'red'}}>{formik.errors.email}</div>
           )}
         </div>
     )
