@@ -27,7 +27,7 @@ export const Signup:React.FC = () => {
 
     return (
         <div className="page-auth">
-        <section className="s-login menu">
+        <section className="menu">
             {isLoading ? 
             <div className="flex justify-center items-center" style={{ margin: '150px' }}>
                 <Loading /> 
@@ -37,12 +37,14 @@ export const Signup:React.FC = () => {
                     <CISTEM size={150}/>
                 </div>
                 <h2>{t('signup.inscription')}</h2>
+                <h4>Un pré-compte utilisateur (hors mot de passe) a été créé pour vous par l'administrateur. <br/>
+                    Pour vous y lier, veuillez utiliser l'email que vous avez fourni dans le formulaire d'inscription des bénévoles. <br />
+                    Le mot de passe entré ici par contre, sera connu de vous seul, car encrypté pas un service tiers fiable. <br/>
+                    Une fois la jointure créée, votre session et votre pré-compte seront relié et vous pourrez naviguer dans le CISTEM.
+                </h4>
                 <form onSubmit={formik.handleSubmit} className="s-login__form ws-form">
                     <EmailInput formik={formik} />
                     <PasswordInput formik={formik} />
-                    <TextInput formik={formik} name="first_name" placeholder="signup.first_name" required />
-                    <TextInput formik={formik} name="last_name" placeholder="signup.last_name" required />
-                    <TextInput formik={formik} name="pseudo" placeholder="signup.pseudo" required />
                     <SubmitButton formik={formik} loading={isLoading} text='signup.signup' textLoading='authenticating' />
                 </form>
                 <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '14px', color: '#666' }}>

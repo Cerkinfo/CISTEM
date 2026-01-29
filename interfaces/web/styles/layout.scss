@@ -2,7 +2,6 @@
     min-height: 100vh;
     display: flex;
     flex-direction: row;
-    gap: 10px;
     background-color: #000;
 }
 
@@ -26,6 +25,10 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+.--no-aside {
+    width: 99vw;
+    margin-left: 0.5vw;
 }
 
 .page-content .page-body {

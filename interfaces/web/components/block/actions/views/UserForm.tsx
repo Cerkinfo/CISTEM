@@ -8,6 +8,7 @@ import { ROLE, type Role } from "@pkg/types/Auth";
 
 export function UserForm ({ data } : { data?: any }) {
   const formInfos = useFormState({
+    email: data?.email || "",
     first_name: data?.first_name || "",
     last_name: data?.last_name || "",
     pseudo: data?.pseudo || "",
@@ -39,6 +40,7 @@ export function UserForm ({ data } : { data?: any }) {
                     label="Facultatif : auto-généré à la création"
                 />
                 </Col><Col md="9" style={{display:'flex', flexDirection: 'column', gap: '15px'}}>
+                <TextInput name="email" placeholder="Servira pour se connecter" form={formInfos} onChange={ onChange }  />
                 <TextInput name="first_name" label="Prénom" form={formInfos} onChange={ onChange }  />
                 <TextInput name="last_name" label="Nom de famille" form={formInfos} onChange={ onChange }  />
                 <TextInput name="pseudo" placeholder="Facultatif : auto-généré à la création" form={formInfos} onChange={ onChange }  />

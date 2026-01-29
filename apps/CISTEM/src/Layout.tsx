@@ -19,3 +19,15 @@ export default function Layout() {
     </main>
   );
 }
+
+export function PublicLayout() {
+  return (
+    <main className="flex h-full global-layout">
+      <section className="flex-1 page-content --no-aside">
+        <div className="page-body">
+          <Outlet />
+        </div>
+      </section>
+    </main>
+  );
+}
