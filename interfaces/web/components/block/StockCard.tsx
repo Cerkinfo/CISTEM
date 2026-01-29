@@ -1,11 +1,13 @@
 import "@styles/components/stock-card.scss"
-import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import { Box } from "../utils/icons";
 
-export function StockCard({ image, title, per_crate, quantity } : {
+export function StockCard({ image, title, per_crate, quantity, available } : {
     image: string,
     title: string,
     per_crate: number,
-    quantity: number
+    quantity: number,
+    available: boolean
 }) {
     return (
         <div className="stock-card">
@@ -16,15 +18,20 @@ export function StockCard({ image, title, per_crate, quantity } : {
                 <img src={ image } />
                 {quantity === 0 && <img src='/out_of_stock.png' className="out_of_stock" />}
                 <CardBody>
-                    <CardTitle tag="h3">
-                        {title}
+                    <CardTitle>
+                        <h3>{title}</h3>
+                        <div className="stock">
+                            <Box size={'20'} />
+                            <span>{quantity} x {per_crate}</span>
+                        </div>
                     </CardTitle>
-                    <CardSubtitle>
-                        Packed by {per_crate} unity
-                    </CardSubtitle>
-                    <CardText>
-                        Stock quantity : {quantity}
-                    </CardText>
+                    {available &&
+                        <CardText>
+                            <Button outline color="danger">-</Button>
+                            0
+                            <Button outline color="success">+</Button>
+                        </CardText>
+                    }
                 </CardBody>
             </Card>
         </div>

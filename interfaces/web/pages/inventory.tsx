@@ -2,12 +2,14 @@ import { ListHeaderBar } from "@front/components/bar/ListHeaderBar";
 import { StockCard } from "@front/components/block/StockCard";
 import { Beer, Note, Sandwich, Soft } from "@front/components/utils/coloredIcons";
 import Loading from "@front/components/utils/Loading";
+import { useSession } from "@pkg/hooks/ctx";
 import { useInventoryList } from "@pkg/hooks/inventory/getInventory";
 import { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 
 function View({ table } : { table: any }) {
     const { list, isLoading } = useInventoryList({tableName: table, subscribe: true})
+    const { user } = useSession();
 
     return (
         <div className="inventory-item">
@@ -25,6 +27,12 @@ function View({ table } : { table: any }) {
                             title={item.id.name}
                             per_crate={item.entity_per_crate}
                             quantity={item.stock}
+                            available= {
+                                (user?.role === 'MANAGER_BAR' || 
+                                (user?.role === 'WATER_SELLER' && (
+                                    table === 'stock_softs' || table === 'stock_foods')))
+                                && item.stock > 0
+                            }
                         />
                     </Col>
                 ))}
