@@ -7,7 +7,6 @@ import { BeerForm } from "./views/BeerForm";
 import { SoftForm } from "./views/SoftForm";
 import { FoodForm } from "./views/FoodForm";
 import { MaterialForm } from "./views/MaterialForm";
-import { BeerInsert } from "@pkg/hooks/insert/beer";
 import { CoffeeForm } from "./views/CoffeeForm";
 import { UserForm } from "./views/UserForm";
 import { LocationForm } from "./views/LocationForm";

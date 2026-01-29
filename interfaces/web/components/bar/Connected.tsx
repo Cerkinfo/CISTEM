@@ -1,7 +1,7 @@
 import { useSession } from "@pkg/hooks/ctx";
 
 export default function Connected({ pseudo }: { pseudo: string }) {
-    const { isUserOnline, user, isLoading } = useSession();
+    const { isUserOnline, isLoading } = useSession();
 
     if (isLoading) {
         return (

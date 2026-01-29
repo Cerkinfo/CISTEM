@@ -34,7 +34,7 @@ export default function Profile() {
                     <div id="profile-d">
                     <div id="profile-pic">
                         <img src={user?.image}/>
-                        <PencilButton />
+                        <PencilButton action={() => {}}/>
                     </div>
                     <div id="u-name">{user?.first_name} {user?.last_name}</div>
                     </div>

@@ -20,7 +20,7 @@ export const useLogin = () => {
             setIsLoading(true);
             setError(null);
             try {
-                const { data: auth, error } = await signIn(
+                const { data: auth } = await signIn(
                     'email', 
                     {'email': values.email,
                     'password': values.password}

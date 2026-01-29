@@ -1,5 +1,5 @@
+import type { Database } from '@pkg/types/Database';
 import { createClient } from '@supabase/supabase-js';
-import { Database } from '../types/Database';
 
 export const supabaseUrl = 'https://twavujkympalstdxyxti.supabase.co';
 

@@ -26,7 +26,7 @@ export function BeerInsert({ form } : { form: any }) {
             if(data) setData(data);
             else if (error) setError(error);
         }
-        //insert()
+        insert()
     })
 
     return { data, error, isLoading }

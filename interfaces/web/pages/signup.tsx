@@ -11,7 +11,7 @@ import { useSession } from "@pkg/hooks/ctx";
 export const Signup:React.FC = () => {
     const { session, user } = useSession();
     const { t } = useLanguage();
-    const { formik, isLoading, success, error } = useSignup();
+    const { formik, isLoading } = useSignup();
 
     if (session && user) return <Navigate to={'/'} />
 

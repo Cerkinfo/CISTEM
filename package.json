@@ -16,8 +16,10 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
     "bootstrap": "^5.3.3",
+    "i18next": "^25.8.0",
     "path": "^0.12.7",
     "processmd": "^4.7.0",
+    "react-i18next": "^16.5.4",
     "react-router-dom": "^7.1.3",
     "reactstrap": "^9.2.3",
     "sass": "^1.83.4",

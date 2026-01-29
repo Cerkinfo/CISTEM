@@ -1,9 +1,7 @@
 import { Window } from "@front/components/block/Window";
 import Separator from "@front/components/headers/Separator";
-import { Alert_ } from "@front/components/text/Alert";
 import Content from "@front/components/text/Content";
-import { Center, H3, Text } from "@front/styles/components/titles";
-import { AccordionBody, AccordionHeader, AccordionItem, Col, Container, UncontrolledAccordion, Row, Alert } from "reactstrap";
+import { Center, H3 } from "@front/styles/components/titles";
 
 export default function HowToFOSDEM() {
     return (

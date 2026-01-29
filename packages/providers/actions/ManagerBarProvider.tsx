@@ -7,7 +7,7 @@ import { useState } from "react"
 export function ManagerBarProvider({ children }: { children: React.ReactNode }) {
   const { user } = useSession()
   const [order, setOrder] = useState<Order>([])
-  const [sellPoint, setSellPoint] = useState<SellPoint>({ id: '00', orders_quantity: 0 })
+  const [sellPoint, _] = useState<SellPoint>({ id: '00', orders_quantity: 0 })
 
   if (!user || user.role !== 'MANAGER_BAR') {
     throw new Error('ManagerBarProvider used with invalid user')

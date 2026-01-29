@@ -5,7 +5,7 @@ import { useItem } from "@pkg/hooks/list/getItem";
 
 type TasteRow = Database["public"]["Tables"]["beers_taste"]["Row"];
 type KeyOfTasteRow = keyof TasteRow;
-export const TasteView = ({ beerId, taste_ }: { beerId: number, taste_?: any }) => {
+export const TasteView = ({ beerId, taste_ }: { beerId: string, taste_?: any }) => {
   const { item: taste, isLoading } = useItem({ tableName: "beers_taste", key: beerId })
   if (isLoading) {
     return (

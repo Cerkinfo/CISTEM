@@ -12,8 +12,8 @@ export const useSignup = () => {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
     const { signUp } = useSession();
-    const { checkUser, isLoading: ilc } = useUserCheck();
-    const { linkUser, isLoading: ill } = useUserLink();
+    const { checkUser } = useUserCheck();
+    const { linkUser } = useUserLink();
     const formik = useFormik({
         initialValues: {
             email: '',

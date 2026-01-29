@@ -1,6 +1,6 @@
 import { Handshake, Info } from "@front/components/utils/icons";
 import { Beer } from "@front/components/utils/coloredIcons";
-import { Center, H3 } from "@front/styles/components/titles";
+import { H3 } from "@front/styles/components/titles";
 
 export const InfoView = ({ title, type, alc, desc } : {
     title : string,

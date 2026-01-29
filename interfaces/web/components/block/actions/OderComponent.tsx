@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
+    //@ts-ignore
     const { order } = useAction();
     const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
 
@@ -51,7 +52,7 @@ export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b:
                     Cancel
                 </Button>
                 <Button outline color="success" type='submit'>
-                    Add
+                    Order
                 </Button>
             </ModalFooter>
         </Modal>

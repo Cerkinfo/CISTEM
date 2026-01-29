@@ -123,10 +123,10 @@ export function BeerForm ({ data, setData } : { data: any, setData: (...args: an
                   />
               ) },
               { key: 'taste', icon: <Graph size={'20'} />, content: (
-                  <TasteView key="tasteView" beerId={0} taste_={formTaste.values} />
+                  <TasteView key="tasteView" beerId={'0'} taste_={formTaste.values} />
               ) },
               { key: 'flavors', icon: <SmileyTooth size={'20'} />, content: (
-                  <FlavorsView key="flavorView" beerId={0} flavors_={formFlavors.values} />
+                  <FlavorsView key="flavorView" beerId={'0'} flavors_={formFlavors.values} />
               ) },
             ]}
           />

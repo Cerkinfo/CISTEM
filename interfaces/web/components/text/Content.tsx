@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Spinner } from "reactstrap";
+import { Container } from "reactstrap";
 import styled from "styled-components";
 import Loading from "../utils/Loading";
 

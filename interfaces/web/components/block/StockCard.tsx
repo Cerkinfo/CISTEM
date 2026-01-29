@@ -11,6 +11,7 @@ export function StockCard({ id, image, title, per_crate, quantity, available } :
     quantity: number,
     available: boolean
 }) {
+    //@ts-ignore
     const { increment, decrement, order } = useAction()
     function getQuantity(order: Array<Record<string, number>>, id: string): number {
         const item = order.find(o => Object.keys(o)[0] === id)

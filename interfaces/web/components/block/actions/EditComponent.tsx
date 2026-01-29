@@ -17,7 +17,7 @@ export function EditComponent({ isOpen, close } : { isOpen: boolean, close: (b: 
     const [listView, setListView] = useState('beers');
     const [current, setCurrent] = useState<any>('');
     const {list: data} = useInformationsList({tableName: listView as any})
-    const [data_, setData] = useState([])
+    const [_, setData] = useState([])
     const list = [
         { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', view: <BeerForm data={data} setData={setData} />},
         { key: 'softs', icon: <Soft size={'30'} />, name: 'Softs', view: <SoftForm data={current} />},

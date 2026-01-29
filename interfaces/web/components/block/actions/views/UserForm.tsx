@@ -21,12 +21,11 @@ export function UserForm ({ data } : { data?: any }) {
     if (Object.keys(formInfos.values).includes(key)) formInfos.set(key, value);
   }
 
-  const { insertUser, data: user, error, isLoading } = useUserInsert()
+  const { insertUser, isLoading } = useUserInsert()
   async function handleSubmit() {
     console.log('log')
     await insertUser(formInfos.values)
   }
-
   
   return (
     <>

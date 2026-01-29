@@ -2,3 +2,4 @@ node_modules
 .turbo
 supabase/.temp
 supabase/.branches
+apps/**/dist
