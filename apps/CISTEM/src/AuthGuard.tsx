@@ -1,3 +1,4 @@
+import { ActionProvider } from '@pkg/providers/ActionProvider';
 import { useSession } from '@session';
 import type { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -20,7 +21,11 @@ const AuthGuard = ({ children }: AuthGuardProps) => {
 
   if (!session && !isLoading) return <Navigate to="/login" state={{ from: location }} replace />;
 
-  return <>{children}</>;
+  return (
+    <ActionProvider>
+      {children}
+    </ActionProvider>
+  )
 };
 
 export default AuthGuard;

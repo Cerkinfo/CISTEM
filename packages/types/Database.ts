@@ -18,7 +18,7 @@ export type Database = {
         Row: {
           alcohol: number
           description: string | null
-          id: number
+          id: string
           image: string | null
           name: string
           price: number
@@ -28,7 +28,7 @@ export type Database = {
         Insert: {
           alcohol?: number
           description?: string | null
-          id?: number
+          id?: string
           image?: string | null
           name: string
           price?: number
@@ -38,7 +38,7 @@ export type Database = {
         Update: {
           alcohol?: number
           description?: string | null
-          id?: number
+          id?: string
           image?: string | null
           name?: string
           price?: number
@@ -49,19 +49,19 @@ export type Database = {
       }
       beers_flavors: {
         Row: {
-          id: number
+          id: string
           smell: string | null
           taste: string | null
           visual: string | null
         }
         Insert: {
-          id?: number
+          id: string
           smell?: string | null
           taste?: string | null
           visual?: string | null
         }
         Update: {
-          id?: number
+          id?: string
           smell?: string | null
           taste?: string | null
           visual?: string | null
@@ -81,7 +81,7 @@ export type Database = {
           acidity: number | null
           bitterness: number | null
           fruity: number | null
-          id: number
+          id: string
           liveliness: number | null
           power: number | null
           roundness: number | null
@@ -90,7 +90,7 @@ export type Database = {
           acidity?: number | null
           bitterness?: number | null
           fruity?: number | null
-          id?: number
+          id: string
           liveliness?: number | null
           power?: number | null
           roundness?: number | null
@@ -99,7 +99,7 @@ export type Database = {
           acidity?: number | null
           bitterness?: number | null
           fruity?: number | null
-          id?: number
+          id?: string
           liveliness?: number | null
           power?: number | null
           roundness?: number | null
@@ -116,21 +116,21 @@ export type Database = {
       }
       coffee: {
         Row: {
-          id: number
+          id: string
           image: string
           name: string
           price: number
           price_large: number | null
         }
         Insert: {
-          id?: number
+          id?: string
           image: string
           name: string
           price: number
           price_large?: number | null
         }
         Update: {
-          id?: number
+          id?: string
           image?: string
           name?: string
           price?: number
@@ -140,21 +140,21 @@ export type Database = {
       }
       foods: {
         Row: {
-          id: number
+          id: string
           image: string | null
           ingredients: string | null
           name: string
           price: number
         }
         Insert: {
-          id?: number
+          id?: string
           image?: string | null
           ingredients?: string | null
           name: string
           price: number
         }
         Update: {
-          id?: number
+          id?: string
           image?: string | null
           ingredients?: string | null
           name?: string
@@ -164,19 +164,19 @@ export type Database = {
       }
       locations: {
         Row: {
-          id: number
+          id: string
           name: string
           orders: number
           prefix: string
         }
         Insert: {
-          id?: number
+          id?: string
           name: string
           orders?: number
           prefix: string
         }
         Update: {
-          id?: number
+          id?: string
           name?: string
           orders?: number
           prefix?: string
@@ -185,28 +185,21 @@ export type Database = {
       }
       managers: {
         Row: {
-          id: number
+          id: string
           manager: string
           suppleant: string | null
         }
         Insert: {
-          id?: number
+          id?: string
           manager: string
           suppleant?: string | null
         }
         Update: {
-          id?: number
+          id?: string
           manager?: string
           suppleant?: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "managers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "locations"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "managers_manager_fkey"
             columns: ["manager"]
@@ -226,21 +219,21 @@ export type Database = {
       materials: {
         Row: {
           description: string | null
-          id: number
+          id: string
           image: string | null
           name: string
           price: number
         }
         Insert: {
           description?: string | null
-          id?: number
+          id?: string
           image?: string | null
           name: string
           price?: number
         }
         Update: {
           description?: string | null
-          id?: number
+          id?: string
           image?: string | null
           name?: string
           price?: number
@@ -250,31 +243,31 @@ export type Database = {
       orders: {
         Row: {
           created_at: string
-          id: number
-          location: number
+          id: string
+          location: string | null
           name: string
           order: Json
           status: string
         }
         Insert: {
           created_at?: string
-          id?: number
-          location: number
+          id?: string
+          location?: string | null
           name: string
           order: Json
           status: string
         }
         Update: {
           created_at?: string
-          id?: number
-          location?: number
+          id?: string
+          location?: string | null
           name?: string
           order?: Json
           status?: string
         }
         Relationships: [
           {
-            foreignKeyName: "orders_location_fkey"
+            foreignKeyName: "orders_new_location_fkey"
             columns: ["location"]
             isOneToOne: false
             referencedRelation: "locations"
@@ -284,21 +277,21 @@ export type Database = {
       }
       softs: {
         Row: {
-          id: number
+          id: string
           image: string | null
           name: string
           price: number
           volume: number
         }
         Insert: {
-          id?: number
+          id?: string
           image?: string | null
           name: string
           price: number
           volume: number
         }
         Update: {
-          id?: number
+          id?: string
           image?: string | null
           name?: string
           price?: number
@@ -309,17 +302,17 @@ export type Database = {
       stock_beers: {
         Row: {
           entity_per_crate: number
-          id: number
+          id: string
           stock: number
         }
         Insert: {
           entity_per_crate?: number
-          id?: number
+          id?: string
           stock?: number
         }
         Update: {
           entity_per_crate?: number
-          id?: number
+          id?: string
           stock?: number
         }
         Relationships: [
@@ -335,22 +328,22 @@ export type Database = {
       stock_foods: {
         Row: {
           entity_per_crate: number
-          id: number
+          id: string
           stock: number
         }
         Insert: {
           entity_per_crate: number
-          id?: number
+          id: string
           stock?: number
         }
         Update: {
           entity_per_crate?: number
-          id?: number
+          id?: string
           stock?: number
         }
         Relationships: [
           {
-            foreignKeyName: "stock_foods_id_fkey"
+            foreignKeyName: "stock_foods_new_id_fkey"
             columns: ["id"]
             isOneToOne: true
             referencedRelation: "foods"
@@ -361,24 +354,24 @@ export type Database = {
       stock_materials: {
         Row: {
           entity_per_crate: number
-          id: number
+          id: string
           stock: number
         }
         Insert: {
           entity_per_crate: number
-          id?: number
+          id: string
           stock?: number
         }
         Update: {
           entity_per_crate?: number
-          id?: number
+          id?: string
           stock?: number
         }
         Relationships: [
           {
             foreignKeyName: "stock_materials_id_fkey"
             columns: ["id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "materials"
             referencedColumns: ["id"]
           },
@@ -387,17 +380,17 @@ export type Database = {
       stock_softs: {
         Row: {
           entity_per_crate: number
-          id: number
+          id: string
           stock: number
         }
         Insert: {
           entity_per_crate: number
-          id?: number
+          id: string
           stock: number
         }
         Update: {
           entity_per_crate?: number
-          id?: number
+          id?: string
           stock?: number
         }
         Relationships: [
@@ -445,7 +438,15 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      products_view: {
+        Row: {
+          id: string | null
+          image: string | null
+          name: string | null
+          type: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       get_public_tables: {

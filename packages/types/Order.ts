@@ -1,0 +1,1 @@
+export type Order = Array<Record<string, number>>;

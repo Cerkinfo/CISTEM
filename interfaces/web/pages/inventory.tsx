@@ -22,7 +22,8 @@ function View({ table } : { table: any }) {
                 {list?.map((item: any) => (
                     <Col lg="3" md="6" sm="12" style={{justifyContent:'center', alignItems:'center', display:'flex'}}>
                         <StockCard
-                            key={item.id}
+                            key={item.id.id}
+                            id={item.id.id}
                             image={item.id.image}
                             title={item.id.name}
                             per_crate={item.entity_per_crate}

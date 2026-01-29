@@ -12,7 +12,7 @@ export function useInventoryList({ tableName, subscribe } : { tableName: keyof D
         try {
           const { data, error } = await supabase
             .from(tableName)
-            .select("id(name, image),*");
+            .select("id(id,name, image),*");
           if (data) setList(data);
           else if (error && error.code !== 'PGRST116') {
             console.log('🚀 ~ fetchInventory ~ error:', JSON.stringify(error, null, 2));

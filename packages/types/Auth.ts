@@ -4,6 +4,7 @@ export type Role = Database["public"]["Enums"]["ROLE"]
 export const ROLE = Constants.public.Enums.ROLE;
 
 export interface User {
+  id: string;
   email: string;
   first_name: string;
   last_name: string;
