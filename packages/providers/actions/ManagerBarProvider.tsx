@@ -1,5 +1,6 @@
 import { ActionContext, type ManagerBarUser } from "@pkg/contexts/ActionContext"
 import { useSession } from "@pkg/hooks/ctx"
+import { useOrderInsert } from "@pkg/hooks/insert/order"
 import { useLocationByManager } from "@pkg/hooks/location/getManagerLocation"
 import type { Order } from "@pkg/types/Order"
 import type { SellPoint } from "@pkg/types/SellPoint"
@@ -9,7 +10,18 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
   const { user } = useSession()
   const { data } = useLocationByManager(user?.id || '')
   const [order, setOrder] = useState<Order>([])
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [sellPoint, setSellPoint] = useState<SellPoint | null>(null)
+  const { insertOrder, data: accepted } = useOrderInsert()
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+          setSuccess(false);
+      }, 500);
+    }
+  }, [success])
 
   useEffect(() => {
     if(data && !sellPoint) {
@@ -39,7 +51,6 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
           : item
       )
     })
-    console.log(order)
   }
 
   function decrement(id: string) {
@@ -58,12 +69,32 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
     })
   }
 
+  function clearOrder() {
+    setOrder([]);
+    setSuccess(true);
+  }
+
+  async function sendOrder() {
+    setIsLoading(true)
+    await insertOrder(order)
+    setIsLoading(false)
+    if (accepted) { 
+      setOrder([]);
+      setSuccess(true)
+    }
+    else return;
+  }
+
   const value: ManagerBarUser = {
     role: 'MANAGER_BAR',
     order: order,
     sell_point: sellPoint,
+    isLoading: isLoading,
+    success: success,
     increment,
-    decrement
+    decrement,
+    clearOrder,
+    sendOrder
   }
 
 

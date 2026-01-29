@@ -2,26 +2,21 @@ import { supabase } from "@pkg/functions/Client";
 import { useState } from "react";
 import { useSession } from "../ctx";
 
-export function useUserInsert() {
+export function useOrderInsert() {
   const { session } = useSession()
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<any>(null)
   const [error, setError] = useState<any>(null)
 
-  const insertUser = async (form: any) => {
+  const insertOrder = async (order: any) => {
     setIsLoading(true)
     setError(null)
 
-    const formData = new FormData();
-    if (form.image instanceof File) {
-        formData.append('image', form["image"])
-    }
-    formData.append('user', JSON.stringify(form))
-
+    const body = JSON.stringify(order)
     const { data, error } = await supabase.functions.invoke(
-      'create-user',
+      'send-order',
       {
-        body: formData,
+        body: {order : body},
         headers: {
           Authorization: `Bearer ${session?.access_token}`,
         },
@@ -29,10 +24,10 @@ export function useUserInsert() {
     )
 
     if (error) setError(error)
-    else setData(data)
+    else setData(!!data)
 
     setIsLoading(false)
   }
 
-  return { insertUser, data, error, isLoading }
+  return { insertOrder, data, error, isLoading }
 }

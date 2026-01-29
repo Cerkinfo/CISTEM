@@ -8,9 +8,13 @@ export function useAction() {
     if (ctx.role === 'MANAGER_BAR') return {
         role: ctx.role,
         order: ctx.order,
+        sell_point: ctx.sell_point,
+        isLoading: ctx.isLoading,
+        success: ctx.success,
         increment: ctx.increment,
         decrement: ctx.decrement,
-        sell_point: ctx.sell_point
+        clearOrder: ctx.clearOrder,
+        sendOrder: ctx.sendOrder
     }
 
     if (ctx.role === 'ADMIN') return {

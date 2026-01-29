@@ -1,0 +1,26 @@
+@import '../colors.scss';
+
+.component-line {
+    display: flex;
+    width: 100%;
+    color: #fff;
+    background-color: #252525;
+    max-height: 50px;
+    img {
+        width: 50px;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+    .component-text {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        p {
+            font-size: 30px;
+            margin-left: auto;
+            color: $color-secondary;
+        }
+    }
+}
