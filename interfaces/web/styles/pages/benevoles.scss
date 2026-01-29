@@ -14,6 +14,14 @@
         border-radius: 55px;
         margin: 20px;
         width: auto;
+        .user-infos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            margin: 20px;
+        }
         img {
             max-height: 120px;
             width: auto;
@@ -21,11 +29,14 @@
             display: flex;
             border-radius: 48px;
         }
-        span {
-            margin: 20px;
+        h1 {
             font-size: 25px;
             padding: 2px;
             overflow: hidden;
+            width: 100%;
+        }
+        p {
+            color: #00000099
         }
     }
 }

@@ -3,10 +3,11 @@ import { useInformationsList } from "@pkg/hooks/list/getInformations"
 import { Col, Container, Row } from "reactstrap";
 import "@styles/pages/benevoles.scss"
 import { Link } from "react-router-dom";
+import { useLanguage } from "@pkg/contexts/LanguageContext";
 
 export function Benevoles() {
     const { list: users, isLoading } = useInformationsList({tableName: 'users', subscribe: true});
-    console.log(users)
+    const { t } = useLanguage();
     return (
         <>
         <section className="section section-lg section-shaped pg-250 m-0 benevoles">
@@ -22,7 +23,10 @@ export function Benevoles() {
                         <Link to={`/profile/${user.pseudo}`} >
                             <div className="user">
                                 <img src={user.image} alt={user.pseudo} />
-                                <span>{user.pseudo}</span>
+                                <div className="user-infos">
+                                    <h1>{user.pseudo}</h1>
+                                    <p>{t(user.role)}</p>
+                                </div>
                             </div>
                         </Link>
                         </Col>
