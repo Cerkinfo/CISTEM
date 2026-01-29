@@ -2,7 +2,7 @@ import { supabase } from "@client";
 import type { Database } from "@db";
 import { useEffect, useState } from "react";
 
-export function useItem({ tableName, key, subscribe } : { tableName: keyof Database["public"]["Tables"], key: any, subscribe?: boolean }) {
+export function useItem({ tableName, key, eq, subscribe } : { tableName: keyof Database["public"]["Tables"], key: any, eq?: string, subscribe?: boolean }) {
     const [item, setItem] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -13,7 +13,7 @@ export function useItem({ tableName, key, subscribe } : { tableName: keyof Datab
           const { data, error } = await supabase
             .from(tableName)
             .select("*")
-            .eq("id", key)
+            .eq(eq ? eq : "id", key)
             .limit(1)
             .single();
           if (data) setItem(data);

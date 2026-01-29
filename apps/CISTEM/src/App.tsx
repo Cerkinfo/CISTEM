@@ -15,6 +15,7 @@ import List from '@front/pages/list';
 import Profile from '@front/pages/profile';
 import HowToFOSDEM from '@front/pages/howto';
 import Inventory from '@front/pages/inventory';
+import { Benevoles } from '@front/pages/benevoles';
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
               <Route path="list" element={<List />} />
               <Route path="drain" element={<></>} />
               <Route path="inventory" element={<Inventory />} />
-              <Route path='benevoles' element={<></>} />
+              <Route path='benevoles' element={<Benevoles />} />
               <Route path='credits' element={<></>} />
               <Route path="*" element={<div>404 Not Found</div>} />
             </Route>
