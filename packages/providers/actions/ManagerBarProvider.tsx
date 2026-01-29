@@ -1,13 +1,27 @@
 import { ActionContext, type ManagerBarUser } from "@pkg/contexts/ActionContext"
 import { useSession } from "@pkg/hooks/ctx"
+import { useLocationByManager } from "@pkg/hooks/location/getManagerLocation"
 import type { Order } from "@pkg/types/Order"
 import type { SellPoint } from "@pkg/types/SellPoint"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export function ManagerBarProvider({ children }: { children: React.ReactNode }) {
   const { user } = useSession()
+  const { data } = useLocationByManager(user?.id || '')
   const [order, setOrder] = useState<Order>([])
-  const [sellPoint, _] = useState<SellPoint>({ id: '00', orders_quantity: 0 })
+  const [sellPoint, setSellPoint] = useState<SellPoint | null>(null)
+
+  useEffect(() => {
+    if(data && !sellPoint) {
+      setSellPoint({
+        id: data.location.id,
+        name: data.location.name,
+        prefix: data.location.prefix,
+        orders: data.location.orders,
+        image: data.location.image
+      })
+    }
+  }, [data])
 
   if (!user || user.role !== 'MANAGER_BAR') {
     throw new Error('ManagerBarProvider used with invalid user')

@@ -2,6 +2,8 @@ import { useAction } from "@pkg/hooks/action/useAction";
 import { fetchProductsInfos } from "@pkg/hooks/inventory/getProductInfos";
 import { useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { LocationRow } from "../LocationRow";
+import "@styles/components/order-modal.scss"
 
 export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     //@ts-ignore
@@ -25,9 +27,9 @@ export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b:
     }, [order])
 
     return (
-        <Modal isOpen={isOpen} size="xl" unmountOnClose={true}>
-            <ModalHeader>
-                
+        <Modal isOpen={isOpen} size="xl" unmountOnClose={true} className="order">
+            <ModalHeader style={{display: 'flex', width: '100%'}}>
+                <LocationRow />
             </ModalHeader>
             <ModalBody>
                 {order.length > 0 ? (

@@ -9,7 +9,7 @@ export type AdminUser = {
 export type ManagerBarUser = {
   role: 'MANAGER_BAR'
   order: Order | null
-  sell_point: SellPoint
+  sell_point: SellPoint | null
   increment: (uuid: string) => void
   decrement: (uuid: string) => void
 }
