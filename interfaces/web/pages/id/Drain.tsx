@@ -1,4 +1,5 @@
 import { AddDrainPoint } from "@front/components/block/actions/AddDrainPoint";
+import { UpdateDrainPoint } from "@front/components/block/actions/UpdateDrainPoint";
 import { useSession } from "@pkg/hooks/ctx";
 import { useItem } from "@pkg/hooks/fetch/getItem";
 import { Navigate, useParams } from "react-router-dom";
@@ -15,7 +16,5 @@ export function DrainIdActions() {
 
     if (drain && !drain.name) return <AddDrainPoint id={id || ''}/>
 
-    return (
-        <>Scan</>
-    )
+    return <UpdateDrainPoint id={id || ''} />
 }
