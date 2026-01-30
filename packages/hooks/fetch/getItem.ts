@@ -34,7 +34,7 @@ export function useItem({ tableName, key, eq, subscribe } : { tableName: keyof D
           .on(
             'postgres_changes',
             { event: '*', schema: 'public', table: tableName },
-            (payload) => {
+            () => {
               setTimeout(() => {
                   fetchData();
               }, 500);

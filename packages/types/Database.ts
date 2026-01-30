@@ -138,6 +138,47 @@ export type Database = {
         }
         Relationships: []
       }
+      drain: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image: string | null
+          last_scanner: string | null
+          name: string | null
+          status: Database["public"]["Enums"]["DRIAN"] | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image?: string | null
+          last_scanner?: string | null
+          name?: string | null
+          status?: Database["public"]["Enums"]["DRIAN"] | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image?: string | null
+          last_scanner?: string | null
+          name?: string | null
+          status?: Database["public"]["Enums"]["DRIAN"] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "drain_last_scanner_fkey"
+            columns: ["last_scanner"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       foods: {
         Row: {
           id: string
@@ -165,18 +206,21 @@ export type Database = {
       locations: {
         Row: {
           id: string
+          image: string | null
           name: string
           orders: number
           prefix: string
         }
         Insert: {
           id?: string
+          image?: string | null
           name: string
           orders?: number
           prefix: string
         }
         Update: {
           id?: string
+          image?: string | null
           name?: string
           orders?: number
           prefix?: string
@@ -186,30 +230,30 @@ export type Database = {
       managers: {
         Row: {
           id: string
+          location: string
           manager: string
-          suppleant: string | null
         }
         Insert: {
           id?: string
+          location: string
           manager: string
-          suppleant?: string | null
         }
         Update: {
           id?: string
+          location?: string
           manager?: string
-          suppleant?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "managers_manager_fkey"
-            columns: ["manager"]
+            foreignKeyName: "managers_location_fkey"
+            columns: ["location"]
             isOneToOne: false
-            referencedRelation: "users"
+            referencedRelation: "locations"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "managers_suppleant_fkey"
-            columns: ["suppleant"]
+            foreignKeyName: "managers_manager_fkey"
+            columns: ["manager"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -247,7 +291,7 @@ export type Database = {
           location: string | null
           name: string
           order: Json
-          status: string
+          status: Database["public"]["Enums"]["ORDER"]
         }
         Insert: {
           created_at?: string
@@ -255,7 +299,7 @@ export type Database = {
           location?: string | null
           name: string
           order: Json
-          status: string
+          status: Database["public"]["Enums"]["ORDER"]
         }
         Update: {
           created_at?: string
@@ -263,7 +307,7 @@ export type Database = {
           location?: string | null
           name?: string
           order?: Json
-          status?: string
+          status?: Database["public"]["Enums"]["ORDER"]
         }
         Relationships: [
           {
@@ -271,6 +315,29 @@ export type Database = {
             columns: ["location"]
             isOneToOne: false
             referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      schedule: {
+        Row: {
+          id: string
+          schedule: Json
+        }
+        Insert: {
+          id: string
+          schedule: Json
+        }
+        Update: {
+          id?: string
+          schedule?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedule_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -371,7 +438,7 @@ export type Database = {
           {
             foreignKeyName: "stock_materials_id_fkey"
             columns: ["id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "materials"
             referencedColumns: ["id"]
           },
@@ -458,6 +525,8 @@ export type Database = {
       pg_execute: { Args: { sql: string }; Returns: Record<string, unknown>[] }
     }
     Enums: {
+      DRIAN: "EMPTY" | "SUFFICIENT" | "EMPTIED"
+      ORDER: "PENDING" | "SENDED" | "ABORTED"
       ROLE:
         | "ADMIN"
         | "TREZ"
@@ -466,7 +535,6 @@ export type Database = {
         | "MANAGER_DRAIN"
         | "WATER_SELLER"
         | "BENEVOLE"
-      USER_ROLE: "ADMIN" | "MANAGER" | "SUPPLEANT" | "BENEVOLE" | "TEST"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -594,6 +662,8 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      DRIAN: ["EMPTY", "SUFFICIENT", "EMPTIED"],
+      ORDER: ["PENDING", "SENDED", "ABORTED"],
       ROLE: [
         "ADMIN",
         "TREZ",
@@ -603,7 +673,6 @@ export const Constants = {
         "WATER_SELLER",
         "BENEVOLE",
       ],
-      USER_ROLE: ["ADMIN", "MANAGER", "SUPPLEANT", "BENEVOLE", "TEST"],
     },
   },
 } as const

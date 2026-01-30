@@ -1,5 +1,5 @@
 import { useAction } from "@pkg/hooks/action/useAction";
-import { fetchProductsInfos } from "@pkg/hooks/inventory/getProductInfos";
+import { fetchProductsInfos } from "@pkg/hooks/fetch/getProductInfos";
 import { useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { LocationRow } from "../LocationRow";

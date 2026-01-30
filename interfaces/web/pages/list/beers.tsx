@@ -1,4 +1,4 @@
-import { useInformationsList } from "@pkg/hooks/list/getInformations";
+import { useInformationsList } from "@pkg/hooks/fetch/getInformations";
 import { Container, Row } from "reactstrap";
 import Loading from "@front/components/utils/Loading";
 import { BeerItem } from "@front/components/block/BeerItem";

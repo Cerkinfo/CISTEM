@@ -11,12 +11,12 @@ type ManagerLocation = {
     name: string
     prefix: string
     orders: number
-    image: string
+    image: string | null;
   }
 }
 
 export function useLocationByManager(id?: string) {
-  const [data, setData] = useState<ManagerLocation | null>(null)
+  const [data, setData] = useState<ManagerLocation | undefined>(undefined)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<any>(null)
 

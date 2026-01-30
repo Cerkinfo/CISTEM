@@ -3,40 +3,4 @@
     a {
         text-decoration: none;
     }
-    .user {
-        display: flex;
-        background-color: #fff;
-        color: #000;
-        margin: auto;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 5px;
-        border-radius: 55px;
-        margin: 20px;
-        width: auto;
-        .user-infos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            align-items: center;
-            width: 100%;
-            margin: 20px;
-        }
-        img {
-            max-height: 120px;
-            width: auto;
-            aspect-ratio: 1/1;
-            display: flex;
-            border-radius: 48px;
-        }
-        h1 {
-            font-size: 25px;
-            padding: 2px;
-            overflow: hidden;
-            width: 100%;
-        }
-        p {
-            color: #00000099
-        }
-    }
 }

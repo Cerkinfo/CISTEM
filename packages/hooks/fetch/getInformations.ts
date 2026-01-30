@@ -2,7 +2,7 @@ import { supabase } from "@client";
 import type { Database } from "@db";
 import { useEffect, useState } from "react";
 
-export function useInventoryList({ tableName, subscribe } : { tableName: keyof Database["public"]["Tables"], subscribe?: boolean }) {
+export function useInformationsList({ tableName, key, eq, subscribe } : { tableName: keyof Database["public"]["Tables"], key?: string, eq?: string, subscribe?: boolean }) {
     const [list, setList] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -12,7 +12,8 @@ export function useInventoryList({ tableName, subscribe } : { tableName: keyof D
         try {
           const { data, error } = await supabase
             .from(tableName)
-            .select("id(id,name, image),*");
+            .select("*")
+            .eq(eq ? eq : '', key ? key: '');
           if (data) setList(data);
           else if (error && error.code !== 'PGRST116') {
             console.log('🚀 ~ fetchInventory ~ error:', JSON.stringify(error, null, 2));
@@ -31,7 +32,7 @@ export function useInventoryList({ tableName, subscribe } : { tableName: keyof D
           .on(
             'postgres_changes',
             { event: '*', schema: 'public', table: tableName },
-            (payload) => {
+            () => {
               setTimeout(() => {
                   fetchData();
               }, 500);

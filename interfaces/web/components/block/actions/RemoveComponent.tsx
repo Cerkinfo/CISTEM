@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "@styles/components/modal.scss";
 import { ComponentDropdown } from "@front/components/form/dropdown/ComponentDropdown";
-import { useInformationsList } from "@pkg/hooks/list/getInformations";
+import { useInformationsList } from "@pkg/hooks/fetch/getInformations";
 import { DrinkCard } from "../DrinkCard";
 
 export function RemoveComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {

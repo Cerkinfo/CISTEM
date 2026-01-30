@@ -7,6 +7,16 @@ import { ComponentDropdown } from "@front/components/form/dropdown/ComponentDrop
 import { ROLE, type Role } from "@pkg/types/Auth";
 import { useUserInsert } from "@pkg/hooks/insert/user";
 
+// type ScheduleCell = {
+//   location: string
+//   start: string
+//   end: string
+// }
+
+// type ScheduleForm = {
+//   schedule: ScheduleCell[]
+// }
+
 export function UserForm ({ data } : { data?: any }) {
   const formInfos = useFormState({
     email: data?.email || "",
@@ -17,20 +27,30 @@ export function UserForm ({ data } : { data?: any }) {
     image: data?.image || null as File | string | null
   })
 
+  // const formSchedule = useFormState({
+  //   schedule: []
+  // })
+
+  // const formCell = useFormState({
+  //   location: '',
+  //   start: '',
+  //   end: ''
+  // })
+
   function onChange(key: any, value: any) {
     if (Object.keys(formInfos.values).includes(key)) formInfos.set(key, value);
   }
 
+  
+
   const { insertUser, isLoading } = useUserInsert()
   async function handleSubmit() {
-    console.log('log')
     await insertUser(formInfos.values)
   }
   
   return (
     <>
         <Form>
-
             <Separator title="General" />
             <Container fluid>
             <Row style={{display:'flex', alignItems: 'center'}}>
@@ -51,6 +71,13 @@ export function UserForm ({ data } : { data?: any }) {
             </Row>
             </Container>
 
+            <Separator title="Schedule" />
+            <Button outline color="warning">
+              Ajouter une tranche
+            </Button>
+            <Container fluid>
+
+            </Container>
         </Form>
         <Button outline color="danger" onClick={() => {}}>
             Cancel

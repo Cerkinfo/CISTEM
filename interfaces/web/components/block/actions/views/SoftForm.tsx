@@ -3,7 +3,7 @@ import Separator from "../../../headers/Separator";
 import { useFormState } from "@pkg/hooks/form/useFormState";
 import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
-import { useItem } from "@pkg/hooks/list/getItem";
+import { useItem } from "@pkg/hooks/fetch/getItem";
 import { useEffect, useState } from "react";
 import { DrinkCard } from "../../DrinkCard";
 import { SwitcherButton } from "@front/components/form/buttons/SwitchButton";

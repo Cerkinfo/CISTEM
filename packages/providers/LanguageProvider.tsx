@@ -10,10 +10,20 @@ interface LanguageProviderProps {
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState<LanguageType>(() => {
-
     const savedLanguage = localStorage.getItem('language') as LanguageType;
     return savedLanguage || (i18n.language as LanguageType) || 'fr';
   });
+
+  useEffect(() => {
+    if (!i18n) return;
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
+
+  useEffect(() => {
+    if (i18n && typeof i18n.changeLanguage === 'function') {
+      i18n.changeLanguage(language);
+    }
+  }, [i18n, language]);
   
   useEffect(() => {
     i18n.changeLanguage(language);

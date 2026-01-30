@@ -3,5 +3,5 @@ export type SellPoint = {
     name: string,
     prefix: string,
     orders: number,
-    image: string;
+    image: string | null;
 }

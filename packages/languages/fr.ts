@@ -19,4 +19,12 @@ export default {
     MANAGER_DRAIN : "Manageur des vidanges",
     WATER_SELLER : "Responsable d'un point d'eau",
     BENEVOLE : "Bénévole",
+
+    PENDING: "En cours...",
+    SENDED: "Envoyée!",
+    ABORTED: "Annulée.",
+
+    EMPTY: 'Vide',
+    SUFFICIENT: 'Pas vide mais suffisent',
+    EMPTIED: 'A été vidé'
 }

@@ -1,7 +1,7 @@
 import { Progress } from "reactstrap";
 import type { Database } from "@db";
 import { Center, H3 } from "@front/styles/components/titles";
-import { useItem } from "@pkg/hooks/list/getItem";
+import { useItem } from "@pkg/hooks/fetch/getItem";
 
 type TasteRow = Database["public"]["Tables"]["beers_taste"]["Row"];
 type KeyOfTasteRow = keyof TasteRow;
