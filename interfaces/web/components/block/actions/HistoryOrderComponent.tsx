@@ -1,4 +1,4 @@
-import { useInformationsList } from "@pkg/hooks/list/getInformations";
+import { useInformationsList } from "@pkg/hooks/fetch/getInformations";
 import { Button, ListGroup, ListGroupItem, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { CollapseOrder } from "../CollapseOrder";
 import { useAction } from "@pkg/hooks/action/useAction";

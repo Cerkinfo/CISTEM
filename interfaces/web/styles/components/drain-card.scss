@@ -1,0 +1,40 @@
+.drain-card {
+    background-color: #252525;
+    color: #fff;
+    .card-body {
+        background-color: #252525;
+        color: #fff;
+    }
+    .card-footer {
+        background-color: #252525;
+        color: #fff;
+        .user-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            background-color: #000;
+            margin: auto;
+            width: fit-content;
+            padding: 5px 20px 5px 10px;
+            border-radius: 35px;
+            margin-top: -38px;
+            margin-right: 0;
+            margin-bottom: 10px;
+            img {
+                max-width: 50px;
+                aspect-ratio: 1/1;
+                height: auto;
+            }
+            span {
+                font-size: 18px;
+                width: 100%;
+            }
+        }
+        p {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
+}

@@ -8,7 +8,7 @@ import { SoftForm } from "./views/SoftForm";
 import { FoodForm } from "./views/FoodForm";
 import { MaterialForm } from "./views/MaterialForm";
 import { ComponentDropdown } from "@front/components/form/dropdown/ComponentDropdown";
-import { useInformationsList } from "@pkg/hooks/list/getInformations";
+import { useInformationsList } from "@pkg/hooks/fetch/getInformations";
 import { CoffeeForm } from "./views/CoffeeForm";
 import { UserForm } from "./views/UserForm";
 import { LocationForm } from "./views/LocationForm";

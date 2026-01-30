@@ -5,7 +5,7 @@ import { capitalize } from "@pkg/utils/string";
 import { TextInput } from "@front/components/form/inputs/TextInput";
 import { ImageInput } from "@front/components/form/inputs/ImageInput";
 import { useEffect, useState } from "react";
-import { useItem } from "@pkg/hooks/list/getItem";
+import { useItem } from "@pkg/hooks/fetch/getItem";
 import { SwitcherButton } from "@front/components/form/buttons/SwitchButton";
 import { DrinkCard } from "../../DrinkCard";
 import { Beer, Graph, Note, SmileyTooth } from "@front/components/utils/coloredIcons";

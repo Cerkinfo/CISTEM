@@ -17,6 +17,8 @@ import HowToFOSDEM from '@front/pages/howto';
 import Inventory from '@front/pages/inventory';
 import { Benevoles } from '@front/pages/benevoles';
 import { Credits } from '@front/pages/credits';
+import { DrainIdActions } from '@front/pages/id/Drain';
+import { Drain } from '@front/pages/drain';
 
 function App() {
   return (
@@ -35,7 +37,8 @@ function App() {
               <Route path="profile/:pseudo" element={<Profile />} />
               <Route path="schedule" element={<></>} />
               <Route path="list" element={<List />} />
-              <Route path="drain" element={<></>} />
+              <Route path="drain" element={<Drain />} />
+              <Route path="drain/:id" element={<DrainIdActions />} />
               <Route path="inventory" element={<Inventory />} />
               <Route path='benevoles' element={<Benevoles />} />
               <Route path='credits' element={<Credits />} />

@@ -5,7 +5,7 @@ import { PencilButton } from "@front/components/buttons/PencilButton";
 import { Talk, Time } from "@front/components/utils/icons";
 import Loading from "@front/components/utils/Loading";
 import { useSession } from "@pkg/hooks/ctx";
-import { useItem } from "@pkg/hooks/list/getItem";
+import { useItem } from "@pkg/hooks/fetch/getItem";
 import "@styles/pages/profile.scss";
 import { useParams } from "react-router-dom";
 

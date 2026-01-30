@@ -1,7 +1,7 @@
 import { ActionContext, type ManagerBarUser } from "@pkg/contexts/ActionContext"
 import { useSession } from "@pkg/hooks/ctx"
 import { useOrderInsert } from "@pkg/hooks/insert/order"
-import { useLocationByManager } from "@pkg/hooks/location/getManagerLocation"
+import { useLocationByManager } from "@pkg/hooks/fetch/getManagerLocation"
 import type { Order } from "@pkg/types/Order"
 import type { SellPoint } from "@pkg/types/SellPoint"
 import { useEffect, useState } from "react"

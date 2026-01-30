@@ -1,4 +1,4 @@
-import { fetchProductsInfos } from "@pkg/hooks/inventory/getProductInfos";
+import { fetchProductsInfos } from "@pkg/hooks/fetch/getProductInfos";
 import { useEffect, useState } from "react";
 import { Button, Collapse } from "reactstrap";
 import { ComponentLine } from "./ComponentLine";

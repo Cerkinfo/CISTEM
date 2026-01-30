@@ -2,7 +2,7 @@ import { Eye, Mouth, Nose } from "@front/components/utils/icons";
 import type { Database } from "@db";
 import type { JSX } from "react";
 import { Center, H3 } from "@front/styles/components/titles";
-import { useItem } from "@pkg/hooks/list/getItem";
+import { useItem } from "@pkg/hooks/fetch/getItem";
 
 type FlavorsRow = Database["public"]["Tables"]["beers_flavors"]["Row"];
 type KeyOfFlavorsRow = keyof FlavorsRow;

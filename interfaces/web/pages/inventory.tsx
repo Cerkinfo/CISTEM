@@ -3,7 +3,7 @@ import { StockCard } from "@front/components/block/StockCard";
 import { Beer, Note, Sandwich, Soft } from "@front/components/utils/coloredIcons";
 import Loading from "@front/components/utils/Loading";
 import { useSession } from "@pkg/hooks/ctx";
-import { useInventoryList } from "@pkg/hooks/inventory/getInventory";
+import { useInventoryList } from "@pkg/hooks/fetch/getInventory";
 import { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 

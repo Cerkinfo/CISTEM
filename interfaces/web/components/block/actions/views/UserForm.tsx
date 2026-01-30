@@ -23,14 +23,12 @@ export function UserForm ({ data } : { data?: any }) {
 
   const { insertUser, isLoading } = useUserInsert()
   async function handleSubmit() {
-    console.log('log')
     await insertUser(formInfos.values)
   }
   
   return (
     <>
         <Form>
-
             <Separator title="General" />
             <Container fluid>
             <Row style={{display:'flex', alignItems: 'center'}}>
@@ -50,7 +48,6 @@ export function UserForm ({ data } : { data?: any }) {
                 </Col>
             </Row>
             </Container>
-
         </Form>
         <Button outline color="danger" onClick={() => {}}>
             Cancel
