@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "cistem"
+  },
+  "targets": {
+    "cistem": {
+      "hosting": {
+        "cistem": [
+          "cistem"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
