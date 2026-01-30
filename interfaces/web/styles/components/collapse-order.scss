@@ -1,0 +1,21 @@
+.order-item {
+    button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 0px;
+        margin: auto;
+        h4 {
+            font-size: 22px;
+        }
+        span {
+            margin-left: auto;
+        }
+    }
+    .dropdown-menu {
+        background-color: #252525;
+        width: 100%;
+    }
+}

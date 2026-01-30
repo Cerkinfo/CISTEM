@@ -1,58 +1,49 @@
-import { fetchProductsInfos } from "@pkg/hooks/inventory/getProductInfos";
 import { useInformationsList } from "@pkg/hooks/list/getInformations";
-import { useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { CollapseOrder } from "../CollapseOrder";
+import { useAction } from "@pkg/hooks/action/useAction";
+import { useMemo } from "react";
+import { LocationRow } from "../LocationRow";
+import "@styles/components/order-modal.scss"
 
 export function HistoryOrderComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     //@ts-ignore
-    const { list: history, isLoading } = useInformationsList({tableName: 'orders', subscribe: true})
-    const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
+    const { sell_point } = useAction();
+    if (!sell_point?.id) return null;
 
-    useEffect(() => {
-    async function loadProducts() {
-        const entries = order.map((o: any) => Object.entries(o)[0][0])
-        const results = await Promise.all(
-            entries.map((id: string) => fetchProductsInfos(id))
+    const { list: history, isLoading } = useInformationsList({tableName: 'orders', key: sell_point?.id, eq: 'location', subscribe: true})
+
+    const sortedOrders = useMemo(() => {
+        if (!history) return null
+        return [...history].sort(
+            (a, b) =>
+            new Date(b.created_at).getTime() -
+            new Date(a.created_at).getTime()
         )
-        const mapped: Record<string, any> = {}
-            results.forEach((p: any) => {
-            mapped[p.id] = p
-        })
-        setProductsInfos(mapped)
-    }
+    }, [history])
 
-    if (order.length > 0) loadProducts()
-    }, [order])
 
     return (
-        <Modal isOpen={isOpen} size="xl" unmountOnClose={true}>
-            <ModalHeader>
-                
+        <Modal isOpen={isOpen} size="xl" unmountOnClose={true} className="order">
+            <ModalHeader style={{display: 'flex', width: '100%'}}>
+                <LocationRow />
             </ModalHeader>
             <ModalBody>
-                {order.length > 0 ? (
-                <ListGroup>
-                    {order.map((o: any) => {
-                        const [id, quantity] = Object.entries(o)[0]
-                        const product = productsInfos[id]
-                        if (!product) return null
-                        return (
-                            <ListGroupItem key={id} style={{ backgroundColor: 'currentColor' }}>
-                            <p style={{ color: '#fff' }}>{product.name} × {quantity}</p>
-                            </ListGroupItem>
-                        )
-                    })}
+                {history?.length > 0 ? (
+                <ListGroup flush>
+                    {sortedOrders?.map((order: any) => { return (
+                        <ListGroupItem key={order.id} style={{ backgroundColor: 'currentColor' }}>
+                            <CollapseOrder order={order} />
+                        </ListGroupItem>
+                    )})}
                 </ListGroup>
-                ) : (
-                    <p style={{color: 'white'}}>L'historique est vide</p>
+                ) : (isLoading ? <p style={{color: 'white'}}>Loading...</p>
+                    :<p style={{color: 'white'}}>L'historique est vide</p>
                 )}
             </ModalBody>
             <ModalFooter>
                 <Button outline color="danger" onClick={() => close(false)}>
                     Cancel
-                </Button>
-                <Button outline color="success" type='submit'>
-                    Order
                 </Button>
             </ModalFooter>
         </Modal>
