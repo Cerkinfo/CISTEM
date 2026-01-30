@@ -40,6 +40,7 @@ Deno.serve(async (req) => {
         description: drain.description,
         updated_at: new Date().toISOString(),
         last_scanner: user.id,
+        status: 'EMPTY',
         image: `https://api.dicebear.com/9.x/lorelei/svg?seed=${encodeURIComponent(drain.name)}`,
     })
     .eq('id', drain.id)

@@ -22,5 +22,9 @@ export default {
 
     PENDING: "En cours...",
     SENDED: "Envoyée!",
-    ABORTED: "Annulée."
+    ABORTED: "Annulée.",
+
+    EMPTY: 'Vide',
+    SUFFICIENT: 'Pas vide mais suffisent',
+    EMPTIED: 'A été vidé'
 }
