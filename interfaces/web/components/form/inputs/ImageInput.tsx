@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import '@styles/components/form/input.scss';
-import { useLanguage } from "@pkg/contexts/LanguageContext";
 import { Picture } from "@front/components/utils/icons";
 
 interface ImageProps {
@@ -12,7 +11,6 @@ interface ImageProps {
 }
 
 export function ImageInput({name, label, image, setImage, required}: ImageProps) {
-    const { t } = useLanguage();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -66,7 +64,7 @@ export function ImageInput({name, label, image, setImage, required}: ImageProps)
     return (
         <div className="image">
             <div className="image__text">
-                { label && <label className="image__label" htmlFor={ name }>{ t(label) }</label> }
+                { label && <label className="image__label" htmlFor={ name }>{ label }</label> }
             </div>
             
             <div

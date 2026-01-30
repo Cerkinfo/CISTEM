@@ -1,13 +1,12 @@
 import "@styles/components/action-bar.scss"
 import { useSession } from "@pkg/hooks/ctx"
 import { Admin } from "../block/actions/admin";
-import { useLanguage } from "@pkg/contexts/LanguageContext";
 import { ManagerBar } from "../block/actions/manager-bar";
 import type { Role } from "@pkg/types/Auth";
+import { getRole } from "@pkg/utils/string";
 
 export function ActionFooterBar() {
     const { user, isLoading } = useSession();
-    const { t } = useLanguage();
 
     function getModals(role: Role) {
         switch (role) {
@@ -22,7 +21,7 @@ export function ActionFooterBar() {
         <footer className="action-bar">
             <ul>
                 <li className="role">
-                    {t(user?.role)}
+                    {getRole(user?.role)}
                 </li>
                 {getModals(user?.role)}
             </ul>
