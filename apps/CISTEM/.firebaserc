@@ -1,16 +1,12 @@
 {
   "projects": {
-    "default": "cistem"
+    "default": "cistem-d05f6"
   },
   "targets": {
     "cistem-d05f6": {
       "hosting": {
-        "cistem": [
-          "cistem"
-        ]
+        "cistem": ["cistem"]
       }
     }
-  },
-  "etags": {},
-  "dataconnectEmulatorConfig": {}
+  }
 }

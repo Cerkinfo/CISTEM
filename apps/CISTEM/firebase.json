@@ -1,14 +1,11 @@
 {
   "hosting": [
     {
-      "site": "https://cistem-d05f6.web.app/",
+      "target": "cistem",
       "public": "dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
+        { "source": "**", "destination": "/index.html" }
       ]
     }
   ]
