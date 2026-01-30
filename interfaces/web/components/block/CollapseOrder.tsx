@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import { Button, Collapse } from "reactstrap";
 import { ComponentLine } from "./ComponentLine";
 import "@styles/components/collapse-order.scss"
-import { useLanguage } from "@pkg/contexts/LanguageContext";
+import { getOrderStatus } from "@pkg/utils/string";
 
 export function CollapseOrder({ order } : { order: any }) {
-    const { t } = useLanguage();
     const [open, setOpen] = useState(false);
     const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
 
@@ -34,7 +33,7 @@ export function CollapseOrder({ order } : { order: any }) {
             style={{ width: "100%" }}
         >
             <h4>{order.name}</h4>
-            <span>{t(order.status)}</span>
+            <span>{getOrderStatus(order.status)}</span>
         </Button>
 
         <Collapse isOpen={open}>

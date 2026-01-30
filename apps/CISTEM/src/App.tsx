@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "@styles/style.scss";
 
 import { SessionProvider } from '@pkg/providers/SessionProvider';
-import { LanguageProvider } from '@pkg/providers/LanguageProvider';
 
 import AuthGuard from './AuthGuard';
 import Layout, { PublicLayout } from './Layout';
@@ -23,7 +22,6 @@ import { Drain } from '@front/pages/drain';
 function App() {
   return (
     <SessionProvider>
-      <LanguageProvider>
         <BrowserRouter>
           <Routes>
             <Route element={<PublicLayout />}>
@@ -46,7 +44,6 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </LanguageProvider>
     </SessionProvider>
   );
 }

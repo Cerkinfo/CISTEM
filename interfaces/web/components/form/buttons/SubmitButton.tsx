@@ -1,15 +1,13 @@
-import { useLanguage } from "@pkg/contexts/LanguageContext";
 import "@styles/components/buttons/submit-button.scss"
 
-export function SubmitButton({ formik, loading, text, textLoading }: { formik: any, loading: boolean, text: string, textLoading: string }) {
-    const { t } = useLanguage();
+export function SubmitButton({ formik, loading, text }: { formik: any, loading: boolean, text: string }) {
     return (
       <div className="submit">
         <button
           type="submit" 
           disabled={loading || formik.isSubmitting}
         >
-          {loading ? t(`${textLoading}`) : t(`${text}`)}
+          {loading ? 'Loading...': text}
         </button>
       </div>
     );

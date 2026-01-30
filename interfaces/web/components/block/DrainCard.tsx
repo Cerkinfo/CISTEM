@@ -2,11 +2,10 @@ import { useItem } from "@pkg/hooks/fetch/getItem";
 import { Card, CardBody, CardFooter, CardText, CardTitle } from "reactstrap";
 import "@styles/components/drain-card.scss"
 import { formatDateTime } from "@pkg/utils/date";
-import { useLanguage } from "@pkg/contexts/LanguageContext";
 import { useEffect, useState } from "react";
+import { getDrainStatus } from "@pkg/utils/string";
 
 export function DrainCard({ drain } : { drain: any }) {
-    const { t } = useLanguage();
     const { item: user, isLoading } = useItem({tableName: 'users', key: drain.last_scanner, subscribe: true})
 
     const [timeWarning, setTimeWarning] = useState(false)
@@ -50,7 +49,7 @@ export function DrainCard({ drain } : { drain: any }) {
                             drain.status === 'EMPTY' ? '#0e94e2ff'
                             : drain.status === 'SUFFICIENT' ? '#e78a11ff' : '#3fdf1fff'}}
                         >
-                            {t(drain.status)}
+                            {getDrainStatus(drain.status)}
                         </em>
                     )}
                     <p>{formatDateTime(drain.updated_at).date} {formatDateTime(drain.updated_at).time}</p>

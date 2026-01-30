@@ -1,5 +1,4 @@
 import { Navigate } from "react-router-dom";
-import { useLanguage } from "@pkg/contexts/LanguageContext";
 import { EmailInput } from '@front/components/form/inputs/EmailInput';
 import { PasswordInput } from '@front/components/form/inputs/PasswordInput';
 import { SubmitButton } from '@front/components/form/buttons/SubmitButton';
@@ -10,7 +9,6 @@ import { useSession } from "@pkg/hooks/ctx";
 
 export const Signup:React.FC = () => {
     const { session, user } = useSession();
-    const { t } = useLanguage();
     const { formik, isLoading } = useSignup();
 
     if (session && user) return <Navigate to={'/'} />
@@ -26,7 +24,7 @@ export const Signup:React.FC = () => {
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <CISTEM size={150}/>
                 </div>
-                <h2>{t('signup.inscription')}</h2>
+                <h2>Inscription</h2>
                 <h4>Un pré-compte utilisateur (hors mot de passe) a été créé pour vous par l'administrateur. <br/>
                     Pour vous y lier, veuillez utiliser l'email que vous avez fourni dans le formulaire d'inscription des bénévoles. <br />
                     Le mot de passe entré ici par contre, sera connu de vous seul, car encrypté pas un service tiers fiable. <br/>
@@ -35,7 +33,7 @@ export const Signup:React.FC = () => {
                 <form onSubmit={formik.handleSubmit} className="s-login__form ws-form">
                     <EmailInput formik={formik} />
                     <PasswordInput formik={formik} />
-                    <SubmitButton formik={formik} loading={isLoading} text='signup.signup' textLoading='authenticating' />
+                    <SubmitButton formik={formik} loading={isLoading} text="S'inscrire" />
                 </form>
                 <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '14px', color: '#666' }}>
                     <p>Un problème ? Contactez : 

@@ -1,4 +1,3 @@
-import { useLanguage } from "@pkg/contexts/LanguageContext";
 import { capitalize } from "@pkg/utils/string";
 import "@styles/components/form/input.scss"
 
@@ -19,7 +18,6 @@ export function TextInput({
   label?: string,
   onChange: (...args: any[]) => any;
 }) {
-  const { t } = useLanguage();
   return (
       <div className={`input--${type}`}>
         <span>{label || capitalize(name)}</span>
@@ -29,7 +27,7 @@ export function TextInput({
           type={type}
           value={form.values[name]}
           onChange={ (e) => onChange(name, e.target.value) }
-          placeholder={placeholder && t(`${placeholder}`)}
+          placeholder={placeholder && placeholder}
           required={required}
         />
         {/* {formik.touched[name] && formik.errors[name] && (
