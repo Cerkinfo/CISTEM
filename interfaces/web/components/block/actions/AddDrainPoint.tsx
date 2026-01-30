@@ -4,7 +4,7 @@ import Separator from "@front/components/headers/Separator";
 import { useFormState } from "@pkg/hooks/form/useFormState";
 import { useDrainCreate } from "@pkg/hooks/update/createDrain";
 import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Button, Col, Container, Form, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap"
 
 export function AddDrainPoint({ id } : { id: string }) {

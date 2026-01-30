@@ -8,7 +8,6 @@ import { useLanguage } from "@pkg/contexts/LanguageContext";
 export function CollapseOrder({ order } : { order: any }) {
     const { t } = useLanguage();
     const [open, setOpen] = useState(false);
-    const toggle = () => setOpen((prevState) => !prevState);
     const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
 
     useEffect(() => {

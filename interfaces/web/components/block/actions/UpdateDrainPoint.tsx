@@ -3,7 +3,7 @@ import { useItem } from "@pkg/hooks/fetch/getItem";
 import { useFormState } from "@pkg/hooks/form/useFormState";
 import { useDrainScanned } from "@pkg/hooks/update/updateDrain";
 import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Button, Col, Container, Form, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap"
 
 export function UpdateDrainPoint({ id } : { id: string }) {

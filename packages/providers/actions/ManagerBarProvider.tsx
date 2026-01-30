@@ -39,7 +39,7 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
         name: data.location.name,
         prefix: data.location.prefix,
         orders: data.location.orders,
-        image: data.location.image
+        image: data.location.image || null
       })
     }
   }, [data])

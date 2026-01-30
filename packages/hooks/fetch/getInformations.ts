@@ -32,7 +32,7 @@ export function useInformationsList({ tableName, key, eq, subscribe } : { tableN
           .on(
             'postgres_changes',
             { event: '*', schema: 'public', table: tableName },
-            (payload) => {
+            () => {
               setTimeout(() => {
                   fetchData();
               }, 500);

@@ -15,7 +15,7 @@ export function Drain() {
         : (
             <Container fluid>
                 <Row>
-                    {drains?.map((drain: any, index: number) => {
+                    {drains?.map((drain: any) => {
                         if(!drain.name) return null;
                         return (
                             <Col md="3">

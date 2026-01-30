@@ -1,7 +1,6 @@
 // UI from : https://codepen.io/singhimalaya/pen/bxoBZZ
 
 import Connected from "@front/components/bar/Connected";
-import { PencilButton } from "@front/components/buttons/PencilButton";
 import { Talk, Time } from "@front/components/utils/icons";
 import Loading from "@front/components/utils/Loading";
 import { useSession } from "@pkg/hooks/ctx";
