@@ -16,10 +16,7 @@ export function ActionProvider({ children }: { children: React.ReactNode }) {
     case 'MANAGER_BAR':
       return <ManagerBarProvider>{children}</ManagerBarProvider>
 
-    case 'BENEVOLE':
-      return <BenevoleProvider>{children}</BenevoleProvider>
-
     default:
-      return null
+      return <BenevoleProvider>{children}</BenevoleProvider>
   }
 }

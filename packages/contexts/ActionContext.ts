@@ -19,7 +19,7 @@ export type ManagerBarUser = {
 }
 
 export type BenevoleUser = {
-  role: 'BENEVOLE'
+  role: string
 }
 
 export type ActionUser =

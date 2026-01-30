@@ -4,12 +4,12 @@ import { useSession } from "@pkg/hooks/ctx"
 export function BenevoleProvider({ children }: { children: React.ReactNode }) {
   const { user } = useSession()
 
-  if (!user || user.role !== 'BENEVOLE') {
+  if (!user) {
     throw new Error('BenevoleProvider used with invalid user')
   }
 
   const value: BenevoleUser = {
-    role: 'BENEVOLE',
+    role: user?.role,
   }
 
   return (

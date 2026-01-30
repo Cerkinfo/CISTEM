@@ -1,7 +1,7 @@
 // UI from : https://codepen.io/onediv/pen/WNOdMWw
 
 import "@styles/components/sidebar.scss";
-import { Box, Calendar, CISTEM, Inventory, Peoples, ProgressBar } from "../utils/icons";
+import { Bell, Box, Calendar, CISTEM, Inventory, Peoples, ProgressBar } from "../utils/icons";
 import CISTEM_text from "../utils/CISTEM";
 import Profile from "../block/Profile";
 import { useSession } from "@pkg/hooks/ctx";
@@ -18,7 +18,7 @@ export default function Sidebar() {
                         <Profile /><span>Mon profile</span>
                     </Link>
                 </li>
-                <li className="navbar__item">
+                {/* <li className="navbar__item">
                     <Link to={`/`} className="navbar__link" state={{ from: location }}>
                         <CISTEM size={'50'}/><span>How To FOSDEM</span>
                     </Link>
@@ -27,9 +27,9 @@ export default function Sidebar() {
                     <Link to="/schedule" className="navbar__link">
                         <Calendar size={'50'}/><span>Horaires</span>
                     </Link>
-                </li>
+                </li> */}
                 <li className="navbar__item">
-                    <Link to="/list" className="navbar__link">
+                    <Link to="/" className="navbar__link">
                         <ProgressBar size={'50'}/><span>Listes</span>
                     </Link>
                 </li>
@@ -41,6 +41,11 @@ export default function Sidebar() {
                 <li className="navbar__item">
                     <Link to="/inventory" className="navbar__link">
                         <Inventory size={'50'}/><span>Inventaire</span>
+                    </Link>
+                </li>
+                <li className="navbar__item">
+                    <Link to="/orders" className="navbar__link">
+                        <Bell size={'50'}/><span>Commandes</span>
                     </Link>
                 </li>
                 <li className="navbar__item">

@@ -37,5 +37,5 @@
     "../../packages/hooks/ctx.ts", 
     "../../packages/types/Database.ts",
     "../../packages/functions/Client.ts"
-  ],
+, "../../scripts/drain-qrcode.ts"  ],
 }

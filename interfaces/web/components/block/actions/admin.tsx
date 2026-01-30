@@ -12,15 +12,15 @@ export function Admin() {
             <li>
                 <SlideButton text={'Ajouter'} onClick={() => setModal('add')} />
             </li>
-            <li>
+            {/* <li>
                 <SlideButton text={'Editer'} onClick={() => setModal('edit')} />
             </li>
             <li>
                 <SlideButton text={'Supprimer'} onClick={() => setModal('remove')} />
-            </li>
+            </li> */}
             <AddComponent isOpen={modal === 'add'} close={() => setModal('')} />
-            <EditComponent isOpen={modal === 'edit'} close={() => setModal('')} />
-            <RemoveComponent isOpen={modal === 'remove'} close={() => setModal('')} />
+            {/* <EditComponent isOpen={modal === 'edit'} close={() => setModal('')} />
+            <RemoveComponent isOpen={modal === 'remove'} close={() => setModal('')} /> */}
         </>
     )
 }
