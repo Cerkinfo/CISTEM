@@ -3,7 +3,7 @@
     "default": "cistem"
   },
   "targets": {
-    "cistem": {
+    "cistem-d05f6": {
       "hosting": {
         "cistem": [
           "cistem"
