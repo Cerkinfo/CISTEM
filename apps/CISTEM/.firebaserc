@@ -5,7 +5,7 @@
   "targets": {
     "cistem-d05f6": {
       "hosting": {
-        "cistem": ["cistem"]
+        "cistem": ["cistem-d05f6"]
       }
     }
   }
