@@ -9,9 +9,13 @@ export type AdminUser = {
 export type ManagerBarUser = {
   role: 'MANAGER_BAR'
   order: Order | null
-  sell_point: SellPoint
+  sell_point: SellPoint | null
+  isLoading: boolean
+  success: boolean
   increment: (uuid: string) => void
   decrement: (uuid: string) => void
+  clearOrder: () => void
+  sendOrder: () => void
 }
 
 export type BenevoleUser = {

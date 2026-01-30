@@ -17,7 +17,6 @@ export function useUserInsert() {
         formData.append('image', form["image"])
     }
     formData.append('user', JSON.stringify(form))
-    console.log('user', formData)
 
     const { data, error } = await supabase.functions.invoke(
       'create-user',

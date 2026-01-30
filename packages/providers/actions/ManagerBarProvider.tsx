@@ -1,13 +1,48 @@
 import { ActionContext, type ManagerBarUser } from "@pkg/contexts/ActionContext"
 import { useSession } from "@pkg/hooks/ctx"
+import { useOrderInsert } from "@pkg/hooks/insert/order"
+import { useLocationByManager } from "@pkg/hooks/location/getManagerLocation"
 import type { Order } from "@pkg/types/Order"
 import type { SellPoint } from "@pkg/types/SellPoint"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export function ManagerBarProvider({ children }: { children: React.ReactNode }) {
   const { user } = useSession()
+  const { data } = useLocationByManager(user?.id || '')
   const [order, setOrder] = useState<Order>([])
-  const [sellPoint, _] = useState<SellPoint>({ id: '00', orders_quantity: 0 })
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [sellPoint, setSellPoint] = useState<SellPoint | null>(null)
+  const { insertOrder } = useOrderInsert()
+  const [accepted, setAccepted] = useState(false);
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+          setSuccess(false);
+      }, 500);
+    }
+  }, [success])
+
+  useEffect(() => {
+    if (accepted) {
+      setOrder([])
+      setSuccess(true)
+      setAccepted(false)
+    }
+  }, [accepted])
+
+  useEffect(() => {
+    if(data && !sellPoint) {
+      setSellPoint({
+        id: data.location.id,
+        name: data.location.name,
+        prefix: data.location.prefix,
+        orders: data.location.orders,
+        image: data.location.image
+      })
+    }
+  }, [data])
 
   if (!user || user.role !== 'MANAGER_BAR') {
     throw new Error('ManagerBarProvider used with invalid user')
@@ -25,7 +60,6 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
           : item
       )
     })
-    console.log(order)
   }
 
   function decrement(id: string) {
@@ -44,12 +78,27 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
     })
   }
 
+  function clearOrder() {
+    setOrder([]);
+    setSuccess(true);
+  }
+
+  async function sendOrder() {
+    setIsLoading(true)
+    setAccepted(await insertOrder(order))
+    setIsLoading(false)
+  }
+
   const value: ManagerBarUser = {
     role: 'MANAGER_BAR',
     order: order,
     sell_point: sellPoint,
+    isLoading: isLoading,
+    success: success,
     increment,
-    decrement
+    decrement,
+    clearOrder,
+    sendOrder
   }
 
 

@@ -32,7 +32,6 @@ export function useInventoryList({ tableName, subscribe } : { tableName: keyof D
             'postgres_changes',
             { event: '*', schema: 'public', table: tableName },
             (payload) => {
-              console.log("Changement détecté :", payload);
               setTimeout(() => {
                   fetchData();
               }, 500);

@@ -1,11 +1,11 @@
-import { useAction } from "@pkg/hooks/action/useAction";
 import { fetchProductsInfos } from "@pkg/hooks/inventory/getProductInfos";
+import { useInformationsList } from "@pkg/hooks/list/getInformations";
 import { useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
-export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
+export function HistoryOrderComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     //@ts-ignore
-    const { order } = useAction();
+    const { list: history, isLoading } = useInformationsList({tableName: 'orders', subscribe: true})
     const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
 
     useEffect(() => {
@@ -44,7 +44,7 @@ export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b:
                     })}
                 </ListGroup>
                 ) : (
-                    <p style={{color: 'white'}}>Le panier est vide</p>
+                    <p style={{color: 'white'}}>L'historique est vide</p>
                 )}
             </ModalBody>
             <ModalFooter>
