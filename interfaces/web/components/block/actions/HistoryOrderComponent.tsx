@@ -1,11 +1,11 @@
-import { useAction } from "@pkg/hooks/action/useAction";
 import { fetchProductsInfos } from "@pkg/hooks/inventory/getProductInfos";
+import { useInformationsList } from "@pkg/hooks/list/getInformations";
 import { useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export function HistoryOrderComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
     //@ts-ignore
-    const { order, sellPoint } = useAction();
+    const { list: history, isLoading } = useInformationsList({tableName: 'orders', subscribe: true})
     const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
 
     useEffect(() => {

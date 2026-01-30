@@ -26,6 +26,9 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   };
 
   useEffect(() => {
+    if(!localStorage.getItem('language')) {
+      localStorage.setItem('language', language);
+    }
     if (localStorage.getItem('language') !== language) {
       localStorage.setItem('language', language);
     }
