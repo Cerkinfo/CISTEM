@@ -12,7 +12,7 @@ import { UserForm } from "./views/UserForm";
 import { LocationForm } from "./views/LocationForm";
 
 export function AddComponent({ isOpen, close } : { isOpen: boolean, close: (b: boolean) => void}) {
-    const [listView, setListView] = useState('benevole');
+    const [listView, setListView] = useState('users');
     const [data, setData] = useState([])
     const list = [
         // { key: 'beers', icon: <Beer size={'30'} />, name: 'Bières', view: <BeerForm data={data} setData={setData} />},
