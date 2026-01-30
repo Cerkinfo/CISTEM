@@ -13,6 +13,8 @@
     "autoprefixer": "^10.4.22",
     "formik": "^2.4.9",
     "i18next": "^25.7.1",
+    "pdfkit": "^0.17.2",
+    "qrcode": "^1.5.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-helmet": "^6.1.0",

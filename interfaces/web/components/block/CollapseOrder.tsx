@@ -4,8 +4,12 @@ import { Button, Collapse } from "reactstrap";
 import { ComponentLine } from "./ComponentLine";
 import "@styles/components/collapse-order.scss"
 import { getOrderStatus } from "@pkg/utils/string";
+import { useSession } from "@pkg/hooks/ctx";
+import { useOrderValid } from "@pkg/hooks/update/validOrder";
 
-export function CollapseOrder({ order } : { order: any }) {
+export function CollapseOrder({ order, isOpen } : { order: any, isOpen?: boolean }) {
+    const { user } = useSession();
+    const { updateOrderValid, data, isLoading } = useOrderValid();
     const [open, setOpen] = useState(false);
     const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
 
@@ -27,16 +31,28 @@ export function CollapseOrder({ order } : { order: any }) {
 
     return (
         <div className="order-item">
-        <Button
-            color={order.status === "PENDING" ? "warning" : order.status === "SENDED" ? "success": "danger"}
-            onClick={() => setOpen(o => !o)}
-            style={{ width: "100%" }}
-        >
-            <h4>{order.name}</h4>
-            <span>{getOrderStatus(order.status)}</span>
-        </Button>
-
-        <Collapse isOpen={open}>
+        {user?.role === "MANAGER_STOCK" && order.status === 'PENDING' ? (
+            <Button
+                color={order.status === "PENDING" ? "warning" : order.status === "SENDED" ? "success": "danger"}
+                onClick={() => {}}
+                style={{ width: "100%" }}
+            >
+                <h4>{order.name}</h4>
+                <span><Button color="success" onClick={() => updateOrderValid(order.id)}>
+                    {isLoading ? 'Loading...' : 'Valider'}
+                    </Button></span>
+            </Button>
+        ) : (
+            <Button
+                color={order.status === "PENDING" ? "warning" : order.status === "SENDED" ? "success": "danger"}
+                onClick={() => setOpen(o => !o)}
+                style={{ width: "100%" }}
+            >
+                <h4>{order.name}</h4>
+                <span>{getOrderStatus(order.status)}</span>
+            </Button>
+        )}
+        <Collapse isOpen={open || isOpen}>
             <div style={{ padding: "0.5rem 0" }}>
                 {order.order.map((o: any) => {
                     const [id, quantity] = Object.entries(o)[0]

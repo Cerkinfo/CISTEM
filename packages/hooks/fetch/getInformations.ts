@@ -43,7 +43,7 @@ export function useInformationsList({ tableName, key, eq, subscribe } : { tableN
               supabase.removeChannel(subscription);
           };
       }
-    }, [tableName]);
+    }, [tableName, key]);
     
     return { list, isLoading };
 }

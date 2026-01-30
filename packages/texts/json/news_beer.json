@@ -1,0 +1,13 @@
+{
+  "name": "news_fosdem_beer",
+  "page": "home",
+  "bodyContent": "### Test our FOSDEM Beer 2025!\n\nFOSDEM Beer 2025 is a *Brussels craft beer* from the brewery *En Stoemelings*, with a beautiful **amber color** and **aromas of malt and caramel**. It offers a balanced flavor, with slightly spicy notes and a touch of bitterness. It's a beer with character, perfect for lovers of rich, authentic beers !\n\n### Logo symbol\n\nThe schema in the background is a rough schema often used to represent an *AI neural system*. It starts at the top of the bottle and finishes when you've learned everything there is to know (or taste) about its container!",
+  "bodyHtml": "<h3>Test our FOSDEM Beer 2025!</h3>\n<p>FOSDEM Beer 2025 is a <em>Brussels craft beer</em> from the brewery <em>En Stoemelings</em>, with a beautiful <strong>amber color</strong> and <strong>aromas of malt and caramel</strong>. It offers a balanced flavor, with slightly spicy notes and a touch of bitterness. It's a beer with character, perfect for lovers of rich, authentic beers !</p>\n<h3>Logo symbol</h3>\n<p>The schema in the background is a rough schema often used to represent an <em>AI neural system</em>. It starts at the top of the bottle and finishes when you've learned everything there is to know (or taste) about its container!</p>\n",
+  "preview": "Test our FOSDEM Beer 2025!\n\nFOSDEM Beer 2025 is a Brussels craft beer from the brewery En Stoemelings, with a",
+  "title": "Test our FOSDEM Beer 2025!",
+  "dir": "packages/texts/json",
+  "base": "news_beer.json",
+  "ext": ".json",
+  "sourceBase": "news_beer.md",
+  "sourceExt": ".md"
+}
