@@ -10,7 +10,6 @@ export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b:
     //@ts-ignore
     const { order, clearOrder, sendOrder, isLoading, success } = useAction();
     const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
-    const [isOpen_, setIsOpen] = useState(false)
 
     useEffect(() => {
         async function loadProducts() {
@@ -28,12 +27,11 @@ export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b:
     }, [order])
 
     useEffect(() => {
-        if (success) setIsOpen(false)
-        if (isOpen) setIsOpen(true)
-    }, [success, isOpen])
+        if (success) close(false)
+    }, [success])
 
     return (
-        <Modal isOpen={isOpen_} size="xl" unmountOnClose={true} className="order">
+        <Modal isOpen={isOpen} size="xl" unmountOnClose={true} className="order">
             <ModalHeader style={{display: 'flex', width: '100%'}}>
                 <LocationRow />
             </ModalHeader>
@@ -56,13 +54,13 @@ export function OrderComponent({ isOpen, close } : { isOpen: boolean, close: (b:
                 )}
             </ModalBody>
             <ModalFooter>
-                <Button outline color="danger" onClick={() => {close(false), setIsOpen(false)}}>
+                <Button outline color="danger" onClick={() => close(false)}>
                     Cancel
                 </Button>
                 <Button outline color="warning" onClick={() => clearOrder()}>
                     Vider
                 </Button>
-                <Button outline color="success" onClick={() => sendOrder()}>
+                <Button outline color="success" onClick={() => sendOrder()} disabled={order.length === 0}>
                     {isLoading ? 'Loading...' : 'Order'}
                 </Button>
             </ModalFooter>

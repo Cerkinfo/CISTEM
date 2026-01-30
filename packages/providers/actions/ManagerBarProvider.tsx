@@ -13,7 +13,8 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [sellPoint, setSellPoint] = useState<SellPoint | null>(null)
-  const { insertOrder, data: accepted } = useOrderInsert()
+  const { insertOrder } = useOrderInsert()
+  const [accepted, setAccepted] = useState(false);
 
   useEffect(() => {
     if (success) {
@@ -22,6 +23,14 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
       }, 500);
     }
   }, [success])
+
+  useEffect(() => {
+    if (accepted) {
+      setOrder([])
+      setSuccess(true)
+      setAccepted(false)
+    }
+  }, [accepted])
 
   useEffect(() => {
     if(data && !sellPoint) {
@@ -76,13 +85,8 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
 
   async function sendOrder() {
     setIsLoading(true)
-    await insertOrder(order)
+    setAccepted(await insertOrder(order))
     setIsLoading(false)
-    if (accepted) { 
-      setOrder([]);
-      setSuccess(true)
-    }
-    else return;
   }
 
   const value: ManagerBarUser = {
