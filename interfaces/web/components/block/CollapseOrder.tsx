@@ -6,10 +6,11 @@ import "@styles/components/collapse-order.scss"
 import { getOrderStatus } from "@pkg/utils/string";
 import { useSession } from "@pkg/hooks/ctx";
 import { useOrderValid } from "@pkg/hooks/update/validOrder";
+import { formatFullTimeStr } from "@pkg/utils/date";
 
-export function CollapseOrder({ order, isOpen, name } : { order: any, isOpen?: boolean, name?: any }) {
+export function CollapseOrder({ order, isOpen } : { order: any, isOpen?: boolean }) {
     const { user } = useSession();
-    const { updateOrderValid, data, isLoading } = useOrderValid();
+    const { updateOrderValid, isLoading } = useOrderValid();
     const [open, setOpen] = useState(false);
     const [productsInfos, setProductsInfos] = useState<Record<string, any>>({})
 
@@ -37,7 +38,7 @@ export function CollapseOrder({ order, isOpen, name } : { order: any, isOpen?: b
                 onClick={() => {}}
                 style={{ width: "100%" }}
             >
-                <h4>{name && name}{order.name}</h4>
+                <h4> @{formatFullTimeStr(order.created_at)} | {order.location.name && `${order.location.name} | `}{order.name}</h4>
                 <span><Button color="success" onClick={() => updateOrderValid(order.id)}>
                     {isLoading ? 'Loading...' : 'Valider'}
                     </Button></span>
@@ -48,7 +49,7 @@ export function CollapseOrder({ order, isOpen, name } : { order: any, isOpen?: b
                 onClick={() => setOpen(o => !o)}
                 style={{ width: "100%" }}
             >
-                <h4>{name && name}{order.name}</h4>
+                <h4> @{formatFullTimeStr(order.created_at)} | {order.location.name && `${order.location.name} | `}{order.name}</h4>
                 <span>{getOrderStatus(order.status)}</span>
             </Button>
         )}
