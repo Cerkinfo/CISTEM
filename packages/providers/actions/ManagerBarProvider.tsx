@@ -44,10 +44,6 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
     }
   }, [data])
 
-  if (!user || (user.role !== 'MANAGER_BAR' && user.role !== 'WATER_SELLER')) {
-    throw new Error('ManagerBarProvider used with invalid user')
-  }
-
   function increment(id: string) {
     setOrder(prev => {
       const index = prev.findIndex(item => id in item)
@@ -90,7 +86,7 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
   }
 
   const value: ManagerBarUser = {
-    role: user.role,
+    role: user?.role || 'BENEVOLE',
     order: order,
     sell_point: sellPoint,
     isLoading: isLoading,
@@ -100,7 +96,6 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
     clearOrder,
     sendOrder
   }
-
 
   return (
     <ActionContext.Provider value={value}>

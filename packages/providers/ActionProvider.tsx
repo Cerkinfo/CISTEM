@@ -9,17 +9,5 @@ export function ActionProvider({ children }: { children: React.ReactNode }) {
   if (isLoading) return null
   if (!user) return null
 
-  switch (user.role) {
-    case 'ADMIN':
-      return <AdminProvider>{children}</AdminProvider>
-
-    case 'MANAGER_BAR':
-      return <ManagerBarProvider>{children}</ManagerBarProvider>
-
-    case 'WATER_SELLER':
-      return <ManagerBarProvider>{children}</ManagerBarProvider>
-
-    default:
-      return <BenevoleProvider>{children}</BenevoleProvider>
-  }
+  return <ManagerBarProvider>{children}</ManagerBarProvider>
 }
