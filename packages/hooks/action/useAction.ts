@@ -4,8 +4,8 @@ import { useContext } from "react"
 export function useAction() {
     const ctx = useContext(ActionContext)
     if (!ctx) return null
-
-    if (ctx.role === 'MANAGER_BAR' || ctx.role === 'WATER_SELLER') return {
+    
+    return {
         role: ctx.role,
         order: ctx.order,
         sell_point: ctx.sell_point,
@@ -15,9 +15,5 @@ export function useAction() {
         decrement: ctx.decrement,
         clearOrder: ctx.clearOrder,
         sendOrder: ctx.sendOrder
-    }
-
-    if (ctx.role === 'ADMIN') return {
-        role: ctx.role
     }
 }
