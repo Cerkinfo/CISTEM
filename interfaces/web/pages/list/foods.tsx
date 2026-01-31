@@ -2,6 +2,7 @@ import { useInformationsList } from "@pkg/hooks/fetch/getInformations";
 import { Col, Container, Row } from "reactstrap";
 import Loading from "@front/components/utils/Loading";
 import { FoodCard } from "@front/components/block/FoodCard";
+import { DrinkCard } from "@front/components/block/DrinkCard";
 
 export default function Foods() {
     const { list, isLoading } = useInformationsList({tableName: 'foods'})
@@ -16,14 +17,16 @@ export default function Foods() {
         : (
             <Container fluid>
                 <Row>
-                    {list?.map((food: any, index: number) => (
+                    {list
+                        ?.slice()
+                        .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        .map((food: any, index: number) => (
                         <Col lg="3" md="6" sm="12" style={{justifyContent:'center', alignItems:'center', display:'flex'}}>
-                            <FoodCard
+                            <DrinkCard
                                 key={index}
                                 name={food.name}
                                 image={food.image}
                                 price={food.price}
-                                description={food.ingredients ? "Components : " + food.ingredients : ''}
                             />
                         </Col>
                     ))}

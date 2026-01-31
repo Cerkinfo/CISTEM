@@ -5,7 +5,7 @@ export function useAction() {
     const ctx = useContext(ActionContext)
     if (!ctx) return null
 
-    if (ctx.role === 'MANAGER_BAR') return {
+    if (ctx.role === 'MANAGER_BAR' || ctx.role === 'WATER_SELLER') return {
         role: ctx.role,
         order: ctx.order,
         sell_point: ctx.sell_point,

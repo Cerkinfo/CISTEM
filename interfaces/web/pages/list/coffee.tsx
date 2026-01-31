@@ -16,7 +16,10 @@ export default function Coffee() {
         : (
             <Container fluid>
                 <Row>
-                    {list?.map((coffee: any, index: number) => (
+                    {list
+                        ?.slice()
+                        .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        .map((coffee: any, index: number) => (
                         <Col lg="3" md="6" sm="12" style={{justifyContent:'center', alignItems:'center', display:'flex'}}>
                             <DrinkCard coffee
                                 key={index}

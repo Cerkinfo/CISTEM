@@ -7,7 +7,7 @@ export type AdminUser = {
 }
 
 export type ManagerBarUser = {
-  role: 'MANAGER_BAR'
+  role: string
   order: Order | null
   sell_point: SellPoint | null
   isLoading: boolean

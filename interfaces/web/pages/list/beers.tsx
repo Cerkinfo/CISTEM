@@ -16,8 +16,11 @@ export default function Beers() {
         : (
             <Container fluid>
                 <Row>
-                    {list?.map((beer: any, index: number) => (
-                        <BeerItem key={index} beer={beer} />
+                    {list
+                        ?.slice()
+                        .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        .map((beer: any, index: number) => (
+                            <BeerItem key={index} beer={beer} />
                     ))}
                 </Row>
 

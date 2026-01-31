@@ -15,7 +15,10 @@ export function Drain() {
         : (
             <Container fluid>
                 <Row>
-                    {drains?.map((drain: any) => {
+                    {drains
+                        ?.slice()
+                        .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        .map((drain: any) => {
                         if(!drain.name) return null;
                         return (
                             <Col md="3">

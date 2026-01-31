@@ -4,6 +4,19 @@ import { useInformationsList } from "@pkg/hooks/fetch/getInformations";
 import { useMemo, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import "@styles/pages/order.scss"
+import { useItem } from "@pkg/hooks/fetch/getItem";
+
+function LocationName({ id }: { id: string }) {
+    const { item: location, isLoading } = useItem({
+        tableName: 'locations',
+        key: id
+    })
+
+    if (isLoading) return <span>...</span>
+    if (!location) return <span>-</span>
+
+    return <span>{location.name} | </span>
+}
 
 export function Orders() {
     const [status, setStatus] = useState('PENDING');
@@ -29,7 +42,7 @@ export function Orders() {
                         <div className="order-items">
                             {sortedOrders?.map((order: any) => { return (<>
                                 <Col md="10">
-                                    <CollapseOrder order={order} isOpen={true}/>
+                                    <CollapseOrder order={order} isOpen={true} name={<LocationName id={order.location} />} />
                                 </Col>
                             </>)})}
                         </div>

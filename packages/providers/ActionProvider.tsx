@@ -16,6 +16,9 @@ export function ActionProvider({ children }: { children: React.ReactNode }) {
     case 'MANAGER_BAR':
       return <ManagerBarProvider>{children}</ManagerBarProvider>
 
+    case 'WATER_SELLER':
+      return <ManagerBarProvider>{children}</ManagerBarProvider>
+
     default:
       return <BenevoleProvider>{children}</BenevoleProvider>
   }
