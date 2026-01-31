@@ -1,3 +1,4 @@
+import { getTranslations } from "@pkg/utils/string";
 import "@styles/components/buttons/switcher-button.scss"
 
 export function SwitcherButton({ current, choices, onSelect } : {
@@ -9,7 +10,7 @@ export function SwitcherButton({ current, choices, onSelect } : {
         <div className="switcher">
             {choices.map(choice => {return (
                 <button onClick={() => onSelect(choice)} className={choice === current ? '--active' : ''} key={choice}>
-                    {choice}
+                    {getTranslations(choice)}
                 </button>
             )})}
         </div>

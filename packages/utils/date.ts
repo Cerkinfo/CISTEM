@@ -12,3 +12,8 @@ export function formatDateTime(dateStr: string | null | undefined): { date: stri
     time: date.toLocaleTimeString("fr-FR", optionsTime),
   };
 }
+
+export function formatFullTimeStr(dateStr: string | null | undefined) {
+  const date = formatDateTime(dateStr)
+  return `${date.date} ${date.time}`
+}
