@@ -15,7 +15,10 @@ export default function Locations() {
         : (
             <Container fluid>
                 <Row>
-                    {list?.map((loc: any, index: number) => (
+                    {list
+                        ?.slice()
+                        .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        .map((loc: any, index: number) => (
                         <Col lg="3" md="6" sm="12" style={{justifyContent:'center', alignItems:'center', display:'flex'}}>
                             <Card key={index} style={{
                                 width: "100%",

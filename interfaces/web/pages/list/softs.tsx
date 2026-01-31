@@ -16,7 +16,10 @@ export default function Softs() {
         : (
             <Container fluid>
                 <Row>
-                    {list?.map((soft: any, index: number) => (
+                    {list
+                        ?.slice()
+                        .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        .map((soft: any, index: number) => (
                         <Col style={{ display: "flex", justifyContent: "center" }}>
                             <DrinkCard 
                                 key={index}

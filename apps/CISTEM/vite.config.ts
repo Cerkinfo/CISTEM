@@ -42,6 +42,8 @@ export default defineConfig({
   },
 
   server: {
+    host: true,
+    allowedHosts: true,
     proxy: {
       "/supabase": {
         target: "https://twavujkympalstdxyxti.supabase.co",
