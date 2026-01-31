@@ -44,7 +44,7 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
     }
   }, [data])
 
-  if (!user || user.role !== 'MANAGER_BAR') {
+  if (!user || (user.role !== 'MANAGER_BAR' && user.role !== 'WATER_SELLER')) {
     throw new Error('ManagerBarProvider used with invalid user')
   }
 
@@ -90,7 +90,7 @@ export function ManagerBarProvider({ children }: { children: React.ReactNode }) 
   }
 
   const value: ManagerBarUser = {
-    role: 'MANAGER_BAR',
+    role: user.role,
     order: order,
     sell_point: sellPoint,
     isLoading: isLoading,

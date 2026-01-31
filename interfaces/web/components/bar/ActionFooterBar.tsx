@@ -11,7 +11,8 @@ export function ActionFooterBar() {
     function getModals(role: Role) {
         switch (role) {
             case 'ADMIN': return (<Admin />);
-            case 'MANAGER_BAR': return (<ManagerBar />)
+            case 'MANAGER_BAR': return (<ManagerBar />);
+            case 'WATER_SELLER': return(<ManagerBar />);
             default: return ([])
         }
     }

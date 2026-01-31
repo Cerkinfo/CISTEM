@@ -7,7 +7,7 @@ import { getOrderStatus } from "@pkg/utils/string";
 import { useSession } from "@pkg/hooks/ctx";
 import { useOrderValid } from "@pkg/hooks/update/validOrder";
 
-export function CollapseOrder({ order, isOpen } : { order: any, isOpen?: boolean }) {
+export function CollapseOrder({ order, isOpen, name } : { order: any, isOpen?: boolean, name?: any }) {
     const { user } = useSession();
     const { updateOrderValid, data, isLoading } = useOrderValid();
     const [open, setOpen] = useState(false);
@@ -37,7 +37,7 @@ export function CollapseOrder({ order, isOpen } : { order: any, isOpen?: boolean
                 onClick={() => {}}
                 style={{ width: "100%" }}
             >
-                <h4>{order.name}</h4>
+                <h4>{name && name}{order.name}</h4>
                 <span><Button color="success" onClick={() => updateOrderValid(order.id)}>
                     {isLoading ? 'Loading...' : 'Valider'}
                     </Button></span>
@@ -48,7 +48,7 @@ export function CollapseOrder({ order, isOpen } : { order: any, isOpen?: boolean
                 onClick={() => setOpen(o => !o)}
                 style={{ width: "100%" }}
             >
-                <h4>{order.name}</h4>
+                <h4>{name && name}{order.name}</h4>
                 <span>{getOrderStatus(order.status)}</span>
             </Button>
         )}
